@@ -1,0 +1,25 @@
+#thymeleaf start
+spring.thymeleaf.encoding=UTF-8
+spring.thymeleaf.content-type=text/html
+
+#开发时关闭缓存,不然没法看到实时页面
+#spring.thymeleaf.cache=false
+#使用宽松模式解析网页，默认使用严格的HTML5标准
+#spring.thymeleaf.mode=LEGACYHTML5
+# 一项是非严格的HTML检查，一项是禁用缓存来获取实时页面数据，其他采用默认项即可
+#spring:
+#  thymeleaf:
+#    mode: LEGACYHTML5
+#    cache: false
+#thymeleaf end
+
+#热部署配置
+#devtools:
+#  restart:
+#  #热部署生效
+#  enabled: true
+#  #设置重启的目录
+#  additional-paths: resources/**,static/**,templates/**
+#  #该目录下的内容修改不重启
+#  exclude: data/**
+
