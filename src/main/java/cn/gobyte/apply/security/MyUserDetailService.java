@@ -6,9 +6,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * 自定义认证必须要实现UserDetailService接口
+ *
  * @author shanLan misterchou@qq.com
  * @date 2019/4/10 23:50
-*/
+ */
 public class MyUserDetailService implements UserDetailsService {
 
     @Override
