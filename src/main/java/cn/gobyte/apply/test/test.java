@@ -1,6 +1,6 @@
 package cn.gobyte.apply.test;
 
-import cn.gobyte.apply.pojo.User;
+import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.service.Impl.BaseService;
 import cn.gobyte.apply.service.Impl.UserServiceImpl;
 import cn.gobyte.apply.utils.Utils;

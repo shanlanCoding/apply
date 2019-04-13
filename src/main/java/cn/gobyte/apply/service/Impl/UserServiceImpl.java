@@ -1,8 +1,8 @@
 package cn.gobyte.apply.service.Impl;
 
-import cn.gobyte.apply.pojo.User;
-import cn.gobyte.apply.pojo.UserVo;
-import cn.gobyte.apply.pojo.oldUser;
+import cn.gobyte.apply.pojo.user.User;
+import cn.gobyte.apply.pojo.user.UserVo;
+import cn.gobyte.apply.pojo.user.oldUser;
 import cn.gobyte.apply.service.UserService;
 import cn.gobyte.apply.utils.Utils;
 import org.springframework.stereotype.Service;

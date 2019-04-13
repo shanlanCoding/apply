@@ -1,6 +1,6 @@
-package cn.gobyte.apply.dao;
+package cn.gobyte.apply.dao.user;
 
-import cn.gobyte.apply.pojo.oldUser;
+import cn.gobyte.apply.pojo.user.oldUser;
 import org.springframework.stereotype.Repository;
 
 //@Component
