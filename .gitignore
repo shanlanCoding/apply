@@ -29,5 +29,4 @@ HELP.md
 .vscode/
 
 ### 过滤文件夹 ###
-/.idea
-/.mvn/wrapper
+.idea/
