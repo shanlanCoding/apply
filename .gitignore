@@ -27,3 +27,7 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+### 过滤文件夹 ###
+/.idea
+/.mvn/wrapper
