@@ -30,4 +30,4 @@ HELP.md
 
 ### 过滤文件夹 ###
 .idea/
-.mvn/wrapper
+.mvn
