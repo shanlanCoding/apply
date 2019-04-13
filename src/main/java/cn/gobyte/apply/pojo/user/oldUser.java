@@ -28,7 +28,6 @@ import java.util.Date;
 @AllArgsConstructor//有参构造
 @NoArgsConstructor//无参构造
 public class oldUser implements Serializable {
-    private static final long serialVersionUID = -1561561645651651L;
 
     /**
      * 账户状态: 0锁定; 1有效
@@ -60,8 +59,7 @@ public class oldUser implements Serializable {
      * 未知性别
      */
     public static final String SEX_UNKNOW = "2";
-
-
+    private static final long serialVersionUID = 4516192513062811133L;
 
     //--------------------------------------------------------
 

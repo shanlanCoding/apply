@@ -59,7 +59,7 @@ public class index {
     @PostMapping("/register")
     public String registerUser(oldUser oldUser) {
         System.err.println("oldUser：" + oldUser.toString());
-        us.register(oldUser);
+//        us.register(oldUser);
 
         //forward 内部跳转,redirect
         return "index";
