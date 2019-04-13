@@ -2,7 +2,6 @@ package cn.gobyte.apply.service.Impl;
 
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.pojo.user.UserVo;
-import cn.gobyte.apply.pojo.user.oldUser;
 import cn.gobyte.apply.service.UserService;
 import cn.gobyte.apply.utils.Utils;
 import org.springframework.stereotype.Service;
@@ -26,11 +25,11 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 //    private OldUserMapper um;
 
     //注册到数据库
-    @Override
+/*    @Override
     public void register(oldUser oldUser) {
         try {
             // 1.以身份证号为条件，判断是否为空注册
-           /* if (oldUser.getId() != null && !oldUser.getId().equals("") && um != null) {
+           *//* if (oldUser.getId() != null && !oldUser.getId().equals("") && um != null) {
                 String id = oldUser.getId();
                 //如果返回了null ，说明没有找到，即代表可以注册
                 if (um.queryId(id) == null) {
@@ -42,12 +41,12 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
                 } else {
                     System.err.println("存在" + um.queryId(oldUser.getId()));
                 }
-            }*/
+            }*//*
 
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Override
     public void login(UserVo user) {

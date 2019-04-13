@@ -1,7 +1,6 @@
 package cn.gobyte.apply.service;
 
 import cn.gobyte.apply.pojo.user.User;
-import cn.gobyte.apply.pojo.user.oldUser;
 import cn.gobyte.apply.pojo.user.UserVo;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ public interface UserService extends IService<User> {
      * @author shanLan misterchou@qq.com
      * @date 2019/3/28 21:53
      */
-    public void register(oldUser oldUser);
+//    public void register(oldUser oldUser);
 
     /**
      * TODO:登陆

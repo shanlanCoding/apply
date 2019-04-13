@@ -50,9 +50,12 @@ public class MyUserDetailService implements UserDetailsService {
              */
             myUserDetails userDetails = new myUserDetails(user.getName(), user.getPassword(), true, true, true,
                     notLocked, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+
             userDetails.setEmail(user.getEmail());
             userDetails.setPassword(user.getPassword());
             userDetails.setLoginTime(DateUtil.getDateFormat(new Date(), DateUtil.FULL_DATE_FORMAT));
+        }else {
+
         }
 
 

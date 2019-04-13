@@ -2,7 +2,6 @@ package cn.gobyte.apply.test;
 
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.service.Impl.BaseService;
-import cn.gobyte.apply.service.Impl.UserServiceImpl;
 import cn.gobyte.apply.utils.Utils;
 import cn.gobyte.apply.utils.idNumberVerify;
 import org.junit.jupiter.api.Test;
@@ -34,9 +33,9 @@ public class test extends BaseService<User> {
      */
     @Test
     void test02() {
-        UserServiceImpl userService = new UserServiceImpl();
+/*        UserServiceImpl userService = new UserServiceImpl();
         User user = userService.findByEmailOrIdNumber("421127199408013338");
-        System.err.println(user);
+        System.err.println(user);*/
 
     }
 
