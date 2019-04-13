@@ -1,14 +1,14 @@
 package cn.gobyte.apply.service.Impl;
 
-import cn.gobyte.apply.dao.OldUserMapper;
 import cn.gobyte.apply.pojo.User;
 import cn.gobyte.apply.pojo.UserVo;
 import cn.gobyte.apply.pojo.oldUser;
 import cn.gobyte.apply.service.UserService;
 import cn.gobyte.apply.utils.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 /**
  * 用户的业务类，里面包括了注册，登陆等等用户的业务
@@ -17,19 +17,20 @@ import tk.mybatis.mapper.entity.Example;
  * @date 2019/4/10 1:57
  */
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userService")
+// 继承了基础的BaseService类，然后再去实现需要完善的UserService类
+public class UserServiceImpl extends BaseService<User> implements UserService {
 
     //mapper，查询数据库
-    @Autowired
-    private OldUserMapper um;
+//    @Autowired
+//    private OldUserMapper um;
 
     //注册到数据库
     @Override
     public void register(oldUser oldUser) {
         try {
             // 1.以身份证号为条件，判断是否为空注册
-            if (oldUser.getId() != null && !oldUser.getId().equals("") && um != null) {
+           /* if (oldUser.getId() != null && !oldUser.getId().equals("") && um != null) {
                 String id = oldUser.getId();
                 //如果返回了null ，说明没有找到，即代表可以注册
                 if (um.queryId(id) == null) {
@@ -41,12 +42,11 @@ public class UserServiceImpl implements UserService {
                 } else {
                     System.err.println("存在" + um.queryId(oldUser.getId()));
                 }
-            }
+            }*/
 
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -62,15 +62,17 @@ public class UserServiceImpl implements UserService {
         Example example = new Example(User.class);
 
         // 判断是否为邮箱
-        Boolean isEmail = Utils.checkEmail(arg, 99);
+        boolean isEmail = Utils.checkEmail(arg, 99);
         if (isEmail) {
             // 开始查数据库，email 是否等于 arg
-            example.createCriteria().andCondition("email=",arg);
-        }else {
+            example.createCriteria().andCondition("email=", arg);
+        } else {
             // 否则把arg当成身份证号去查询，先转小写
-            example.createCriteria().andCondition("id=",arg.toLowerCase());
+            example.createCriteria().andCondition("id=", arg.toLowerCase());
         }
-        return null;
+        List<User> userList = this.selectByExample(example);
+        // 三元表达式 userList是空的，则返回null；否则返回第0个索引
+        return userList.isEmpty() ? null : userList.get(0);
     }
 
 }

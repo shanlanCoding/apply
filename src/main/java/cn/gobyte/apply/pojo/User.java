@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * 用户表，里面包含了用户的所有信息
-*/
+ */
 @Table(name = "users")
 public class User implements Serializable {
     /**
