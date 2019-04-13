@@ -22,7 +22,10 @@ public class myUserDetails extends User {
      * 系统默认id
      */
     private Long systemid;
-
+    /**
+     * 登陆超时
+     */
+    private String loginTime;
     /**
      * 身份证号
      */

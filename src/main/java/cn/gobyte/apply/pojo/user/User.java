@@ -1,4 +1,4 @@
-package cn.gobyte.apply.pojo;
+package cn.gobyte.apply.pojo.user;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +9,36 @@ import java.util.Date;
  */
 @Table(name = "users")
 public class User implements Serializable {
+    private static final long serialVersionUID = -6478492890959452848L;
+
+    /**
+     * 账户状态: 0锁定; 1有效
+     */
+    public static final String STATUS_VALID = "1";
+
+    /**
+     * 账户状态: 0锁定; 1有效
+     */
+    public static final String STATUS_LOCK = "0";
+
+    /**
+     * 主题
+     */
+    public static final String DEFAULT_THEME = "green";
+    /**
+     * 默认头像
+    */
+    public static final String DEFAULT_AVATAR = "default.jpg";
+
+    /**
+     * 男
+     */
+    public static final String SEX_MALE = "0";
+    /**
+     * 女
+     */
+    public static final String SEX_FEMALE = "1";
+
     /**
      * 系统默认id
      */

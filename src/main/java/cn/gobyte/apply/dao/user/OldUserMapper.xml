@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 
-<mapper namespace="cn.gobyte.apply.dao.OldUserMapper">
+<mapper namespace="cn.gobyte.apply.dao.user.OldUserMapper">
 
     <!-- id:statement的id 或者叫做sql的id-->
     <!-- parameterType:声明输入参数的类型 -->
@@ -14,7 +14,7 @@
 
     <!--注册一个User用户到数据库内，并返回主键到systemId属性中-->
     <!--public Integer register(oldUser oldUser);-->
-    <insert id="register" parameterType="cn.gobyte.apply.pojo.oldUser" useGeneratedKeys="true" keyProperty="systemId">
+    <insert id="register" parameterType="cn.gobyte.apply.pojo.user.oldUser" useGeneratedKeys="true" keyProperty="systemId">
       INSERT INTO `users` VALUES
       ( #{systemId}, #{id},#{password},#{tswt} ,#{mmda},#{email}, #{sid}, #{name}, #{birthd}, #{gender}, #{mz}, #{zzmm}, #{tel},
       #{address} , #{school}, #{schoolc}, #{major},#{gkbmh}, #{bkmajor}, #{mcode}, #{jl}, #{tc}, #{lxaddress}, #{yb},

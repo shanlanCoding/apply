@@ -1,4 +1,4 @@
-package cn.gobyte.apply.pojo;
+package cn.gobyte.apply.pojo.user;
 
 import cn.gobyte.apply.annotation.ExportConfig;
 import lombok.*;

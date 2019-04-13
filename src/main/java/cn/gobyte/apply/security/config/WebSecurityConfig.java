@@ -91,8 +91,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 oldUser.withDefaultPasswordEncoder()
-                        .username("a")
-                        .password("a")
+                        .username("MenuMapper")
+                        .password("MenuMapper")
                         .roles("USER")
                         .build();
 
@@ -112,7 +112,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         auth.inMemoryAuthentication()
 //                .withUser(oldUser.withDefaultPasswordEncoder().username("admin")
-                .withUser("a")
-                .password(encoder.encode("a")).roles("USER");
+                .withUser("MenuMapper")
+                .password(encoder.encode("MenuMapper")).roles("USER");
     }
 }

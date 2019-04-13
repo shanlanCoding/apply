@@ -1,7 +1,7 @@
 package cn.gobyte.apply.controller;
 
-import cn.gobyte.apply.pojo.oldUser;
-import cn.gobyte.apply.pojo.UserVo;
+import cn.gobyte.apply.pojo.user.oldUser;
+import cn.gobyte.apply.pojo.user.UserVo;
 import cn.gobyte.apply.service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -105,7 +105,7 @@ public class index {
 
         // 3.登陆验证，判断账号或者密码
 
-        System.err.println("a------" + user.toString());
+        System.err.println("MenuMapper------" + user.toString());
 
 
         /*if (password != us.queryPassword) {
