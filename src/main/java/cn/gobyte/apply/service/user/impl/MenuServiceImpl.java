@@ -1,9 +1,9 @@
-package cn.gobyte.apply.service.page.impl;
+package cn.gobyte.apply.service.user.impl;
 
 import cn.gobyte.apply.dao.page.MenuMapper;
 import cn.gobyte.apply.pojo.page.Menu;
 import cn.gobyte.apply.pojo.page.Tree;
-import cn.gobyte.apply.service.Impl.BaseService;
+import cn.gobyte.apply.service.BaseService;
 import cn.gobyte.apply.service.page.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

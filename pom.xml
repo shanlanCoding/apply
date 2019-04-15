@@ -92,11 +92,11 @@
         </dependency>
 
         <!--热更新，不用重启更新静态页面-->
-<!--        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
 
         <!--测试用的-->
         <dependency>
@@ -147,6 +147,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--热部署必备-->
+<!--                <configuration>-->
+<!--                    <fork>true</fork>&lt;!&ndash;必须添加这个配置&ndash;&gt;-->
+<!--                </configuration>-->
             </plugin>
 
             <!--逆向工程-->

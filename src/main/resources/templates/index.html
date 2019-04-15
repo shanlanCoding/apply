@@ -14,25 +14,24 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style type="text/css">
-        #logo {
-            height: 113px;
-            width: 491px;
-            background-image: url(img/logo.png);
-            margin-right: auto;
-            margin-bottom: 0px;
-            margin-left: auto;
-            float: left;
-            padding: 0px;
-            /*z-index: 1;*/
-        }
+        /*        #logo {
+                    height: 113px;
+                    width: 491px;
+                    background-image: url(img/a);
+                    margin-right: auto;
+                    margin-bottom: 0px;
+                    margin-left: auto;
+                    float: left;
+                    padding: 0px;
+                    z-index: 1;
+                }*/
 
         .zhuti {
             padding-top: 60px;
         }
 
         body {
-            background: url("img/cc.png");
-            background-repeat: no-repeat;
+            background: url("/img/cc.png") no-repeat;
             z-index: 0;
         }
 
@@ -80,16 +79,19 @@
                     <label for="exampleInputEmail1" style="width: 100%;">
                         <strong>账 户：</strong>
                     </label>
-                    <span style="font-size: 12px;color: #ff0000" th:text="${error}" aria-describedby="basic-addon0"></span>
+                    <!--错误提示-->
+<!--                    <span style="font-size: 12px;color: #ff0000" th:text="${error}"-->
+<!--                          aria-describedby="basic-addon0"></span>-->
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="邮箱/身份证号"
-                           autofocus="autofocus" name="id" value="421127199909098888"/>
+                           autofocus="autofocus" name="username" value="421127199909098888"/>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1" style="width: 100%;">
                         <strong>密 码：</strong>
                     </label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码" name="password"/>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码"
+                           name="password"/>
                 </div>
 
                 <button type="button" class="btn btn-primary">
@@ -138,7 +140,7 @@
                                                     <br/> （一）报名本人必须是2020届应届普通高职/高专毕业生，并能够如期毕业并获得毕业证书； <br/>
                                                     （二）报名本人在校期间未受到任何纪律处分；
                                                     <br/> （三）报名填写信息必须真实准确。
-                                                    <br/> 二、本系统仅为2020年武昌工学院专升本考试报名专用，若有疑问请致电武昌工学院教务处综合科（电话:027-88151859）
+                                                    <br/> 二、本系统仅为2020年武昌工学院专升本考试报名专用，若有疑问请致电武昌工学院教务处综合科：027-88151859
                                                 </p>
                                             </div>
                                         </div>
@@ -148,36 +150,38 @@
 
                                 <div class="form-group">
                                     <input type="text" name="id" placeholder="身份证号（用户名）"
-                                           class="form-first-name form-control" id="form-first-name" value="421127199909098888">
+                                           class="form-first-name form-control"
+                                           value="421127199909098888">
                                 </div>
                                 <!--密码-->
                                 <div class="form-group">
                                     <input type="text" name="password" placeholder="密码"
-                                           class="form-first-name form-control" id="form-first-name"  value="zxc...">
+                                           class="form-first-name form-control" value="zxc...">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="password2" placeholder="再次输入密码"
-                                           class="form-first-name form-control" id="form-first-name"  value="zxc...">
+                                           class="form-first-name form-control" value="zxc...">
                                 </div>
                                 <!--问题-->
                                 <div class="form-group">
                                     <input type="text" name="tswt" placeholder="提示问题"
-                                           class="form-first-name form-control" id="form-first-name"  value="提示问题">
+                                           class="form-first-name form-control" value="提示问题">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="mmda" placeholder="问题答案"
-                                           class="form-first-name form-control" id="form-first-name"  value="问题答案">
+                                           class="form-first-name form-control" value="问题答案">
                                 </div>
                                 <!--邮箱-->
                                 <div class="form-group">
                                     <input type="text" name="email" placeholder="邮箱/Email"
-                                           class="form-first-name form-control" id="form-first-name"  value="hi@gobyte.cn">
+                                           class="form-first-name form-control" id="form-first-name"
+                                           value="hi@gobyte.cn">
                                 </div>
                                 <!---->
                                 <!--姓名-->
                                 <div class="form-group">
                                     <input type="text" name="name" placeholder="姓名（务必真实）"
-                                           class="form-first-name form-control" id="form-first-name"  value="名字">
+                                           class="form-first-name form-control" value="名字">
                                 </div>
                                 <!--报考专业 bkmajor-->
                                 <div class="form-group">
@@ -221,10 +225,10 @@
                                 <div class="form-group">
                                     <div class="dropdown">
                                         <button class="btn btn-primary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown">
+                                                id="dropdownMenuButton-zzmm" data-toggle="dropdown">
                                             政治面貌
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-zzmm">
                                             <a class="dropdown-item disabled" href="#">党员</a>
                                             <a class="dropdown-item" href="#">预备党员</a>
                                             <a class="dropdown-item" href="#">团员</a>
@@ -236,52 +240,52 @@
                                 <!--民族-->
                                 <div class="form-group">
                                     <input type="text" name="mz" placeholder="民族"
-                                           class="form-first-name form-control" id="form-first-name"  value="民族">
+                                           class="form-first-name form-control" value="民族">
                                 </div>
                                 <!--邮箱-->
                                 <!--<div class="form-group">-->
-                                    <!--<input type="text" name="form-first-name" placeholder="邮箱"-->
-                                           <!--class="form-first-name form-control" id="form-first-name">-->
+                                <!--<input type="text" name="form-first-name" placeholder="邮箱"-->
+                                <!--class="form-first-name form-control" id="form-first-name">-->
                                 <!--</div>-->
                                 <!--电话-->
                                 <div class="form-group">
                                     <input type="text" name="tel" placeholder="手机号"
-                                           class="form-first-name form-control" id="form-first-name"  value="电话手机号">
+                                           class="form-first-name form-control" value="电话手机号">
                                 </div>
                                 <!--家庭住址-->
                                 <div class="form-group">
                                     <input type="text" name="address" placeholder="家庭地址"
-                                           class="form-first-name form-control" id="form-first-name"  value="家庭地址">
+                                           class="form-first-name form-control" value="家庭地址">
                                 </div>
                                 <!--毕业学校-->
                                 <div class="form-group">
                                     <input type="text" name="school" placeholder="大专就读学校"
-                                           class="form-first-name form-control" id="form-first-name"  value="大专就读学校">
+                                           class="form-first-name form-control" value="大专就读学校">
                                 </div>
                                 <!--学校代码-->
                                 <div class="form-group">
                                     <input type="text" name="schoolc" placeholder="大专院校代码"
-                                           class="form-first-name form-control" id="form-first-name"  value="大专学校代码">
+                                           class="form-first-name form-control" value="大专学校代码">
                                 </div>
                                 <!--大专就读专业-->
                                 <div class="form-group">
                                     <input type="text" name="major" placeholder="大专就读专业"
-                                           class="form-first-name form-control" id="form-first-name" value="大专专业">
+                                           class="form-first-name form-control" value="大专专业">
                                 </div>
                                 <!--高考报名号-->
                                 <div class="form-group">
                                     <input type="text" name="gkbmh" placeholder="高考报名号；可以前往学信网查看照片底部有记录"
-                                           class="form-first-name form-control" id="form-first-name"  value="高考报名号">
+                                           class="form-first-name form-control" value="高考报名号">
                                 </div>
                                 <!--联系地址-->
                                 <div class="form-group">
                                     <input type="text" name="contactAddress" placeholder="联系地址"
-                                           class="form-first-name form-control" id="form-first-name"  value="联系地址">
+                                           class="form-first-name form-control" value="联系地址">
                                 </div>
                                 <!--邮编-->
                                 <div class="form-group">
                                     <input type="text" name="yb" placeholder="邮编"
-                                           class="form-first-name form-control" id="form-first-name"  value="邮编">
+                                           class="form-first-name form-control" value="邮编">
                                 </div>
 
                             </div>

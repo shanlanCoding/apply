@@ -27,7 +27,7 @@ public class User implements Serializable {
     public static final String DEFAULT_THEME = "green";
     /**
      * 默认头像
-    */
+     */
     public static final String DEFAULT_AVATAR = "default.jpg";
 
     /**
@@ -219,7 +219,7 @@ public class User implements Serializable {
      * 账号状态:0锁定 1有效
      */
     @Column(name = "account_status")
-    private Integer accountStatus;
+    private String accountStatus;
 
     /**
      * 获取系统默认id
@@ -838,7 +838,7 @@ public class User implements Serializable {
      *
      * @return account_status - 账号状态:0锁定 1有效
      */
-    public Integer getAccountStatus() {
+    public String getAccountStatus() {
         return accountStatus;
     }
 
@@ -847,7 +847,7 @@ public class User implements Serializable {
      *
      * @param accountStatus 账号状态:0锁定 1有效
      */
-    public void setAccountStatus(Integer accountStatus) {
+    public void setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
     }
 }

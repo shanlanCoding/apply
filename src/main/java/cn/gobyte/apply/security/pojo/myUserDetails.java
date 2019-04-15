@@ -1,12 +1,14 @@
-package cn.gobyte.apply.security;
+package cn.gobyte.apply.security.pojo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class myUserDetails extends User {
 

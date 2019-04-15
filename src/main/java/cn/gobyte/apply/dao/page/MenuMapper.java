@@ -1,9 +1,16 @@
 package cn.gobyte.apply.dao.page;
 
 import cn.gobyte.apply.pojo.page.Menu;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
+@CacheConfig(cacheNames = "MenuService")
+@Component
+//@Mapper
+//@Service
 public interface MenuMapper {
 
     /**

@@ -1,25 +1,29 @@
 package cn.gobyte.apply.security.config;
 
+import cn.gobyte.apply.security.handler.MyAuthenticationFailureHandler;
+import cn.gobyte.apply.security.handler.MyAuthenticationSucessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
-/*
-TODO: 安全配置类；这里面配置了各个路径的访问权限。
-* @author shanLan misterchou@qq.com
-* @date 2019/3/31 23:58
-*/
+/**
+ * TODO: 安全配置类；这里面配置了各个路径的访问权限。
+ *
+ * @author shanLan misterchou@qq.com
+ * @date 2019/3/31 23:58
+ */
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private MyAuthenticationSucessHandler authenticationSucessHandler;
+    @Autowired
+    private MyAuthenticationFailureHandler authenticationFailureHandler;
 
     /**
      * TODO: 密码加密储存
@@ -33,23 +37,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     /**
-    TODO: 安全访问配置；Spring Security
-    * @param http
-    * @return void
-    * @author shanLan misterchou@qq.com
-    * @date 2019/4/5 1:18
-    */@Override
+     * TODO: 安全访问配置；Spring Security
+     *
+     * @param http
+     * @return void
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/5 1:18
+     */
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+
+        /*http
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/css/**", "/js/**", "/img/**").permitAll()//主页、静态资源放行
+                .antMatchers("/", "/favicon.ico", "/index", "/css/**", "/js/**", "/img/**", "/static/**").permitAll()//主页、静态资源放行,"/favicon.ico"
                 .anyRequest().authenticated()//任何请求都需要认证
                 .and()
 
                 .formLogin()// 基于From表单验证
-                .loginPage("/index").failureUrl("/login-error")//自定义登录页面和登陆失败需要跳转的页面
+                .loginPage("/index")// 登录页面，未认证的时候跳转到该页面
+                .loginProcessingUrl("/login") // 处理表单登录 URL
+                .failureUrl("/login-error")//自定义登录页面和登陆失败需要跳转的页面
                 .defaultSuccessUrl("/home")//登录成功后默认跳转到
                 .and()
 
@@ -58,16 +66,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
 
-                .csrf().disable(); //关闭csrf防御机制;
+                .csrf().disable(); //关闭csrf防御机制;*/
+        http.formLogin() // 表单登录
+//                 http.httpBasic() // HTTP Basic
+                .loginPage("/signin") // 跳转到登录页面的请求URL,注意！这只是url，最终该url打开什么还需要在control层里设置
+                .loginProcessingUrl("/login") // 对应登录页面form表单的action="/login"
+                .successHandler(authenticationSucessHandler) // 处理登录成功
+                .failureHandler(authenticationFailureHandler)// 处理登录失败
+                .and()
+                .authorizeRequests() // 授权配置
+//                .antMatchers("/", "/favicon.ico", "/index", "/css/**", "/js/**", "/img/**", "/static/**").permitAll() // 登录跳转 URL 无需认证
+                .antMatchers("/signin", "/css/**", "/js/**", "/img/**").permitAll() // 登录跳转 URL 无需认证
+                .anyRequest()  // 所有请求
+                .authenticated() // 都需要认证
+                .and().csrf().disable();//解决非thymeleaf的form表单提交被拦截问题
 
-        //解决非thymeleaf的form表单提交被拦截问题
-        http.csrf().disable();
+//        http.csrf().disable();
 
         //解决中文乱码问题
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-        filter.setForceEncoding(true);
-        http.addFilterBefore(filter, CsrfFilter.class);
+//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+//        filter.setEncoding("UTF-8");
+//        filter.setForceEncoding(true);
+//        http.addFilterBefore(filter, CsrfFilter.class);
 
 /*
        http.formLogin()// 表单登录  来身份认证
@@ -93,7 +113,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 oldUser.withDefaultPasswordEncoder()
                         .username("MenuMapper")
                         .password("MenuMapper")
-                        .roles("USER")
+                        .roles("user")
                         .build();
 
         return new InMemoryUserDetailsManager(user);
@@ -106,13 +126,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * @param auth
      * @throws Exception
      */
-    @Override
+/*    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // withDefaultPasswordEncoder被弃用，用以下方式
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         auth.inMemoryAuthentication()
 //                .withUser(oldUser.withDefaultPasswordEncoder().username("admin")
                 .withUser("MenuMapper")
-                .password(encoder.encode("MenuMapper")).roles("USER");
-    }
+                .password(encoder.encode("MenuMapper")).roles("user");
+    }*/
 }

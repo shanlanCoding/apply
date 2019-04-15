@@ -1,21 +1,20 @@
 package cn.gobyte.apply.controller;
 
-import cn.gobyte.apply.pojo.user.oldUser;
-import cn.gobyte.apply.pojo.user.UserVo;
-import cn.gobyte.apply.service.Impl.UserServiceImpl;
+import cn.gobyte.apply.service.user.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.regex.Pattern;
-
-/** 主页，用户页面的所有操作都是从这里开始的
-* @author shanLan misterchou@qq.com
-* @date 2019/4/10 1:56
-*/
+/**
+ * 主页，用户页面的所有操作都是从这里开始的
+ *
+ * @author shanLan misterchou@qq.com
+ * @date 2019/4/10 1:56
+ */
 
 @Controller
 public class index {
@@ -37,15 +36,32 @@ public class index {
     }
 
     /**
-     * TODO:首页，用户访问首页
+     * TODO: 登录页面
+     *
+     * @param
+     * @return java.lang.String:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/15 20:54
+     */
+    @GetMapping("/signin")
+    public String toLogin() {
+        return "index";
+    }
+    @GetMapping("/index")
+    public String toIndex() {
+        return "home";
+    }
+
+    /**
+     * TODO:登陆成功后页面
      *
      * @return java.lang.String
      * @author shanLan misterchou@qq.com
      * @date 2019/3/27 23:33
      */
-    @GetMapping("/index")
-    public String toIndex() {
-        return "index";
+    @GetMapping("/home")
+    public String toHome() {
+        return "home";
     }
 
     /**
@@ -56,15 +72,17 @@ public class index {
      * @author shanLan misterchou@qq.com
      * @date 2019/3/29 22:47
      */
-    @PostMapping("/register")
+/*    @PostMapping("/register")
     public String registerUser(oldUser oldUser) {
         System.err.println("oldUser：" + oldUser.toString());
 //        us.register(oldUser);
 
         //forward 内部跳转,redirect
         return "index";
-    }
+    }*/
 
+    private RequestCache requestCache = new HttpSessionRequestCache();
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
     /**
      * TODO: 登陆
      * * @param modelAndView
@@ -74,13 +92,16 @@ public class index {
      * @author shanLan misterchou@qq.com
      * @date 2019/4/5 0:34
      */
-    @RequestMapping("/login")
-    public ModelAndView login(ModelAndView modelAndView, UserVo user) {
-//        if (bindingResult.hasErrors()) {
-//            modelAndView.addObject("error", bindingResult.getFieldError().getDefaultMessage());
-//            modelAndView.setViewName("index");
-//            return modelAndView;
-//        }
+
+    /*@RequestMapping("/logins")
+    public ModelAndView logins(ModelAndView modelAndView, String username, String password) {
+
+        if (binding Result.hasErrors()) {
+            modelAndView.addObject("error", bindingResult.getFieldError().getDefaultMessage());
+            modelAndView.setViewName("index");
+            return modelAndView;
+        }
+        System.err.println("进来了");
 
         // .取出账户名、密码，去除所有空格
         String username = user.getId().replace(" ", "");
@@ -105,18 +126,18 @@ public class index {
 
         // 3.登陆验证，判断账号或者密码
 
-        System.err.println("MenuMapper------" + user.toString());
+//        System.err.println("MenuMapper------" + user.toString());
 
 
-        /*if (password != us.queryPassword) {
+        if (password != us.queryPassword) {
             modelAndView.addObject("error", "密码错误！");
             modelAndView.setViewName("index");
             return modelAndView;
-        }*/
+        }
 
         modelAndView.addObject("userName", username);
         modelAndView.setViewName("home");
         return modelAndView;
-    }
+    }*/
 
 }
