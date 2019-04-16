@@ -67,16 +67,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .csrf().disable(); //关闭csrf防御机制;*/
-        http.formLogin() // 表单登录
+        http
+                .formLogin() // 表单登录
 //                 http.httpBasic() // HTTP Basic
-                .loginPage("/signin") // 跳转到登录页面的请求URL,注意！这只是url，最终该url打开什么还需要在control层里设置
+                .loginPage("/index") // 跳转到登录页面的请求URL,注意！这只是url，最终该url打开什么还需要在control层里设置
                 .loginProcessingUrl("/login") // 对应登录页面form表单的action="/login"
                 .successHandler(authenticationSucessHandler) // 处理登录成功
                 .failureHandler(authenticationFailureHandler)// 处理登录失败
                 .and()
                 .authorizeRequests() // 授权配置
 //                .antMatchers("/", "/favicon.ico", "/index", "/css/**", "/js/**", "/img/**", "/static/**").permitAll() // 登录跳转 URL 无需认证
-                .antMatchers("/signin", "/css/**", "/js/**", "/img/**").permitAll() // 登录跳转 URL 无需认证
+                .antMatchers("/", "/signin", "/index", "/css/**", "/js/**", "/img/**", "/register","favicon.ico").permitAll() // 登录跳转 URL 无需认证
                 .anyRequest()  // 所有请求
                 .authenticated() // 都需要认证
                 .and().csrf().disable();//解决非thymeleaf的form表单提交被拦截问题

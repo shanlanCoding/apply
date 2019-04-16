@@ -1,11 +1,16 @@
 package cn.gobyte.apply.controller;
 
+import cn.gobyte.apply.pojo.user.User;
+import cn.gobyte.apply.service.user.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 主页，用户页面的所有操作都是从这里开始的
@@ -18,8 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class index {
 
     //注入业务实现类，所有的业务方法都是调用该类
-//    @Autowired
-//    private UserServiceImpl us;
+    @Autowired
+    private UserServiceImpl us;
 
     /**
      * TODO:默认访问首页
@@ -70,14 +75,29 @@ public class index {
      * @author shanLan misterchou@qq.com
      * @date 2019/3/29 22:47
      */
-/*    @PostMapping("/register")
-    public String registerUser(oldUser oldUser) {
-        System.err.println("oldUser：" + oldUser.toString());
-//        us.register(oldUser);
+    @PostMapping("/register")
+    public String registerUser(User user) {
+        System.err.println("User：" + user.toString() + "\r\n" + this.getClass().getName());
+        us.register(user);
 
         //forward 内部跳转,redirect
-        return "index";
-    }*/
+        return "redirect:index";
+    }
+
+    /**
+    * TODO: 打开测试页面
+    * 
+    * @param user 
+    * @return java.lang.String: 
+    * @author shanLan misterchou@qq.com
+    * @date 2019/4/17 1:47
+    */
+    @RequestMapping("/t")
+    public String test(User user) {
+        return "Test";
+    }
+
+
 
     private RequestCache requestCache = new HttpSessionRequestCache();
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

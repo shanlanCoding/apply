@@ -2,6 +2,7 @@
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!--逆向工程-->
 <generatorConfiguration>
     <context id="mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">

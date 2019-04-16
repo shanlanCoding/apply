@@ -1,0 +1,95 @@
+<!--
+作者：两载
+邮箱：misterchou@qq.com
+时间：2019年3月25日22:33:40
+描述：登陆主页
+-->
+<!DOCTYPE html>
+<html lang="ZH" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>效果测试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+<div id="addgroups" class="btn-group">
+
+    <button type="button" data-name="" id="" class="btn btn-default">
+        <i class="fa fa-plus">Add Groups</i>
+    </button>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="">
+            <span class="buttonText"><i id="dropdownMenu2" class="fa fa-eye"></i></span>
+            <span class="caret">下拉选择框</span>
+        </button>
+
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a href="#" onclick="shows1($(this).text())"><i class="fa fa-pencil">Full AccessRead</i></a>
+            </li>
+            <li>
+                <a href="#" onclick="shows1($(this).text())"><i class="fa fa-eye">Read Only</i></a>
+            </li>
+            <li>
+                <a href="#" onclick="shows1($(this).text())"><i class="fa fa-eye-slash">Deny Access</i></a>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+
+
+<hr>
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span class="buttonText">默认</span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="#" onclick="shows($(this).text())">功能</a></li>
+        <li><a href="#" onclick="shows($(this).text())">另一个功能</a></li>
+        <li><a href="#" onclick="shows($(this).text())">其他</a></li>
+        <li><a href="#" onclick="shows($(this).text())">分离的链接</a></li>
+    </ul>
+</div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/loginAndReginster.js"></script>
+
+<script type="text/javascript">
+
+
+    function shows1(a) {
+        if (a == "Full AccessRead") {
+            $("#dropdownMenu2").removeClass();
+            $("#dropdownMenu2").addClass("fa fa-pencil");
+        } else if (a == "Read Only") {
+            $("#dropdownMenu2").removeClass();
+            $("#dropdownMenu2").addClass("fa fa-eye");
+        } else if (a == "Deny Access") {
+            $("#dropdownMenu2").removeClass();
+            $("#dropdownMenu2").addClass("fa fa-eye-slash");
+        }
+// $('.buttonText').text(a)
+    }
+
+
+    function shows(a) {
+        $('.buttonText').text(a)
+    }
+
+</script>
+</body>
+
+</html>

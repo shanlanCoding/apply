@@ -11,12 +11,12 @@ public interface UserService extends IService<User> {
     /**
      * TODO: 注册用户到数据库
      *
-     * @param oldUser 需要注册的对象，保存到数据库内
+     * @param user 需要注册的对象，保存到数据库内
      * @return void
      * @author shanLan misterchou@qq.com
      * @date 2019/3/28 21:53
      */
-//    public void register(oldUser oldUser);
+    public void register(User user);
 
     /**
      * TODO:登陆

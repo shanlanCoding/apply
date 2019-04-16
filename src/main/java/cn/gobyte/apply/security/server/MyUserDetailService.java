@@ -51,34 +51,37 @@ public class MyUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         // 1. 根据表单提交的用户名，去数据库查询查user
         User user = userService.findByEmailOrIdNumber(s);
-        // 一定要把密码加密，否则登陆失败
-        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        if (user != null) {
+            // 一定要把密码加密，否则登陆失败
+            user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 
-        // 查询权限、按钮列表
+            // 查询权限、按钮列表
 //            List<Menu> permissions = this.menuService.findUserPermissions(user.getId());
 
-        // 用户状态锁，true正常；false锁定
-        boolean notLocked = false;
-        if (StringUtils.equals(User.STATUS_VALID, user.getAccountStatus())) {
-            // 用户有效
-            notLocked = true;
+            // 用户状态锁，true正常；false锁定
+            boolean notLocked = false;
+            if (StringUtils.equals(User.STATUS_VALID, user.getAccountStatus())) {
+                // 用户有效
+                notLocked = true;
+            }
+
+            //  设置用户信息
+            // 这里我们使用了org.springframework.security.core.userdetails.User类包含7个参数的构造器，其还包含一个三个参数的构造器User(String username, String password,Collection<? extends GrantedAuthority> authorities)，
+            // 由于权限参数不能为空，所以这里先使用AuthorityUtils.commaSeparatedStringToAuthorityList方法模拟一个admin的权限，该方法可以将逗号分隔的字符串转换为权限集合。
+
+            // 把用户的email设置为登录名
+            myUserDetails userDetails = new myUserDetails(user.getEmail(), user.getPassword(), true, true, true,
+                    notLocked, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+
+            userDetails.setEmail(user.getEmail());
+            userDetails.setPassword(user.getPassword());
+            userDetails.setLoginTime(DateUtil.getDateFormat(new Date(), DateUtil.FULL_DATE_FORMAT));
+
+            return userDetails;
+        } else {
+            throw new UsernameNotFoundException("用户没有找到");
         }
 
-        //  设置用户信息
-        // 这里我们使用了org.springframework.security.core.userdetails.User类包含7个参数的构造器，其还包含一个三个参数的构造器User(String username, String password,Collection<? extends GrantedAuthority> authorities)，
-        // 由于权限参数不能为空，所以这里先使用AuthorityUtils.commaSeparatedStringToAuthorityList方法模拟一个admin的权限，该方法可以将逗号分隔的字符串转换为权限集合。
-
-        // 把用户的email设置为登录名
-        myUserDetails userDetails = new myUserDetails(user.getEmail(), user.getPassword(), true, true, true,
-                notLocked, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-
-        userDetails.setEmail(user.getEmail());
-        userDetails.setPassword(user.getPassword());
-        userDetails.setLoginTime(DateUtil.getDateFormat(new Date(), DateUtil.FULL_DATE_FORMAT));
-
-        return userDetails;
-
-        //        return null;
     }
 
 }

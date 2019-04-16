@@ -1,5 +1,7 @@
 package cn.gobyte.apply.pojo.user;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.Date;
  * 用户表，里面包含了用户的所有信息
  */
 @Table(name = "users")
+@Data
 public class User implements Serializable {
     private static final long serialVersionUID = -6478492890959452848L;
 
@@ -44,7 +47,7 @@ public class User implements Serializable {
      */
     @Id
     @Column(name = "systemId")
-    private Long systemid;
+    private Long systemId;
 
     /**
      * 身份证号
@@ -226,17 +229,17 @@ public class User implements Serializable {
      *
      * @return systemId - 系统默认id
      */
-    public Long getSystemid() {
-        return systemid;
+    public Long getSystemId() {
+        return systemId;
     }
 
     /**
      * 设置系统默认id
      *
-     * @param systemid 系统默认id
+     * @param systemId 系统默认id
      */
-    public void setSystemid(Long systemid) {
-        this.systemid = systemid;
+    public void setSystemId(Long systemId) {
+        this.systemId = systemId;
     }
 
     /**
