@@ -6,7 +6,6 @@ import cn.gobyte.apply.security.pojo.myUserDetails;
 import cn.gobyte.apply.service.user.UserService;
 import cn.gobyte.apply.utils.DateUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,13 +23,16 @@ import java.util.Date;
  */
 @Configuration
 public class MyUserDetailService implements UserDetailsService {
-    // 注入方法类
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private MenuMapper menuService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    // 注入方法类；idea不推荐使用autowried进行注入，推荐使用构造方法注入
+    private final UserService userService;
+    private final MenuMapper menuService;
+    private final PasswordEncoder passwordEncoder;
+
+    public MyUserDetailService(UserService userService, MenuMapper menuService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.menuService = menuService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     /**
      * TODO: Security默认的表单登陆方法，一定要覆盖。
@@ -49,47 +51,42 @@ public class MyUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         // 1. 根据表单提交的用户名，去数据库查询查user
         User user = userService.findByEmailOrIdNumber(s);
-        user.setPassword(this.passwordEncoder.encode(" "));
+        // 一定要把密码加密，否则登陆失败
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 
-        if (user != null) {
-            // 查询权限、按钮列表
+        // 查询权限、按钮列表
 //            List<Menu> permissions = this.menuService.findUserPermissions(user.getId());
 
-            // 用户状态锁，true正常；false锁定
-            boolean notLocked = false;
-            if (StringUtils.equals(User.STATUS_VALID, user.getAccountStatus())) {
-                // 用户有效
-                notLocked = true;
-            }
-
-            //  设置用户信息
-            // 这里我们使用了org.springframework.security.core.userdetails.User类包含7个参数的构造器，其还包含一个三个参数的构造器User(String username, String password,Collection<? extends GrantedAuthority> authorities)，
-            // 由于权限参数不能为空，所以这里先使用AuthorityUtils.commaSeparatedStringToAuthorityList方法模拟一个admin的权限，该方法可以将逗号分隔的字符串转换为权限集合。
-
-            // 把用户的email设置为登录名
-            myUserDetails userDetails = new myUserDetails(user.getEmail(), user.getPassword(), true, true, true,
-                    notLocked, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-
-            userDetails.setEmail(user.getEmail());
-            userDetails.setPassword(user.getPassword());
-            userDetails.setLoginTime(DateUtil.getDateFormat(new Date(), DateUtil.FULL_DATE_FORMAT));
-
-            return userDetails;
-
-        } else {
-            // 待补充
-            throw new UsernameNotFoundException("");
+        // 用户状态锁，true正常；false锁定
+        boolean notLocked = false;
+        if (StringUtils.equals(User.STATUS_VALID, user.getAccountStatus())) {
+            // 用户有效
+            notLocked = true;
         }
 
-//        return null;
+        //  设置用户信息
+        // 这里我们使用了org.springframework.security.core.userdetails.User类包含7个参数的构造器，其还包含一个三个参数的构造器User(String username, String password,Collection<? extends GrantedAuthority> authorities)，
+        // 由于权限参数不能为空，所以这里先使用AuthorityUtils.commaSeparatedStringToAuthorityList方法模拟一个admin的权限，该方法可以将逗号分隔的字符串转换为权限集合。
+
+        // 把用户的email设置为登录名
+        myUserDetails userDetails = new myUserDetails(user.getEmail(), user.getPassword(), true, true, true,
+                notLocked, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+
+        userDetails.setEmail(user.getEmail());
+        userDetails.setPassword(user.getPassword());
+        userDetails.setLoginTime(DateUtil.getDateFormat(new Date(), DateUtil.FULL_DATE_FORMAT));
+
+        return userDetails;
+
+        //        return null;
     }
 
 }
 
-/**
- * TODO:登陆成功的类，该类负责设置用户的资料，该类一定要实现，这个是Security必须的。
- *
- * @author shanLan misterchou@qq.com
+/*
+  登陆成功的类，该类负责设置用户的资料，该类一定要实现，这个是Security必须的。
+
+  @author shanLan misterchou@qq.com
  * @date 2019/4/15 18:18
  */
 /*@Configuration
