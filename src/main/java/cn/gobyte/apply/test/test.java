@@ -5,8 +5,12 @@ import cn.gobyte.apply.service.BaseService;
 import cn.gobyte.apply.utils.Utils;
 import cn.gobyte.apply.utils.idNumberVerify;
 import org.junit.jupiter.api.Test;
+import tk.mybatis.mapper.common.Mapper;
 
 public class test extends BaseService<User> {
+    public test(Mapper<User> mapper) {
+        super(mapper);
+    }
 
 //    @Autowired
 //    private UserService userService;
