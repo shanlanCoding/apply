@@ -1,7 +1,5 @@
 package cn.gobyte.apply.controller;
 
-import cn.gobyte.apply.service.user.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -20,8 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class index {
 
     //注入业务实现类，所有的业务方法都是调用该类
-    @Autowired
-    private UserServiceImpl us;
+//    @Autowired
+//    private UserServiceImpl us;
 
     /**
      * TODO:默认访问首页
@@ -31,25 +29,25 @@ public class index {
      * @date 2019/3/29 22:44
      */
     @GetMapping("/")
-    public String index() {
+    public String toRootIndex() {
         return "index";
     }
 
     /**
      * TODO: 登录页面
      *
-     * @param
      * @return java.lang.String:
      * @author shanLan misterchou@qq.com
-     * @date 2019/4/15 20:54
+     * @date 2019/4/16 16:10
      */
     @GetMapping("/signin")
     public String toLogin() {
         return "index";
     }
+
     @GetMapping("/index")
     public String toIndex() {
-        return "home";
+        return "index";
     }
 
     /**
@@ -64,8 +62,8 @@ public class index {
         return "home";
     }
 
-    /**
-     * TODO:注册学生的账号
+    /*
+     * 注册学生的账号
      *
      * @param oldUser 传递进来的学生对象
      * @return java.lang.String
@@ -83,8 +81,8 @@ public class index {
 
     private RequestCache requestCache = new HttpSessionRequestCache();
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-    /**
-     * TODO: 登陆
+    /*
+     * 登陆
      * * @param modelAndView
      *
      * @param user
