@@ -54,7 +54,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
                     Long sysId = user.getSystemId();
 
-                    System.err.println("sysId：" + sysId + this.getClass().getName());
+                    System.err.println("sysId：" + sysId+"----" + this.getClass().getName());
                 } else {
                     System.err.println("存在" + um.queryId(user.getId()) + this.getClass().getName());
                 }

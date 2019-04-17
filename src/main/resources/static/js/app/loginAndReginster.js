@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 function register() {
 
-    console.log("register-click");
+    // console.log("register-click");
 
     var username = $("#idNumber").val().trim();
     var password = $("#password").val().trim();
@@ -51,8 +51,9 @@ function register() {
 
     if ( !man && !gril )
     {
-        // $MB.n_warning("请选择性别！");
+        $MB.n_warning("请选择性别！");
         console.log("请选择性别！");
+        return;
     }
 
     $.ajax(

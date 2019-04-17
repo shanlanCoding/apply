@@ -47,12 +47,13 @@ public class User implements Serializable {
      */
     @Id
     @Column(name = "systemId")
+    @GeneratedValue(generator = "JDBC") // 插入后返回主键
     private Long systemId;
 
     /**
      * 身份证号
      */
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     /**
