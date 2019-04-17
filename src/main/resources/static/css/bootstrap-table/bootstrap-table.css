@@ -164,16 +164,17 @@
     color: #292b2c;
 }
 
-.fixed-table-pagination .pagination li.disabled a{
-	color: #bbb;
+.fixed-table-pagination .pagination li.disabled a {
+    color: #bbb;
 }
 
-.fixed-table-pagination .pagination li.page-last a{
+.fixed-table-pagination .pagination li.page-last a {
     border-right: 1px solid #efefef;
 }
+
 .fixed-table-pagination .pagination li.active a {
-	cursor: default;
-	color: #fff;
+    cursor: default;
+    color: #fff;
 }
 
 .fixed-table-pagination .pagination-info {
@@ -280,8 +281,9 @@
 }
 
 .bootstrap-table table {
-	border: 1px solid #f2f2f2;
+    border: 1px solid #f2f2f2;
 }
+
 .bootstrap-table table th {
     color: #464a4c;
     background-color: #fbfbfb;

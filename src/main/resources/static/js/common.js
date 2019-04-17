@@ -86,7 +86,7 @@ var $MB = (function () {
             },
             spacing: 10,
             z_index: 3001,
-            delay: 2000,
+            delay: 200000,
             timer: 1000,
             url_target: '_blank',
             mouse_over: false,
