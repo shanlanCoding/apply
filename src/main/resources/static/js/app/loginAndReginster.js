@@ -48,12 +48,31 @@ function register() {
     // 性别校验
     var man = $("#optionsRadios3").is(":checked");
     var gril = $("#optionsRadios4").is(":checked");
-
     if ( !man && !gril )
     {
         $MB.n_warning("请选择性别！");
         console.log("请选择性别！");
         return;
+    }
+
+    // 专业
+    var major = $("#mcode option:selected").text();
+    if (major === "报考专业") {
+        $MB.n_warning("'报考专业'不能为空！");
+        return;
+    }else {
+        // setting value
+        $("#mcode option:selected").val(major);
+    }
+
+    // 政治面貌
+    var zzmm = $("#zzmm option:selected").text();
+    if (zzmm === "政治面貌") {
+        $MB.n_warning("'政治面貌'不能为空！");
+        return;
+    }else {
+        // setting value
+        $("#zzmm option:selected").val(zzmm);
     }
 
     $.ajax(
