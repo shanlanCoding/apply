@@ -13,10 +13,10 @@ TODO: 权限页面控制器；该类负责主页、登录页面跳转的
 public class MvcConfig implements WebMvcConfigurer {
 
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/home").setViewName("homes");
+        registry.addViewController("/").setViewName("indexs");
         registry.addViewController("/hello").setViewName("hello");
-        registry.addViewController("/login").setViewName("index");
+        registry.addViewController("/login").setViewName("indexs");
     }
 
 }

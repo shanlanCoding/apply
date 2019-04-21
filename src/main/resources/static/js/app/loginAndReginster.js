@@ -75,19 +75,21 @@ function register() {
         $("#zzmm option:selected").val(zzmm);
     }
 
+    // 发数据
     $.ajax(
         {
             type: "post",
             url: "/register",
-            data: $("#register-from").serialize(),
+            data: $("#register-form").serialize(),
             dataType: "json",
             success: function (data) {
                 if (data.code === 0) {
                     $MB.n_success("同学恭喜你，账号注册成功!");
-                    alert("同学恭喜你，账号注册成功！");
-                    window.location.reload();
+
+                    // alert("同学恭喜你，账号注册成功！");
+                    // window.location.reload();
                 } else {
-                    $MB.n_warning(r.msg);
+                    $MB.n_warning(data.msg);
                 }
             }
         }

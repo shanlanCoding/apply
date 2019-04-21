@@ -91,4 +91,22 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         return userList.isEmpty() ? null : userList.get(0);
     }
 
+    @Override
+    public void findByNameAndIdNumber(String id, String email) {
+        // 1. 先验证身份证号和邮箱格式的合法性
+        // 2. 拿着身份证号和邮箱进行数据库查询
+        // 3. 返回查询的结果
+        email = email.trim();
+        id = id.trim();
+        boolean isEmail = Utils.checkEmail(email,99);
+        // 实例化
+        Example example = new Example(User.class);
+        if( isEmail )
+        {
+            // 开始查数据库
+            example.createCriteria().andCondition("email=",email);
+
+        }
+    }
+
 }

@@ -82,16 +82,14 @@ var $MB = (function () {
             },
             /**/
 
-
-
             offset: {
                 x: 20,
                 y: 20
             },
             spacing: 10,
             z_index: 3001,
-            delay: 200000,
-            timer: 10000,
+            delay: 3000,
+            timer: 1000,
             url_target: '_blank',
             mouse_over: false,
             animate: {

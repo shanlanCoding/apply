@@ -49,7 +49,7 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
         // 请求哪个页面登陆成功后，再打开该页面
 //        redirectStrategy.sendRedirect(request, response, savedRequest.getRedirectUrl());
         // 不管请求哪个页面，登陆成功后仅打开指定页面index
-        redirectStrategy.sendRedirect(request, response, "/home");
+        redirectStrategy.sendRedirect(request, response, "/index");
         System.err.println("登陆成功" + this.getClass().getName());
     }
 }

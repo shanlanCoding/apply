@@ -70,70 +70,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .formLogin() // 表单登录
 //                 http.httpBasic() // HTTP Basic
-                .loginPage("/index") // 跳转到登录页面的请求URL,注意！这只是url，最终该url打开什么还需要在control层里设置
+                .loginPage("/login") // 跳转到登录页面的请求URL,注意！这只是url，最终该url打开什么还需要在control层里设置
                 .loginProcessingUrl("/login") // 对应登录页面form表单的action="/login"
                 .successHandler(authenticationSucessHandler) // 处理登录成功
                 .failureHandler(authenticationFailureHandler)// 处理登录失败
                 .and()
                 .authorizeRequests() // 授权配置
 //                .antMatchers("/", "/favicon.ico", "/index", "/css/**", "/js/**", "/img/**", "/static/**").permitAll() // 登录跳转 URL 无需认证
-                .antMatchers("/", "/signin", "/index", "/static/**", "/css/**", "/js/**", "/img/**", "/register","/favicon.ico").permitAll() // 登录跳转 URL 无需认证
+                .antMatchers("/", "/login", "/static/**", "/css/**", "/js/**", "/img/**", "/register", "/favicon.ico").permitAll() // 登录跳转 URL 无需认证
                 .anyRequest()  // 所有请求
                 .authenticated() // 都需要认证
                 .and().csrf().disable();//解决非thymeleaf的form表单提交被拦截问题
 
-//        http.csrf().disable();
-
-        //解决中文乱码问题
-//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-//        filter.setEncoding("UTF-8");
-//        filter.setForceEncoding(true);
-//        http.addFilterBefore(filter, CsrfFilter.class);
-
-/*
-       http.formLogin()// 表单登录  来身份认证
-                .loginPage("/myLogin.html")// 自定义登录页面
-                .loginProcessingUrl("/authentication/form")// 自定义登录路径
-                .and()
-                .authorizeRequests()// 对请求授权
-                // error  127.0.0.1 将您重定向的次数过多
-                .antMatchers("/myLogin.html", "/authentication/require",
-                        "/authentication/form").permitAll()// 这些页面不需要身份认证,其他请求需要认证
-                .anyRequest() // 任何请求
-                .authenticated()//; // 都需要身份认证
-                .and()
-                .csrf().disable();// 禁用跨站攻击
-*/
     }
 
-/*    @Bean
-    @Override
-    // withDefaultPasswordEncoder 弃用了，原因是不安全
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                oldUser.withDefaultPasswordEncoder()
-                        .username("MenuMapper")
-                        .password("MenuMapper")
-                        .roles("user")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }*/
-
-    /**
-     * 在内存中配置一个用户，admin/admin分别是用户名和密码，这个用户拥有USER角色。
-     * withDefaultPasswordEncoder 被遗弃，原因是不安全，只能在例子中使用
-     *
-     * @param auth
-     * @throws Exception
-     */
-/*    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // withDefaultPasswordEncoder被弃用，用以下方式
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.inMemoryAuthentication()
-//                .withUser(oldUser.withDefaultPasswordEncoder().username("admin")
-                .withUser("MenuMapper")
-                .password(encoder.encode("MenuMapper")).roles("user");
-    }*/
 }
