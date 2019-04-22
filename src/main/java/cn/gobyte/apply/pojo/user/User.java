@@ -167,7 +167,7 @@ public class User implements Serializable {
     private String yb;
 
     /**
-     * 状态
+     * 审核状态
      */
     private String state;
 

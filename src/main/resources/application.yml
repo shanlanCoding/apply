@@ -17,6 +17,11 @@ spring:
     mode: HTML5
 
 
+logging:
+  level:
+    cn.gobyte.apply.service.user.impl: debug
+
+
   #热部署配置-开始
 #  devtools:
 #    restart:

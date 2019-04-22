@@ -6,7 +6,9 @@ import cn.gobyte.apply.service.user.impl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +52,8 @@ public class index {
     public String toLogin() {
         return "login";
     }
-        /**
+
+    /**
      * TODO:登陆成功后页面
      *
      * @return java.lang.String
@@ -58,7 +61,10 @@ public class index {
      * @date 2019/3/27 23:33
      */
     @GetMapping("/index")
-    public String toHome() {
+    public String toHome(Authentication authentication, Model md) {
+        Object principal = authentication.getPrincipal();
+        md.addAttribute("user", principal);
+        System.err.println(principal.toString());
         return "index";
     }
 
@@ -112,7 +118,7 @@ public class index {
      */
     @RequestMapping("/t")
     public String test(User user) {
-        return "Test";
+        return "hello";
     }
 
     /**
@@ -127,5 +133,10 @@ public class index {
     @RequestMapping("/login")
     public String login(String username, String password) {
         return "/login";
+    }
+
+    @GetMapping("/printApplicationForm")
+    public String printApplicationForm() {
+        return "printApplicationForm";
     }
 }

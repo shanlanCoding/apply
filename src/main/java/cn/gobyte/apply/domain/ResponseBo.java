@@ -14,23 +14,23 @@ public class ResponseBo extends HashMap<String, Object> {
 
     /**
      * 成功
-    */
+     */
     private static final Integer SUCCESS = 0;
     /**
      * 警告
-    */
+     */
     private static final Integer WARN = 1;
     /**
      * 异常 失败
-    */
+     */
     private static final Integer FAIL = 500;
     /**
      * 未认证
-    */
+     */
     private static final Integer UNAUTHORIZED = 401;
     /**
      * 超频
-    */
+     */
     private static final Integer OVERCLOCKING = 666;
 
     /**
@@ -47,13 +47,13 @@ public class ResponseBo extends HashMap<String, Object> {
     }
 
     /**
-    * TODO: 返回错误状态500
-    *
-    * @param msg 返回的消息
-    * @return cn.gobyte.apply.domain.ResponseBo: 该方法封装了一些返回状态。本方法返回失败状态码500，消息为msg传入进来的内容
-    * @author shanLan misterchou@qq.com
-    * @date 2019/4/22 19:16
-    */
+     * TODO: 返回错误状态500
+     *
+     * @param msg 返回的消息
+     * @return cn.gobyte.apply.domain.ResponseBo: 该方法封装了一些返回状态。本方法返回失败状态码500，消息为msg传入进来的内容
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/22 19:16
+     */
     public static ResponseBo error(Object msg) {
         ResponseBo responseBo = new ResponseBo();
         responseBo.put("code", FAIL);

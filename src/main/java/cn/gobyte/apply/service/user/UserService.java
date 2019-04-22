@@ -16,7 +16,7 @@ public interface UserService extends IService<User> {
      * @author shanLan misterchou@qq.com
      * @date 2019/3/28 21:53
      */
-    public void register(User user);
+    void register(User user);
 
     /**
      * TODO:登陆
@@ -26,7 +26,7 @@ public interface UserService extends IService<User> {
      * @author shanLan misterchou@qq.com
      * @date 2019/4/5 21:34
      */
-    public void login(UserVo user);
+    void login(UserVo user);
 
     /**
      * TODO:使用邮箱或者身份证号查找
@@ -36,7 +36,7 @@ public interface UserService extends IService<User> {
      * @author shanLan misterchou@qq.com
      * @date 2019/4/11 1:28
      */
-    public User findByEmailOrIdNumber(String username);
+    User findByEmailOrIdNumber(String username);
 
     /**
      * TODO: 查找身份证号和邮箱是否存在。
@@ -48,4 +48,14 @@ public interface UserService extends IService<User> {
      * @date 2019/4/21 21:45
      */
     void findByNameAndIdNumber(String id, String email);
+
+    /**
+    * TODO: 更新用户登陆时间
+    *
+    * @param userName 需要更新的用户名
+    * @return void:
+    * @author shanLan misterchou@qq.com
+    * @date 2019/4/23 0:01
+    */
+    void updateLoginTimeByIdNumber(String userName);
 }

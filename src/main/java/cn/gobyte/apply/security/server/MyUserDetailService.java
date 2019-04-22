@@ -73,9 +73,22 @@ public class MyUserDetailService implements UserDetailsService {
             myUserDetails userDetails = new myUserDetails(user.getEmail(), user.getPassword(), true, true, true,
                     notLocked, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
 
+
+            userDetails.setName(user.getName());
+            userDetails.setId(user.getId());
             userDetails.setEmail(user.getEmail());
             userDetails.setPassword(user.getPassword());
+            // 审核状态
+            userDetails.setState(user.getState());
+            // 注册时间
+            userDetails.setCreatTime(user.getCreatTime());
+            // 最后登陆时间
+            userDetails.setLastLoginTime(user.getLastLoginTime());
+            // 登录超时，获取登陆时间
             userDetails.setLoginTime(DateUtil.getDateFormat(new Date(), DateUtil.FULL_DATE_FORMAT));
+
+            // 设置当前时间为“最后登陆时间”到数据库
+            this.userService.updateLoginTimeByIdNumber(user.getId());
 
             return userDetails;
         } else {

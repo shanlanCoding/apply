@@ -8,6 +8,7 @@ import cn.gobyte.apply.service.user.UserService;
 import cn.gobyte.apply.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
@@ -25,7 +26,7 @@ import java.util.List;
 // 继承了基础的BaseService类，然后再去实现需要完善的UserService类
 public class UserServiceImpl extends BaseService<User> implements UserService {
 
-    //    mapper，查询数据库
+    //mapper，查询数据库
     @Autowired
     private userMapper um;
 
@@ -42,10 +43,11 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
                 String id = user.getId();
                 //如果返回了null ，说明没有找到，即代表可以注册
                 if (um.queryId(id) == null) {
-                    // 补充部分字段，例如时间
+                    // 设置默认信息，例如头像、主题、创建时间、默认激活账号
                     user.setCreatTime(new Date());
                     user.setTheme(user.DEFAULT_THEME);
                     user.setAvatar(user.DEFAULT_AVATAR);
+                    user.setAccountStatus("1");
 
                     // 2.判断通过，身份证号可以注册
                     //利用tk-mybatis进行注册
@@ -54,7 +56,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
                     Long sysId = user.getSystemId();
 
-                    System.err.println("sysId：" + sysId+"----" + this.getClass().getName());
+                    System.err.println("sysId：" + sysId + "----" + this.getClass().getName());
                 } else {
                     System.err.println("存在" + um.queryId(user.getId()) + this.getClass().getName());
                 }
@@ -98,15 +100,32 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         // 3. 返回查询的结果
         email = email.trim();
         id = id.trim();
-        boolean isEmail = Utils.checkEmail(email,99);
+        boolean isEmail = Utils.checkEmail(email, 99);
         // 实例化
         Example example = new Example(User.class);
-        if( isEmail )
-        {
+        if (isEmail) {
             // 开始查数据库
-            example.createCriteria().andCondition("email=",email);
+            example.createCriteria().andCondition("email=", email);
 
         }
+    }
+
+    /**
+     * TODO: 根据身份证号更新用户登陆时间；初步设想是在登陆成功以后先获取一下登录时间，然后再使用该方法进行更新
+     *
+     * @param userName 身份证号
+     * @return void:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/22 23:54
+     */
+    @Override
+    @Transactional
+    public void updateLoginTimeByIdNumber(String userName) {
+        Example example = new Example(User.class);
+        example.createCriteria().andCondition("id=", userName);
+        User user = new User();
+        user.setLastLoginTime(new Date());
+        this.um.updateByExampleSelective(user, example);
     }
 
 }

@@ -73,7 +73,7 @@ function register() {
         // setting value
         $("#zzmm option:selected").val(zzmm);
     }
-
+    $(".registration-form");
     // 发数据
     $.ajax(
         {
@@ -84,6 +84,8 @@ function register() {
             success: function (data) {
                 if (data.code === 0) {
                     $MB.n_success("同学恭喜你，账号注册成功!");
+
+                    $(".registration-form")[0].reset();
 
                     // alert("同学恭喜你，账号注册成功！");
                     // window.location.reload();
@@ -113,7 +115,7 @@ function login() {
         return;
     }
     // 登陆按钮加载特效
-    $loginButton.html("").append("<div class='login-loder'><div class='line-scale'><div></div><div></div><div></div><div></div><div></div></div></div>");
+    // $loginButton.html("").append("<div class='login-loder'><div class='line-scale'><div></div><div></div><div></div><div></div><div></div></div></div>");
     $.ajax(
         {
             type: "post",
@@ -131,7 +133,7 @@ function login() {
                 } else {
                     // if (r.msg !== '验证码不能为空！') reloadCode();
                     $MB.n_warning(data.msg);
-                    $loginButton.text("确认登录");
+                    // $loginButton.html("确认登录");
                 }
             }
         }
