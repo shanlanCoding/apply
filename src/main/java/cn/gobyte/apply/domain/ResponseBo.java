@@ -12,19 +12,29 @@ public class ResponseBo extends HashMap<String, Object> {
 
     private static final long serialVersionUID = -8713837118340960775L;
 
-    // 成功
+    /**
+     * 成功
+    */
     private static final Integer SUCCESS = 0;
-    // 警告
+    /**
+     * 警告
+    */
     private static final Integer WARN = 1;
-    // 异常 失败
+    /**
+     * 异常 失败
+    */
     private static final Integer FAIL = 500;
-    // 未认证
+    /**
+     * 未认证
+    */
     private static final Integer UNAUTHORIZED = 401;
-    // 超频
+    /**
+     * 超频
+    */
     private static final Integer OVERCLOCKING = 666;
 
     /**
-     * TODO: 成功
+     * TODO: 成功状态的方法。该方法是一个构造方法，所以如果需要返回消息成功的状态，直接new该类即可返回。例如：new ResponseBo()
      *
      * @param
      * @return :
@@ -36,6 +46,14 @@ public class ResponseBo extends HashMap<String, Object> {
         put("msg", "操作成功");
     }
 
+    /**
+    * TODO: 返回错误状态500
+    *
+    * @param msg 返回的消息
+    * @return cn.gobyte.apply.domain.ResponseBo: 该方法封装了一些返回状态。本方法返回失败状态码500，消息为msg传入进来的内容
+    * @author shanLan misterchou@qq.com
+    * @date 2019/4/22 19:16
+    */
     public static ResponseBo error(Object msg) {
         ResponseBo responseBo = new ResponseBo();
         responseBo.put("code", FAIL);

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/css/bootstrap-table/bootstrap-table.css">
     <!-- animate -->
     <link rel="stylesheet" href="/css/animate/animate.min.css">
-<!--    <link rel="stylesheet" href="/css/app.css" type="text/css">-->
+    <!--    <link rel="stylesheet" href="/css/app.css" type="text/css">-->
 
 
     <style type="text/css">
@@ -81,13 +81,12 @@
         <div class="col-md-4">
         </div>
         <div class="col-md-4 one">
-            <form class="form" role="form" action="/login" method="post">
+            <!--/login onsubmit="return false"-->
+            <form class="form" role="form" action="#" method="post" >
                 <div class="form-group">
                     <label for="username" style="width: 100%;">
                         <strong>账 户：</strong>
                     </label>
-                    <!--错误提示-->
-                    <!--                    <span style="font-size: 12px;color: #ff0000" th:text="${error}" aria-describedby="basic-addon0"></span>-->
                     <input type="text" class="form-control" placeholder="邮箱/身份证号"
                            autofocus="autofocus" name="username" id="username" value="421127199909098888"/>
                 </div>
@@ -97,13 +96,13 @@
                         <strong>密 码：</strong>
                     </label>
                     <input type="password" class="form-control" placeholder="请输入密码"
-                           name="password" id="loginPassword"/>
+                           name="password" id="loginPassword" autocomplete=“current-password”/>
                 </div>
 
                 <button type="button" class="btn btn-primary">
                     找回密码
                 </button>
-                <button type="submit" class="btn btn-primary login">
+                <button type="button" class="btn btn-primary login">
                     确认登陆
                 </button>
             </form>
@@ -126,9 +125,9 @@
 
                 <div class="modal-dialog" role="document">
 
-                    <!--修改客户信息-弹出框-->
+                    <!--修改客户信息-弹出框 /register-->
                     <div class="modal-content">
-                        <form role="form" action="/register" id="register-form" method="post" class="registration-form">
+                        <form role="form" action="" id="register-form" method="post" class="registration-form">
                             <!--表单标题-->
                             <div class="modal-header">
                                 <h4 class="modal-title" id="myModalLabel">立即注册</h4>
@@ -376,6 +375,9 @@
 
         // 注册账号 registerButton|${#httpServletRequest.getContextPath()}
         $(".registerButton").on("click", register);
+
+        // 登陆
+        $(".login").on("click", login);
     });
 </script>
 

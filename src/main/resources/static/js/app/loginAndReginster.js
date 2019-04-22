@@ -48,8 +48,7 @@ function register() {
     // 性别校验
     var man = $("#optionsRadios3").is(":checked");
     var gril = $("#optionsRadios4").is(":checked");
-    if ( !man && !gril )
-    {
+    if (!man && !gril) {
         $MB.n_warning("请选择性别！");
         console.log("请选择性别！");
         return;
@@ -60,7 +59,7 @@ function register() {
     if (major === "报考专业") {
         $MB.n_warning("'报考专业'不能为空！");
         return;
-    }else {
+    } else {
         // setting value
         $("#mcode option:selected").val(major);
     }
@@ -70,7 +69,7 @@ function register() {
     if (zzmm === "政治面貌") {
         $MB.n_warning("'政治面貌'不能为空！");
         return;
-    }else {
+    } else {
         // setting value
         $("#zzmm option:selected").val(zzmm);
     }
@@ -102,6 +101,9 @@ function login() {
     var username = $("#username").val().trim();
     var password = $("#loginPassword").val().trim();
     var $form = $(".one").find("form");
+    // 登陆按钮
+    var $loginButton = $(".login");
+
     if (username === "") {
         $MB.n_warning("请输入账号！");
         return;
@@ -110,21 +112,29 @@ function login() {
         $MB.n_warning("请输入密码！");
         return;
     }
-
-    $.ajax({
-        type: "post",
-        url: ctx + "form/login",
-        data: $form.serialize(),
-        dataType: "json",
-        success: function (r) {
-            if (r.code === 0) {
-                $form[0].reset();
-                location.href = ctx + 'index';
-            } else {
-                if (r.msg !== '验证码不能为空！') reloadCode();
-                $MB.n_warning(r.msg);
-                $loginButton.html("登录");
+    // 登陆按钮加载特效
+    $loginButton.html("").append("<div class='login-loder'><div class='line-scale'><div></div><div></div><div></div><div></div><div></div></div></div>");
+    $.ajax(
+        {
+            type: "post",
+            url: "/login",
+            data: $form.serialize(),
+            dataType: "json",
+            success: function(data) {
+                console.log("data=" + JSON.stringify(data));
+                // alert(JSON.stringify(data));
+                if (data.code === 0) {
+                    // 重置表单的输入框内容
+                    $form[0].reset();
+                    window.location.href = '/index';
+                    // $form.attr("action", '/index');
+                } else {
+                    // if (r.msg !== '验证码不能为空！') reloadCode();
+                    $MB.n_warning(data.msg);
+                    $loginButton.text("确认登录");
+                }
             }
         }
-    });
+    );
+    // return false;
 }

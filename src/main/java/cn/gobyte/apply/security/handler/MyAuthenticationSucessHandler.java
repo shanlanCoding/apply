@@ -1,5 +1,6 @@
 package cn.gobyte.apply.security.handler;
 
+import cn.gobyte.apply.domain.FebsConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 登陆成功处理类
@@ -49,7 +52,16 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
         // 请求哪个页面登陆成功后，再打开该页面
 //        redirectStrategy.sendRedirect(request, response, savedRequest.getRedirectUrl());
         // 不管请求哪个页面，登陆成功后仅打开指定页面index
-        redirectStrategy.sendRedirect(request, response, "/index");
-        System.err.println("登陆成功" + this.getClass().getName());
+//        redirectStrategy.sendRedirect(request, response, "/index");
+//        System.err.println("登陆成功" + this.getClass().getName());
+
+//        response.setContentType(FebsConstant.JSON_UTF8);
+//        response.getWriter().write("{'msg':'成功','code':'0'}");ResponseBo.ok()
+
+        Map json = new HashMap<String ,Object>();
+        json.put("msg","成功");
+        json.put("code",0);
+        response.setContentType(FebsConstant.JSON_UTF8);
+        response.getWriter().write(mapper.writeValueAsString(json));
     }
 }

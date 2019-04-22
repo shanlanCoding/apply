@@ -36,7 +36,7 @@ public class index {
      */
     @GetMapping("/")
     public String toRootIndex() {
-        return "indexs";
+        return "login";
     }
 
     /**
@@ -48,24 +48,18 @@ public class index {
      */
     @GetMapping("/signin")
     public String toLogin() {
-        return "indexs";
+        return "login";
     }
-
-    @GetMapping("/index")
-    public String toIndex() {
-        return "indexs";
-    }
-
-    /**
+        /**
      * TODO:登陆成功后页面
      *
      * @return java.lang.String
      * @author shanLan misterchou@qq.com
      * @date 2019/3/27 23:33
      */
-    @GetMapping("/home")
+    @GetMapping("/index")
     public String toHome() {
-        return "homes";
+        return "index";
     }
 
     /**
@@ -99,7 +93,6 @@ public class index {
                 us.register(user);
                 return ResponseBo.ok();
             }
-
         } catch (Exception e) {
             log.error("注册失败", e);
             return ResponseBo.error("注册失败，请联系网站管理员！");
