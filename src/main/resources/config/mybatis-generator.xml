@@ -52,7 +52,7 @@
         </javaClientGenerator>
 
         <!-- 配置需要生成的表 -->
-        <table tableName="USERS" domainObjectName="User" enableCountByExample="false"
+        <table tableName="course" domainObjectName="Course" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="mysql" identity="true"/>

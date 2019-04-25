@@ -1,19 +1,21 @@
 <!--
-作者：两载
+作者：山岚
 邮箱：misterchou@qq.com
 时间：2019年3月25日22:33:40
-描述：个人主页
+描述：登陆页面
 -->
 <!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+
 <html lang="ZH" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 
 <head>
     <meta charset="utf-8"/>
     <title>武昌工学院专升本报名系统-登陆</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 
 </head>
 
@@ -27,45 +29,380 @@
                 <div class="col-md-8">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1">
+                        <button class="navbar-toggler" data-target="#bs-example-navbar-collapse-1"
+                                data-toggle="collapse"
+                                type="button">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <a class="navbar-brand" href="#">报名系统</a>
+                        <a class="navbar-brand" href="javascript:void(0)">报名系统</a>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="navbar-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#">首页<span class="sr-only">
+                                    <a class="nav-link" href="javascript:void(0)">首页<span class="sr-only"></span></a>
+                                </li>
+                                <!--/*-->
+                                一共有两个user传到该页面：
+                                1.是从principal得到的；principal是从登陆的信息中取得的。
+                                2.是从数据库获取的user
+                                <!--*/-->
+                                <li class="nav-item" th:switch="${duser.state}">
+                                    <span class="d-inline-block" data-toggle="tooltip" tabindex="0" th:case=="未审核"
+                                          title="资料未审核，无法打印申请表">
+                                        <a class="nav-link disabled" href="/printApplicationForm"
+                                           style="pointer-events: none;" target="_blank">打印申请表</a>
+                                    </span>
+                                    <a class="nav-link" href="/printApplicationForm" target="_blank"
+                                       th:case="*">打印申请表</a>
+                                </li>
+                                <li class="nav-item" th:switch="${duser.state}">
+                                    <!--/*-->
+                                    条件判断:if , else
+                                    <!--*/-->
+                                    <span class="d-inline-block" data-toggle="tooltip" tabindex="0" th:case=="未审核"
+                                          title="资料未审核，无法打印准考证">
+                                        <a class="nav-link disabled " href="/zkz" style="pointer-events: none;"
+                                           target="_blank">打印准考证</a>
+                                    </span>
+                                    <a class="nav-link" href="/zkz" target="_blank" th:case="*">打印准考证</a>
+                                </li>
+                                <!--/*-->
+                                弹窗按钮
+                                <!--*/-->
+                                <li class="nav-item">
+                                    <a class="nav-link editUser" data-target="#modal-container-981481"
+                                       data-toggle="modal"
+                                       href="javascript:void(0)">修改个人信息</a>
+                                </li>
+                                <!--/*-->
+                                遮罩层
+                                <!--*/-->
+                                <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                     id="modal-container-981481" role="dialog" tabindex="-1">
+                                    <div class="modal-dialog" role="document">
+                                        <!--修改客户信息-弹出框 /register-->
+                                        <div class="modal-content">
+                                            <form action="" class="registration-form" id="register-form" method="post"
+                                                  role="form">
+                                                <!--表单标题-->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel">修改资料</h4>
 
-                                    </span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/printApplicationForm">打印申请表</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">打印准考证</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">修改个人信息</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/logout">退出登陆</a>
-                                </li>
+                                                    <button class="close" data-dismiss="modal" type="button">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <!--主体-->
+
+                                                    <!--/*-->
+                                                    <div class="form-group">
+                                                        <input class="form-first-name form-control" id="idNumber"
+                                                               name="id"
+                                                               placeholder="身份证号（用户名）"
+                                                               type="text"
+                                                               value="">
+                                                    </div>
+                                                    <!--*/-->
+
+                                                    <!--邮箱-->
+                                                    <!--                                                    <span class="d-inline-block" data-toggle="tooltip" tabindex="0" title="资料未审核，无法打印申请表">-->
+
+                                                    <div class="form-group ">
+                                                        <input class="form-control" data-toggle="tooltip" id="email"
+                                                               name="email"
+                                                               placeholder="邮箱/Email"
+                                                               tabindex="1" title="电子邮箱/Email" type="email"
+                                                               value="">
+                                                    </div>
+
+                                                    <!--问题-->
+                                                    <div class="form-group">
+                                                        <input class="form-first-name form-control"
+                                                               data-toggle="tooltip" id="tswt" name="tswt"
+                                                               placeholder="提示问题" tabindex="1" title="提示问题（找回账号需要此资料）"
+                                                               type="text" value="">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input class="form-control" data-toggle="tooltip" id="mmda"
+                                                               name="mmda" placeholder="问题答案" tabindex="1"
+                                                               title="问题的答案（找回账号需要此资料）"
+                                                               type="text" value="">
+                                                    </div>
+
+                                                    <!--姓名-->
+                                                    <div class="form-group">
+                                                        <input class="form-control" data-toggle="tooltip" id="name"
+                                                               name="name"
+                                                               placeholder="姓名（务必真实）" tabindex="1"
+                                                               title="姓名（务必真实，因为会用在准考证和录取通知书上）" type="text"
+                                                               value="">
+                                                    </div>
+
+                                                    <!--性别gender-->
+                                                    <div class="form-group">
+                                                        <label>性别：</label>
+                                                        <label class="radio-inline">
+                                                            <input id="optionsRadios3" name="gender"
+                                                                   type="radio"
+                                                                   value="男">
+                                                            男
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input id="optionsRadios4" name="gender"
+                                                                   type="radio"
+                                                                   value="女">
+                                                            女
+                                                        </label>
+                                                    </div>
+                                                    <!--报考专业 bkmajor-->
+                                                    <!--/*-->
+                                                    <div class="form-group">
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-primary dropdown-toggle"
+                                                                    data-toggle="dropdown"
+                                                                    id="dropdownMenuButton-bkzy" type="button">
+                                                                报考专业
+                                                            </button>
+                                                            <div aria-labelledby="dropdownMenuButton-bkzy"
+                                                                 class="dropdown-menu">
+                                                                <a class="dropdown-item"
+                                                                   href="javascript:void(0)">会计学</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)">人力资源管理</a>
+                                                                <a class="dropdown-item"
+                                                                   href="javascript:void(0)">工商管理</a>
+                                                                <a class="dropdown-item"
+                                                                   href="javascript:void(0)">工程管理</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)">计算机科学与技术</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)">机械设计制造及其自动化</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)">材料成型及控制工程</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)">电子信息工程</a>
+                                                                <a class="dropdown-item"
+                                                                   href="javascript:void(0)">土木工程</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)">食品质量与安全</a>
+                                                                <a class="dropdown-item"
+                                                                   href="javascript:void(0)">英语</a>
+                                                                <a class="dropdown-item"
+                                                                   href="javascript:void(0)">环境设计</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--*/-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你需要报考的专业">
+                                                        <select class="form-control" id="bkmajor" name="bkmajor"
+                                                                placeholder="报考专业">
+                                                            <option value="">报考专业</option>
+                                                            <option value="">会计学</option>
+                                                            <option value="">人力资源管理</option>
+                                                            <option value="">工商管理</option>
+                                                            <option value="">工程管理</option>
+                                                            <option value="">计算机科学与技术</option>
+                                                            <option value="">机械设计制造及其自动化</option>
+                                                            <option value="">材料成型及控制工程</option>
+                                                            <option value="">电子信息工程</option>
+                                                            <option value="">土木工程</option>
+                                                            <option value="">食品质量与安全</option>
+                                                            <option value="">英语</option>
+                                                            <option value="">环境设计</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你目前的政治面貌">
+                                                        <select class="form-control" id="zzmm" name="zzmm"
+                                                                placeholder="政治面貌">
+                                                            <option value="">政治面貌</option>
+                                                            <option value="">党员</option>
+                                                            <option value="">预备党员</option>
+                                                            <option value="">团员</option>
+                                                            <option value="">群众</option>
+                                                            <option value="">其它</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!--民族-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你是哪个民族">
+                                                        <input class="form-control" id="mz" name="mz" placeholder="民族"
+                                                               type="text" value="">
+                                                    </div>
+
+                                                    <!--电话-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你的手机号；请务必真实切畅通，避免影响你录取">
+                                                        <input class="form-control" id="tel" name="tel"
+                                                               placeholder="手机号；务必真实"
+                                                               type="text" value="">
+                                                    </div>
+                                                    <!--家庭住址-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="家庭住址；请务必真实切畅通，避免影响你录取">
+                                                        <input class="form-control" id="address" name="address"
+                                                               placeholder="家庭地址；务必真实"
+                                                               type="text" value="">
+                                                    </div>
+                                                    <!--毕业学校-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你就读的大专学校校名">
+                                                        <input class="form-control" id="school" name="school"
+                                                               placeholder="大专就读学校"
+                                                               type="text" value="">
+                                                    </div>
+                                                    <!--学校代码-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你就读的大专学校的代码，如果不清楚请上网查询">
+                                                        <input class="form-control" id="schoolc" name="schoolc"
+                                                               placeholder="大专院校代码"
+                                                               type="text" value="">
+                                                    </div>
+                                                    <!--大专就读专业-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你大专就读的专业名称">
+                                                        <input class="form-control" id="major" name="major"
+                                                               placeholder="大专就读专业"
+                                                               type="text" value="">
+                                                    </div>
+                                                    <!--高考报名号-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="高考报名号，如果不记得可以登陆学信网查看个人照片的底部">
+                                                        <input class="form-control" id="gkbmh" name="gkbmh"
+                                                               placeholder="高考报名号；可以前往学信网查看照片底部有记录"
+                                                               type="text" value="">
+                                                    </div>
+                                                    <!--联系地址-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你现在所在的地址；务必真实可用，避免后续无法联系你">
+                                                        <input class="form-control" id="contactAddress"
+                                                               name="contactAddress"
+                                                               placeholder="联系地址；务必真实"
+                                                               type="text" value="">
+                                                    </div>
+                                                    <!--邮编-->
+                                                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                                                         title="你家所在地的邮编">
+                                                        <input class="form-control" id="yb" name="yb" placeholder="邮编"
+                                                               type="text" value="邮编">
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" data-dismiss="modal"
+                                                            type="button">关闭
+                                                    </button>
+                                                    <button class="btn btn-primary editUserButton" type="button">修改
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/*-->
+                                遮罩层-end
+                                <!--*/-->
+
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="http://example.com"
-                                       id="navbarDropdownMenuLink" data-toggle="dropdown">用户功能</a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#">修改密码</a>
-                                        <a class="dropdown-item" href="#">查询成绩</a>
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                       href="http://example.com" id="navbarDropdownMenuLink">用户功能</a>
+                                    <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+
+                                        <!--/*-->
+                                        修改密码
+                                        <!--*/-->
+                                        <a class="dropdown-item" data-target="#modal-container-321564"
+                                           data-toggle="modal" href="javascript:void(0)">修改密码</a>
+
+                                        <!--/*-->
+                                        查询成绩
+                                        <!--*/-->
+                                        <a class="dropdown-item" href="javascript:void(0)">查询成绩</a>
                                         <!--/*-->
                                         <div class="dropdown-divider">
                                         </div>
                                         <!--*/-->
                                     </div>
                                 </li>
+
+                                <!--/*-->
+                                遮罩层
+                                <!--*/-->
+                                <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                     id="modal-container-321564" role="dialog" tabindex="-1">
+                                    <div class="modal-dialog" role="document">
+                                        <!--修改客户信息-弹出框 /register-->
+                                        <div class="modal-content">
+                                            <form action="" class="registration-form" id="updatePassword-form"
+                                                  method="post"
+                                                  role="form">
+                                                <!--表单标题-->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="updatePasswordModalLabel">修改密码</h4>
+
+                                                    <button class="close" data-dismiss="modal" type="button">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <!--主体-->
+                                                    <!--/*-->
+                                                    旧密码
+                                                    <!--*/-->
+
+                                                    <div class="form-group">
+                                                        <input type="text" name="password" id="password"
+                                                               placeholder="请输入旧密码"
+                                                               class="form-first-name form-control" value="1"
+                                                               data-toggle="tooltip" tabindex="1" title="请输入您的旧密码">
+                                                    </div>
+
+                                                    <!--密码1-->
+                                                    <div class="form-group">
+                                                        <input type="text" name="password1" id="password1"
+                                                               placeholder="请输入新密码"
+                                                               class="form-first-name form-control" value="123456"
+                                                               data-toggle="tooltip" tabindex="1"
+                                                               title="请输入新密码，密码长度6-20位">
+                                                    </div>
+
+                                                    <!--密码2-->
+                                                    <div class="form-group">
+                                                        <input type="text" name="password2" id="password2"
+                                                               placeholder="请输入再次输入新密码"
+                                                               class="form-first-name form-control" value="123456"
+                                                               data-toggle="tooltip" tabindex="1"
+                                                               title="请再次输入新密码，密码长度6-20位">
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" data-dismiss="modal"
+                                                            type="button">关闭
+                                                    </button>
+
+                                                    <button class="btn btn-primary updatePasswordButton" type="button">
+                                                        验证并修改
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/*-->
+                                遮罩层-end
+                                <!--*/-->
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-th-href="@{logout}">退出登陆</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>
+                    <!--/*-->
+                    基本信息
+                    <!--*/-->
                     <table class="table">
                         <thead>
                         <tr>
@@ -81,47 +418,56 @@
                         <tr>
                             <td></td>
                             <td>姓名：</td>
-                            <td data-th-utext="${user.name}"></td>
+                            <td data-th-utext="${duser.name}"></td>
                             <td></td>
                         </tr>
 
                         <tr>
                             <td></td>
                             <td>邮箱：</td>
-                            <td>123123@qq.com</td>
+                            <td data-th-utext="${duser.email}"></td>
                             <td></td>
                         </tr>
 
                         <tr>
                             <td></td>
                             <td>身份证号：</td>
-                            <td data-th-utext="${user.id}"></td>
+                            <td data-th-utext="${duser.id}"></td>
                             <td></td>
                         </tr>
 
                         <tr>
                             <td></td>
                             <td>审核状态：</td>
-                            <td>未审核</td>
+                            <td data-th-utext="${duser.state}"></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>注册时间：</td>
-                            <td th:text="${#dates.format(user.creatTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td th:text="${#dates.format(duser.creatTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                             <td></td>
                         </tr>
+
+                        <tr>
+                            <td></td>
+                            <td>总登录次数：</td>
+                            <td data-th-utext="${duser.jl}"></td>
+                            <td></td>
+                        </tr>
+
                         <tr>
                             <td></td>
                             <td>上次登陆时间：</td>
-                            <td th:text="${#dates.format(user.lastLoginTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td th:text="${#dates.format(duser.lastLoginTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                             <td></td>
                         </tr>
                         </tbody>
                     </table>
-                </div>
+                    </divsdfs>
 
-                <div class="col-md-2">
+                    <div class="col-md-2">
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,14 +479,20 @@
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/bootstrap/popper.min.js"></script>
 <script src="/js/bootstrap/bootstrap.min.js"></script>
+<!--导致Dropdown需要点击2下-->
+<!--<script src="/js/bootstrap/bootstrap.bundle.js"></script>-->
 <script src="/js/bootstrap-notify/bootstrap-notify.min.js"></script>
 <script src="/js/common.js"></script>
 <script src="/js/iCheck/icheck.js"></script>
-
-<script src="/js/app/loginAndReginster.js"></script>
+<script src="/js/app/index.js"></script>
 
 <script type="text/javascript">
     $(function () {
+        $("[data-toggle='tooltip']").tooltip();
+        $(".editUser").on("click", getUser);
+        $(".editUserButton").on("click", editUser);
+        $(".updatePasswordButton").on("click", updatePassword);
+
 
     });
 </script>

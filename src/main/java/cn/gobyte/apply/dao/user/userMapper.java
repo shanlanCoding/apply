@@ -29,4 +29,5 @@ public interface userMapper extends MyMapper<User> {
      */
     Integer queryId(String id);
 
+
 }

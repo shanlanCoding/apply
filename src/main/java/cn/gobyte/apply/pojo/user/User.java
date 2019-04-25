@@ -226,6 +226,23 @@ public class User implements Serializable {
     private String accountStatus;
 
     /**
+     * 考试科目1
+     */
+    private String kskm1;
+    /**
+     * 考试科目2
+     */
+    private String kskm2;
+    /**
+     * 考试科目3
+     */
+    private String kskm3;
+    /**
+     * 考试科目4
+     */
+    private String kskm4;
+
+    /**
      * 获取系统默认id
      *
      * @return systemId - 系统默认id

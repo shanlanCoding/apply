@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 抄的
+ * 抄的，提供了很多功能
 */
 @Service
 public interface IService<T> {

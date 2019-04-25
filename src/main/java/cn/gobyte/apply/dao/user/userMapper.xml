@@ -52,6 +52,7 @@
           #{creatTime}, #{modifyTime},#{lastLoginTime},#{theme},#{avatar},#{description},#{accountStatus} )
         </insert>
 
+
     <!--查询身份证号是否存在数据库，True存在；false不存在；-->
     <!--public Integer queryId(String id);-->
     <select id="queryId" parameterType="String" resultType="Integer">

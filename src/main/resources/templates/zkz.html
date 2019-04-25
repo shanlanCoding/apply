@@ -1,0 +1,150 @@
+<html lang="ZH" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body bottommargin="0" leftmargin="0" rightmargin="0" topmargin="0">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+<title>准考证</title>
+<meta content="zh-cn" http-equiv="Content-Language"/>
+
+<style type="text/css">
+    .STYLE2 {
+        font-size: 16px
+    }
+
+    .STYLE10 {
+        font-size: 24px
+    }
+
+    .STYLE11 {
+        font-size: 14px
+    }
+
+    .STYLE12 {
+        font-size: 20px
+    }
+
+    .heiti-font {
+        font-family: SimHei;
+    }
+
+    .songti-font {
+        font-family: SimSun;
+    }
+</style>
+
+<table cellpadding="0" height="143" id="table1" width="634">
+    <tbody>
+    <tr>
+        <td align="center" colspan="5" width="634">
+            <p><br/> <br/>
+                <span class="STYLE12 songti-font">
+                    武昌工学院<span th:text="${#dates.format(#dates.createNow(),'yyyy')}"></span>年“专升本”考试
+                </span>
+            </p>
+            <p><span class="STYLE10 heiti-font">准 考 证</span></p>
+            <p></p>
+        </td>
+    </tr>
+    <tr>
+    </tr>
+    </tbody>
+</table>
+<table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0" id="table2" width="632">
+    <tbody>
+    <tr>
+        <td align="center" bordercolor="#000000" class="STYLE2" height="30" width="15%">准考证号</td>
+        <!--/*--> 
+            准考证号应该是教师在后端点击“已审核”才能生成
+        <!--*/-->
+        <td align="center" bordercolor="#000000" width="22%"><span th:text="${user.zkzh}"></span></td>
+        <td align="center" bordercolor="#000000" class="STYLE2" width="22%">姓 名</td>
+        <td align="center" bordercolor="#000000" colspan="2"><span th:text="${user.name}"></span></td>
+        <td align="center" class="STYLE2" width="9%">性别</td>
+        <td align="center" width="11%"><span th:text="${user.gender}"></span></td>
+    </tr>
+    <tr>
+        <td align="center" class="STYLE2" height="30">身份证号</td>
+        <td align="center"><span th:text="${user.id}"></span></td>
+        <td align="center" class="STYLE2">报考专业</td>
+        <td align="center" colspan="2"><span th:text="${user.bkmajor}"></span></td>
+
+        <td align="center" bordercolor="#000000" colspan="2" rowspan="6">
+            <img border="0" height="140" src="/img/head.png" width="100"/>
+        </td>
+    </tr>
+    <!--/*-->
+    <span th:text="${user.bkmajor}"></span>
+    <!--*/-->
+    <tr>
+        <td align="center" class="STYLE2" height="30">考试科目</td>
+        <td align="center"><span th:text="${user.kskm1}"></span></td>
+        <td align="center"><span th:text="${user.kskm2}"></span></td>
+        <td align="center" colspan="2"></td>
+    </tr>
+    <tr>
+        <td align="center" class="STYLE2" height="50" rowspan="2">考试时间</td>
+        <td align="center" data-th-utext="${course.km1Time}">data-th-utext=${course.km1Time}"</td>
+        <td align="center" data-th-utext="${course.km2Time}">data-th-utext="${course.km1Time}"</td>
+        <td align="center" colspan="2"></td>
+    </tr>
+    <tr>
+    </tr>
+
+    <tr>
+        <td align="center" class="STYLE2" rowspan="2">考试地点</td>
+        <td align="center" height="30">E03-A101</td>
+        <td align="center">E03-A102</td>
+        <td align="center" colspan="2"></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="4" height="30">武昌工学院（武汉市洪山区张家湾街19号）</td>
+    </tr>
+    <tr>
+        <td align="center" class="STYLE2" height="203">考生注意事项</td>
+        <td align="center" colspan="6">
+            <table cellpadding="0" cellspacing="0">
+                <colgroup>
+                    <col width="500"/>
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td width="500"> &nbsp;&nbsp;&nbsp;&nbsp;一、考生凭准考证、身份证入室对号入座，准考证放在课桌左上角，以便查对，考试铃响开始答题。</td>
+                </tr>
+                <tr>
+                    <td width="500">&nbsp;&nbsp;&nbsp;&nbsp;二、考生除自带必要的文具用品（钢笔、签字笔、圆珠笔、计算器、橡皮擦）外，其他物品一律不得带入考室，艺术类考生自带绘画工具，英语听力考试无须带耳机。</td>
+                </tr>
+                <tr>
+                    <td width="500">&nbsp;&nbsp;&nbsp;&nbsp;三、各科考前15分钟打预备铃。开考15分钟后，不得进入考场；考试开始30分钟内，不得交卷出考场；交卷后不得在考场附近逗留、谈论。</td>
+                </tr>
+                <tr>
+                    <td width="500">&nbsp;&nbsp;&nbsp;&nbsp;四、答题应写在指定的答题区域内，不得写在密封线以外或草稿纸上，否则一律无效。</td>
+                </tr>
+                <tr>
+                    <td width="500">&nbsp;&nbsp;&nbsp;&nbsp;五、考生除遇试卷分发错误或缺页、缺题和字迹模糊等问题提问外，其它不准提问。</td>
+                </tr>
+                <tr>
+                    <td width="500">&nbsp;&nbsp;&nbsp;&nbsp;六、考生必须严格遵守考试规则，不准吸烟、左顾右盼，凡是在考试中夹带、接传答案、交换答卷、找人代考、抄袭他人答案、带走他人答卷、携带规定以外物品入室等，考卷作零分记。</td>
+                </tr>
+                <tr>
+                    <td width="500">&nbsp;&nbsp;&nbsp;&nbsp;七、考试结束铃响后，考生立即停止答卷。注意不得将草稿纸带走。</td>
+                </tr>
+                <tr>
+                    <td width="500">&nbsp;&nbsp;&nbsp;&nbsp;八、本证应妥善保存，如有遗失，不补发。</td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table cellpadding="0" height="80" id="table3" width="634">
+    <tbody>
+    <tr>
+        <td align="left" colspan="5" width="634">&nbsp;</td>
+    </tr>
+    <tr>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

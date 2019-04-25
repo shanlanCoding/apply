@@ -8,6 +8,7 @@ function register() {
 
     // console.log("register-click");
 
+
     var username = $("#idNumber").val().trim();
     var password = $("#password").val().trim();
     var cpassword = $("#password2").val().trim();
@@ -55,13 +56,13 @@ function register() {
     }
 
     // 专业
-    var major = $("#mcode option:selected").text();
+    var major = $("#bkmajor option:selected").text();
     if (major === "报考专业") {
         $MB.n_warning("'报考专业'不能为空！");
         return;
     } else {
         // setting value
-        $("#mcode option:selected").val(major);
+        $("#bkmajor option:selected").val(major);
     }
 
     // 政治面貌
@@ -73,7 +74,17 @@ function register() {
         // setting value
         $("#zzmm option:selected").val(zzmm);
     }
-    $(".registration-form");
+    // 高考报名号
+    var gkbmh = $("#gkbmh").val().trim();
+    if (gkbmh.length != 14) {
+        $MB.n_warning("高考报名号不对，应该为14位数！");
+        return;
+    }
+
+    // disabled button
+    $(".registerButton").attr("disabled", "disabled");
+
+    // $(".registration-form");
     // 发数据
     $.ajax(
         {
@@ -84,17 +95,18 @@ function register() {
             success: function (data) {
                 if (data.code === 0) {
                     $MB.n_success("同学恭喜你，账号注册成功!");
-
                     $(".registration-form")[0].reset();
-
-                    // alert("同学恭喜你，账号注册成功！");
-                    // window.location.reload();
+                    alert("同学恭喜你，账号注册成功！");
+                    window.location.reload();
                 } else {
-                    $MB.n_warning(data.msg);
+                    $MB.n_warning(data.message);
                 }
             }
         }
     );
+
+    // Enable Button
+    $(".registerButton").removeAttr("disabled");
 }
 
 
@@ -122,20 +134,37 @@ function login() {
             url: "/login",
             data: $form.serialize(),
             dataType: "json",
-            success: function(data) {
-                console.log("data=" + JSON.stringify(data));
+            error: function (data, type, err) {
+                if (data.responseJSON != undefined) {
+                    console.log(data.responseJSON.error != undefined);
+                    console.log(JSON.stringify(data.responseJSON.error));
+                    $MB.n_danger("error：" + JSON.stringify(data.responseJSON.error));
+                }
+            },
+            success: function (data) {
+
+                console.log(JSON.stringify(data));
                 // alert(JSON.stringify(data));
-                if (data.code === 0) {
-                    // 重置表单的输入框内容
-                    $form[0].reset();
-                    window.location.href = '/index';
-                    // $form.attr("action", '/index');
+
+                if (data.code == 0) {
+                    // 如果有url，则跳转该url
+                    if (data.url != undefined) {
+                        $form[0].reset();
+                        window.location.href = data.url;
+                    } else {
+                        // 重置表单的输入框内容
+                        $form[0].reset();
+                        window.location.href = '/index';
+                        // $form.attr("action", '/index');
+                    }
+
                 } else {
                     // if (r.msg !== '验证码不能为空！') reloadCode();
-                    $MB.n_warning(data.msg);
-                    // $loginButton.html("确认登录");
+                    console.log(data.message);
+                    $MB.n_warning("success:" + data.message);
                 }
-            }
+            },
+
         }
     );
     // return false;

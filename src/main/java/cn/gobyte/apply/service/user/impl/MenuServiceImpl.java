@@ -8,7 +8,6 @@ import cn.gobyte.apply.service.page.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -21,10 +20,6 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
     // 成员变量
     @Autowired
     private MenuMapper menuMapper;
-
-    public MenuServiceImpl(Mapper<Menu> mapper) {
-        super(mapper);
-    }
 
     // 查找用户权限、按钮
     @Override

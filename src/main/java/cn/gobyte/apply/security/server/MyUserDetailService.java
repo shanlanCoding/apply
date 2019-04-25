@@ -72,8 +72,7 @@ public class MyUserDetailService implements UserDetailsService {
             // 把用户的email设置为登录名
             myUserDetails userDetails = new myUserDetails(user.getEmail(), user.getPassword(), true, true, true,
                     notLocked, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-
-
+            userDetails.setSystemid(user.getSystemId()); //设置系统id
             userDetails.setName(user.getName());
             userDetails.setId(user.getId());
             userDetails.setEmail(user.getEmail());
@@ -89,6 +88,17 @@ public class MyUserDetailService implements UserDetailsService {
 
             // 设置当前时间为“最后登陆时间”到数据库
             this.userService.updateLoginTimeByIdNumber(user.getId());
+
+            // 获取登陆次数，并更新到数据库
+            if (user.getJl() != null && !user.getJl().equals("")) {
+                int loginTotal = Integer.parseInt(user.getJl()) + 1;
+                // 写入数据库
+                this.userService.updateLoginTotal(user.getId(), String.valueOf(loginTotal));
+                userDetails.setJl(String.valueOf(loginTotal));
+            } else {
+                this.userService.updateLoginTotal(user.getId(), "0");
+                userDetails.setJl("0");
+            }
 
             return userDetails;
         } else {

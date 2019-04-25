@@ -1,0 +1,372 @@
+<!--
+作者：山岚
+邮箱：misterchou@qq.com
+时间：2019年3月25日22:33:40
+描述：申请表
+--><!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection-->
+<html lang="ZH" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>武昌工学院专升本申请表</title>
+    <style type="text/css">
+        .STYLE2 {
+            font-size: 16px
+        }
+
+        .STYLE10 {
+            font-size: 28px
+        }
+
+        .STYLE11 {
+            font-size: 14px
+        }
+
+        .title-font {
+            font-family: SimHei;
+        }
+
+        #table3 > tbody > tr > td, #table4 > tbody > tr > td {
+            border-top-width: 0;
+            border-bottom-width: 0;
+            border-left-width: 0;
+        }
+
+        #table3 > tbody > tr > td:nth-child(18) {
+            border-right-width: 0;
+        }
+
+        #table4 > tbody > tr > td:nth-child(14), #table4 > tbody > tr > td:nth-child(15) {
+            border-right-width: 0;
+        }
+
+    </style>
+</head>
+<body bottommargin="0" leftmargin="0" rightmargin="0" topmargin="0">
+<table cellpadding="0" height="40" id="table1" width="634">
+    <tbody>
+    <tr>
+        <td align="center" colspan="5" width="634">
+            <p>
+                <span class="STYLE10 title-font"
+                      th:text="${#dates.format(#dates.createNow(),'yyyy')}+'年湖北省高校普通专升本学生报名申请表'"></span>
+            </p>
+        </td>
+    </tr>
+    <tr>
+    </tr>
+    </tbody>
+</table>
+<table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0" id="table2" width="634">
+    <tbody>
+    <tr>
+        <td align="center" bordercolor="#000000" class="STYLE2" height="36" width="15%">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</td>
+        <td align="center" bordercolor="#000000" colspan="3" data-th-utext="${user.name}"></td>
+        <td align="center" class="STYLE2" width="9%">性别</td>
+        <td align="center" class="STYLE2" data-th-utext="${user.gender}" width="9%"></td>
+        <td align="center" class="STYLE2" colspan="2" width="9%">民族</td>
+        <td align="center" colspan="2" data-th-utext="${user.mz}" width="15%"></td>
+        <td align="center" bordercolor="#000000" rowspan="4" width="19%">
+            <img border="0" height="140" src="/img/head.png" width="100"/>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" class="STYLE2" height="36">出生日期</td>
+        <td align="center" colspan="3" data-th-utext="${user.birthd}"></td>
+        <td align="center" bordercolor="#000000" class="STYLE2" colspan="2">政治面貌</td>
+        <td align="center" bordercolor="#000000" colspan="4" data-th-utext="${user.zzmm}"></td>
+    </tr>
+
+    <tr>
+        <td align="center" class="STYLE2" height="36">身份证号</td>
+        <td align="center" colspan="9">
+            <table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0" frame="void" id="table3"
+                   width="442">
+                <tbody>
+                <tr>
+                    <!--/*-->
+                    ${#strings.substringAfter(name,prefix)}，相当于不要某一个字符前面的字符串
+                    ${#strings.substringBefore(name,suffix)}，相当于不要某一个字符后面的字符串
+                    ${#strings.substring(name,3,5)}
+                    <!--*/-->
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,0,1)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,1,2)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,2,3)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,3,4)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,4,5)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,5,6)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,6,7)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,7,8)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,8,9)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,9,10)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,10,11)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,11,12)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,12,13)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,13,14)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,14,15)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,15,16)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,16,17)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.id,17,18)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td align="center" class="STYLE2" height="36">高考报名号</td>
+        <td align="center" colspan="9">
+            <table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0" frame="void" id="table4"
+                   width="442">
+                <tbody>
+                <tr>
+                    <!--data-th-utext="${#strings.substring(user.gkbmh,0,1)}"-->
+
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,0,1)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,1,2)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,2,3)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,3,4)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,4,5)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,5,6)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,6,7)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,7,8)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,8,9)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,9,10)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,10,11)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,11,12)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,12,13)}" height="36"
+                        width="24.5">内容1
+                    </td>
+
+                    <td align="center" bordercolor="#000000" class="STYLE2"
+                        data-th-utext="${#strings.substring(user.gkbmh,13,14)}" height="36"
+                        width="24.5">内容1
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" class="STYLE2" height="36">所在院校</td>
+        <td align="center" colspan="4" data-th-utext="${user.school}">内容</td>
+        <td align="center" class="STYLE2" colspan="3">毕业专业</td>
+        <td align="center" colspan="3" data-th-utext="${user.schoolc}">内容</td>
+    </tr>
+    <tr>
+        <td align="center" class="STYLE2" height="36">报考高校</td>
+        <td align="center" colspan="10">武昌工学院</td>
+    </tr>
+    <tr>
+        <td align="center" class="STYLE2" height="36">报考专业</td>
+        <td align="center" colspan="4" data-th-utext="${user.bkmajor}">内容</td>
+        <td align="center" class="STYLE2" colspan="3">专业代码</td>
+        <td align="center" colspan="3" data-th-utext="${user.gkbmh}">内容</td>
+    </tr>
+    <!--/*-->
+    data-th-utext="${user.gkbmh}"
+    <tr>
+        <td align="center" class="STYLE2" height="70"><p>在校期间受过何种奖励</p></td>
+        <td align="center" colspan="7">内容</td>
+        <td align="center" class="STYLE2" colspan="2">有何特长</td>
+        <td align="center">内容</td>
+    </tr>
+    <!--*/-->
+    <tr>
+        <td align="center" class="STYLE2" height="45"><p>家庭住址</p></td>
+        <td align="center" colspan="7" data-th-utext="${user.address}">内容</td>
+        <td align="center" class="STYLE2" colspan="2">联系电话</td>
+        <td align="center" data-th-utext="${user.tel}">内容</td>
+    </tr>
+    <!--/*-->
+    <!--*/-->
+    <tr>
+        <td align="center" class="STYLE2" height="45"><p>联系地址</p></td>
+        <td align="center" colspan="7" data-th-utext="${user.lxaddress}">内容</td>
+        <td align="center" class="STYLE2" colspan="2">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编</td>
+        <td align="center" data-th-utext="${user.yb}">内容</td>
+    </tr>
+    </tbody>
+</table>
+<table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0" id="table5" width="635">
+    <tbody>
+    <tr>
+        <td align="left" class="STYLE2" height="320" valign="top" width="220"><p>&nbsp;</p>
+            <p>申请须知与承诺：</p>
+            <p><br/> &nbsp;&nbsp;&nbsp;&nbsp;1、本人是2016年应届普通高职/高专毕业生，能够如期毕业并获得毕业证书。<br/> &nbsp;&nbsp;&nbsp;&nbsp;2、本人在校期间未受到任何纪律处分。<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;3、本人保证提供的信息真实。<br/></p>
+            <p>申请人（签名）：</p>
+            <p><br/></p>
+            <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp; &nbsp;月
+                &nbsp;&nbsp;日</p></td>
+        <td align="left" class="STYLE2" valign="top" width="213"><p>&nbsp;</p>
+            <p>申请者所在高校学籍管理部门审核：</p>
+            <p><br/> &nbsp;&nbsp;&nbsp;&nbsp;该生属于我校应届普通全日制在校高职（专科）学生，已取得普通专科学籍。 </p>
+            <p><br/></p>
+            <p> 负责人签字（单位盖章）：<br/></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年 &nbsp;&nbsp;月 &nbsp;&nbsp;日</p>
+        </td>
+        <td align="left" class="STYLE2" valign="top" width="194"><p>&nbsp;</p>
+            <p>本科院校意见：</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p><br/> 负责人签字（单位盖章）：<br/></p>
+            <p>&nbsp;</p>
+            <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年 &nbsp;&nbsp;月 &nbsp;&nbsp;日<br/></p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table cellpadding="0" height="40" id="table6" width="634">
+    <tbody>
+    <tr>
+        <td align="left" colspan="5" width="634"><p class="STYLE11">
+            填表说明:1、本表一式三份,申请者、申请者所在高校和举办学校各留存一份。2、所有信息在上交前必须认真核对，准确无误，如因本人填写错误导致资格审查不能通过，由申请者本人负责。3、报名手续由申请者本人办理，不得委托他人代办。填写信息不实者，一经查实，将取消其普通专升本资格。4、所在院校代码、举办高校代码在教育厅政务信息网下载，高考考生号由申请者所在学校学籍管理部门填写。 </p>
+        </td>
+    </tr>
+    <tr>
+    </tr>
+    </tbody>
+</table>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap/popper.min.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/bootstrap/bootstrap.bundle.js"></script>
+<script src="/js/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/iCheck/icheck.js"></script>
+<script src="/js/app/loginAndReginster.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+    });
+</script>
+</body>
+</html>

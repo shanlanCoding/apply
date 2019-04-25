@@ -11,6 +11,12 @@ public class ApplyApplicationTests {
 
     @Test
     public void contextLoads() {
+
+    }
+
+    @Test
+    void fun01() {
+
     }
 
 }
