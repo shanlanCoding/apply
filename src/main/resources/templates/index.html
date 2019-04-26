@@ -305,7 +305,10 @@
 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown"
-                                       href="http://example.com" id="navbarDropdownMenuLink">用户功能</a>
+                                       href="javascript:void(0)" id="navbarDropdownMenuLink">用户功能</a>
+                                    <!--/*-->
+                                    导航栏下拉
+                                    <!--*/-->
                                     <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
 
                                         <!--/*-->
@@ -317,8 +320,13 @@
                                         <!--/*-->
                                         查询成绩
                                         <!--*/-->
-                                        <a class="dropdown-item" href="javascript:void(0)">查询成绩</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"
+                                           data-target="#modal-container-234233"
+                                           data-toggle="modal">查询成绩</a>
+
+
                                         <!--/*-->
+                                        <!--横线-->
                                         <div class="dropdown-divider">
                                         </div>
                                         <!--*/-->
@@ -326,7 +334,7 @@
                                 </li>
 
                                 <!--/*-->
-                                遮罩层
+                                遮罩层-修改信息
                                 <!--*/-->
                                 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
                                      id="modal-container-321564" role="dialog" tabindex="-1">
@@ -391,7 +399,89 @@
                                     </div>
                                 </div>
                                 <!--/*-->
-                                遮罩层-end
+                                遮罩层-修改信息-end
+                                <!--*/-->
+
+                                <!--/*-->
+                                遮罩层-查询成绩
+                                <!--*/-->
+                                <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                     id="modal-container-234233" role="dialog" tabindex="-1">
+                                    <div class="modal-dialog" role="document">
+                                        <!--修改客户信息-弹出框 /register-->
+                                        <div class="modal-content">
+                                            <form action="" id="grandTable"
+                                                  method="post"
+                                                  role="form">
+                                                <!--表单标题-->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="grandTableModalLabel">修改密码</h4>
+
+                                                    <button class="close" data-dismiss="modal" type="button">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <!--主体-->
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                    <tr class="table-success">
+                                                                        <th>
+                                                                            科目
+                                                                        </th>
+                                                                        <th>
+                                                                            成绩
+                                                                        </th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            C语言基础
+                                                                        </td>
+                                                                        <td>
+                                                                            105
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            计算机基础
+                                                                        </td>
+                                                                        <td>
+                                                                            108
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <strong>总分：</strong>
+                                                                        </td>
+                                                                        <td>
+                                                                            <strong>213</strong>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--主体-end-->
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-primary" data-dismiss="modal"
+                                                            type="button">关闭
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/*-->
+                                遮罩层-查询成绩-end
                                 <!--*/-->
 
                                 <li class="nav-item">

@@ -160,12 +160,35 @@ function login() {
 
                 } else {
                     // if (r.msg !== '验证码不能为空！') reloadCode();
-                    console.log(data.message);
-                    $MB.n_warning("success:" + data.message);
+                    $MB.n_warning(data.message);
                 }
             },
 
         }
     );
     // return false;
+}
+
+/*查询成绩*/
+function selectGrande() {
+    ajax({
+        type: "post",
+        url: "/user/selectGrande",
+        data: $(".grande-form").serialize(),
+        dataType: "json",
+        success: function (data) {
+            if (data.code === 0) {
+                $MB.n_success("查询成功！");
+                $(".selectGrandeForm").toggle();
+                $(".grandeTable").toggle();
+
+            } else {
+                $MB.n_warning(data.message);
+            }
+        },
+        erroer: function (r) {
+
+        }
+    })
+
 }

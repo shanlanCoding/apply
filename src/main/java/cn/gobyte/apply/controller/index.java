@@ -304,6 +304,26 @@ public class index extends BaseController {
         }
     }
 
+    //    /user/selectGrande
+    @RequestMapping("/user/updatePassword")
+    @ResponseBody
+    public ResponseBo selectGrande(String password, String password1, String password2) {
+        try {
+            // 获取当前用户
+            User user = super.getCurrentUser();
+
+            // 判断旧密码是否正确
+            if (this.passwordEncoder.matches(password, user.getPassword())) {
+                return this.us.updatePassword(password1, user.getId());
+            } else {
+                return ResponseBo.error("旧密码不正确");
+            }
+
+        } catch (Exception e) {
+            log.error("修改用户失败", e);
+            return ResponseBo.error("修改出错，请联系网站管理员！");
+        }
+    }
 
 
 
