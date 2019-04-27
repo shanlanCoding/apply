@@ -171,24 +171,195 @@ function login() {
 
 /*查询成绩*/
 function selectGrande() {
-    ajax({
-        type: "post",
-        url: "/user/selectGrande",
-        data: $(".grande-form").serialize(),
-        dataType: "json",
-        success: function (data) {
-            if (data.code === 0) {
-                $MB.n_success("查询成功！");
-                $(".selectGrandeForm").toggle();
-                $(".grandeTable").toggle();
+    // console.log($(this).text())
+    var id = $("#grandeNumber").val();
+    if (id.length < 18) {
+        $MB.n_warning("身份证号不足18位，再检查下？");
+        return;
+    } else if (id.length > 18) {
+        $MB.n_warning("身份证号超过18位，再检查下？");
+        return;
+    }
 
-            } else {
-                $MB.n_warning(data.message);
+    var km1 = $(".km1");
+    var km1f = $(".km1f");
+    var km2 = $(".km2");
+    var km2f = $(".km2f");
+    var total = $(".total");
+    var lq = $(".admissionState");
+
+    if ($(this).text() == "查询") {
+        $.ajax({
+            type: "post",
+            url: "/user/selectGrande",
+            data: $(".grande-form").serialize(),
+            dataType: "json",
+            success: function (data) {
+                if (data.code === 0) {
+                    $MB.n_success("查询成功！");
+                    $(".selectGrandeForm").toggle();
+                    $(".grandeTable").toggle();
+                    $(".selectGrandeButton").text("重新查询");
+
+                    // 填充
+                    km1.text(data.message.km1);
+                    km1f.text(data.message.km1f);
+
+                    km2.text(data.message.km2);
+                    km2f.text(data.message.km2f);
+
+                    total.text(data.message.km1f + data.message.km2f);
+
+                    if (data.message.lq == null || data.message.lq == "") {
+                        lq.text("暂未公布录取结果");
+                    }
+
+                } else {
+                    $MB.n_warning(data.message);
+                }
+            },
+            erroer: function (r) {
+                if (typeof r.message != undefined) {
+                    $MB.n_danger(r.message);
+                }
             }
-        },
-        erroer: function (r) {
+        });
+    } else if ($(this).text() == "重新查询") {
+        $(".selectGrandeForm").toggle();
+        $(".grandeTable").toggle();
+        $(".selectGrandeButton").text("查询");
+    }
 
+}
+
+/* 找回密码 */
+function retrievePassword() {
+    console.log($(this).text());
+
+    var password = $("#id");
+    var problem = $("#problem");
+    var answer = $("#answer");
+    var bt = $(".retrievePasswordButton");
+    var bttx = $(this).text();
+
+    var id = $("#id").val();
+    if (id.length < 18) {
+        $MB.n_warning("身份证号不足18位，再检查下？");
+        return;
+    } else if (id.length > 18) {
+        $MB.n_warning("身份证号超过18位，再检查下？");
+        return;
+    }
+
+    // readOnly
+    problem.attr("readonly", true);
+    if (bttx == "开始找回") {
+
+        $.ajax(
+            {
+                type: "post",
+                url: "/user/retrievePassword",
+                data: $("#retrievePassword-form").serialize(),
+                dataType: "json",
+                error: function (data, type, err) {
+                    if (typeof data.responseJSON != undefined) {
+                        $MB.n_danger("error：" + data.message);
+                    }
+                },
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    // alert(JSON.stringify(data));
+                    if (data.code == 0) {
+
+                        problem.val(data.message)
+                        $(".problem").toggle();
+                        $(".answer").toggle();
+                        bt.text("提交答案");
+                    } else {
+                        $MB.n_warning(data.message);
+                    }
+                },
+
+            }
+        );
+    } else if (bttx == "提交答案") {
+        console.log('if (bttx == "提交答案")');
+        var pass = $(".password");
+        pass.toggle();
+
+        $.ajax(
+            {
+                type: "post",
+                url: "/user/retrievePassword",
+                data: $("#retrievePassword-form").serialize(),
+                dataType: "json",
+                error: function (data, type, err) {
+                    if (typeof data.responseJSON != undefined) {
+                        $MB.n_danger("error：" + data.message);
+                    }
+                },
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    // alert(JSON.stringify(data));
+                    if (data.code == 0) {
+                        problem.val(data.message)
+                        $MB.n_success("请输入新密码.");
+                        bt.text("修改密码");
+                    } else {
+                        $MB.n_warning(data.message);
+                    }
+                },
+
+            }
+        );
+    } else if (bttx == "修改密码") {
+        console.log('if (bttx == "修改密码")');
+        var p1 = $("#pw1");
+        var p2 = $("#pw2");
+        if (p1.val().length < 6) {
+            $MB.n_warning("第一次密码小于6位数");
+            return;
         }
-    })
+        if (p2.val().length < 6) {
+            $MB.n_warning("第二次输入的密码小于6位数");
+            return;
+        }
+
+        if (p2.val() != p1.val()) {
+            $MB.n_warning("两次输入的密码不相同，请检查");
+            return;
+        }
+
+        $.ajax(
+            {
+                type: "post",
+                url: "/user/retrievePassword",
+                data: $("#retrievePassword-form").serialize(),
+                dataType: "json",
+                error: function (data, type, err) {
+                    if (typeof data.responseJSON != undefined) {
+                        $MB.n_danger("error：" + data.message);
+                    }
+                },
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    // alert(JSON.stringify(data));
+                    if (data.code == 0) {
+                        problem.val(data.message)
+                        $MB.n_success(data.message);
+
+                        setTimeout(function () {
+                            alert("同学，密码已经修改成功，点击确定后将刷新页面");
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        $MB.n_warning(data.message);
+                    }
+                },
+
+            }
+        );
+    }
+
 
 }

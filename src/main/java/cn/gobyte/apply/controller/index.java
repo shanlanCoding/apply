@@ -3,9 +3,11 @@ package cn.gobyte.apply.controller;
 import cn.gobyte.apply.domain.ResponseBo;
 import cn.gobyte.apply.pojo.user.Course;
 import cn.gobyte.apply.pojo.user.User;
+import cn.gobyte.apply.pojo.user.userGrande;
 import cn.gobyte.apply.security.pojo.myUserDetails;
 import cn.gobyte.apply.service.user.CourseService;
-import cn.gobyte.apply.service.user.impl.UserServiceImpl;
+import cn.gobyte.apply.service.user.UserService;
+import cn.gobyte.apply.service.user.impl.GrandeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class index extends BaseController {
 
     //注入业务实现类，所有的业务方法都是调用该类
     @Autowired
-    private UserServiceImpl us;
+    private UserService us;
 
     // 报考科目
     @Autowired
@@ -40,6 +42,10 @@ public class index extends BaseController {
     // 密码操作
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    // 查询成绩
+    @Autowired
+    private GrandeServiceImpl gs;
 
     /**
      * TODO:默认访问首页
@@ -75,15 +81,23 @@ public class index extends BaseController {
     @GetMapping("/index")
     public String toHome(Authentication authentication, Model md) {
         Object principal = authentication.getPrincipal();
+
         // 从principal获取的信息，类型为MyDetails
         md.addAttribute("user", principal);
         myUserDetails myUser = (myUserDetails) principal;
-        /**
-         * 把从数据库得到的user，传递给页面。d = data ,数据库的意思。duser可以理解为数据库的user
-         */
+
+        // 把从数据库得到的user，传递给页面。d = data ,数据库的意思。duser可以理解为数据库的user
         User user = us.findByEmailOrIdNumber(myUser.getId());
         md.addAttribute("duser", user);
-        System.err.println(user.toString() + "----" + this.getClass().getName());
+
+        // 传递成绩到页面,切记传递过去的对象不能为null和空字符串，否则页面会报错
+        userGrande grande = this.gs.selectGrande(user.getId());
+        if (grande != null) {
+            md.addAttribute("grande", grande);
+        } else {
+            md.addAttribute("grande", new userGrande());
+        }
+
         return "index";
     }
 
@@ -122,22 +136,6 @@ public class index extends BaseController {
             log.error("注册失败", e);
             return ResponseBo.error("注册失败，请联系网站管理员！");
         }
-
-        //forward 内部跳转,redirect
-        //return "redirect:index";
-    }
-
-    /**
-     * TODO: 打开测试页面
-     *
-     * @param user
-     * @return java.lang.String:
-     * @author shanLan misterchou@qq.com
-     * @date 2019/4/17 1:47
-     */
-    @RequestMapping("/t")
-    public String test(User user) {
-        return "hello";
     }
 
     /**
@@ -305,25 +303,73 @@ public class index extends BaseController {
     }
 
     //    /user/selectGrande
-    @RequestMapping("/user/updatePassword")
+    @RequestMapping("/user/selectGrande")
     @ResponseBody
-    public ResponseBo selectGrande(String password, String password1, String password2) {
+    public ResponseBo selectGrande(String name, String id) {
         try {
-            // 获取当前用户
-            User user = super.getCurrentUser();
-
-            // 判断旧密码是否正确
-            if (this.passwordEncoder.matches(password, user.getPassword())) {
-                return this.us.updatePassword(password1, user.getId());
-            } else {
-                return ResponseBo.error("旧密码不正确");
-            }
+            ResponseBo responseBo = this.gs.selectGrande(name, id);
+            return responseBo;
 
         } catch (Exception e) {
-            log.error("修改用户失败", e);
-            return ResponseBo.error("修改出错，请联系网站管理员！");
+            log.error("查询成绩失败", e);
+            return ResponseBo.error("查询成绩失败，请联系网站管理员！");
         }
     }
+
+    /**
+     * TODO: 通过姓名、身份证号和问题重设密码
+     *
+     * @param name      姓名
+     * @param id        身份证号
+     * @param answer    问题答案
+     * @param password1 新密码1
+     * @param password2 新密码2
+     * @return cn.gobyte.apply.domain.ResponseBo:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/27 20:18
+     */
+    @RequestMapping("/user/retrievePassword")
+    @ResponseBody
+    public ResponseBo retrievePassword(String name, String id, String answer, String password1, String password2) {
+        /*
+            1. 提交身份证号，验证，返回问题
+            2. 提交问题答案，进行验证，返回密码窗口
+            3. 提交密码，设置到数据库
+        */
+        try {
+            //
+            if (name != null && name != "" && id != null && id != "" && answer != null && answer != "" && password1 != null && password1 != "" && password2 != null && password2 != "") {
+                //System.err.println("3验证信息，然后修改密码");
+                // 3验证信息，然后修改密码
+
+                return this.us.updatePassword(name, id, answer, password1, password2);
+
+            } else if (name != null && name != "" && id != null && id != "" && answer != null && answer != "") {
+                //System.err.println("2验证答案");
+                // 2验证答案，为了安全依然需要判断姓名、身份证号，返回提示：填写新密码
+                return this.us.seleteAnswer(name, id, answer);
+
+            } else if (name != null && name != "" && id != null && id != "") {
+                //System.err.println("1验证姓名和身份证号");
+                // 1验证姓名和身份证号，返回问题
+                return this.us.seleteAnswer(name, id);
+            }
+        } catch (Exception e) {
+            log.error("查询成绩失败", e);
+            return ResponseBo.error("查询成绩失败，请联系网站管理员！");
+        }
+        return ResponseBo.error("操作失败，请检查信息是否正确.");
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 

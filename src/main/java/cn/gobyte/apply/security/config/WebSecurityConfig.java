@@ -48,25 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        /*http
-                .authorizeRequests()
-                .antMatchers("/", "/favicon.ico", "/index", "/css/**", "/js/**", "/img/**", "/static/**").permitAll()//主页、静态资源放行,"/favicon.ico"
-                .anyRequest().authenticated()//任何请求都需要认证
-                .and()
-
-                .formLogin()// 基于From表单验证
-                .loginPage("/index")// 登录页面，未认证的时候跳转到该页面
-                .loginProcessingUrl("/login") // 处理表单登录 URL
-                .failureUrl("/login-error")//自定义登录页面和登陆失败需要跳转的页面
-                .defaultSuccessUrl("/home")//登录成功后默认跳转到
-                .and()
-
-                .logout().permitAll() //注销行为任意访问
-                .logoutSuccessUrl("/index")//退出登录后的默认url是"/login"
-                .permitAll()
-                .and()
-
-                .csrf().disable(); //关闭csrf防御机制;*/
         http
                 .formLogin() // 表单登录
 //                 http.httpBasic() // HTTP Basic
@@ -77,11 +58,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests() // 授权配置
 //                .antMatchers("/", "/favicon.ico", "/index", "/css/**", "/js/**", "/img/**", "/static/**").permitAll() // 登录跳转 URL 无需认证
-                .antMatchers("/", "/login", "/static/**", "/css/**", "/js/**", "/img/**", "/register", "/favicon.ico").permitAll() // 登录跳转 URL 无需认证
+                .antMatchers("/static/**", "/css/**", "/js/**", "/img/**", "/favicon.ico",
+                        "/", "/login", "/register","/user/selectGrande","/user/retrievePassword").permitAll() // 登录跳转 URL 无需认证
                 .anyRequest()  // 所有请求
                 .authenticated() // 都需要认证
                 .and().csrf().disable();//解决非thymeleaf的form表单提交被拦截问题
-
     }
 
 }

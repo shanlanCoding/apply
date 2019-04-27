@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gobyte.apply.dao.user.userGrandeMapper">
-  <resultMap id="BaseResultMap" type="cn.gobyte.apply.pojo.user.userGrande">
+
+    <resultMap id="BaseResultMap" type="cn.gobyte.apply.pojo.user.userGrande">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="xh" jdbcType="VARCHAR" property="xh"/>
+        <result column="zkzh" jdbcType="VARCHAR" property="zkzh"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="bkmajor" jdbcType="VARCHAR" property="bkmajor"/>
+        <result column="km1" jdbcType="VARCHAR" property="km1"/>
+        <result column="km1f" jdbcType="REAL" property="km1f"/>
+        <result column="km1b" jdbcType="VARCHAR" property="km1b"/>
+        <result column="km2" jdbcType="VARCHAR" property="km2"/>
+        <result column="km2f" jdbcType="REAL" property="km2f"/>
+        <result column="km2b" jdbcType="VARCHAR" property="km2b"/>
+        <result column="total" jdbcType="VARCHAR" property="total"/>
+        <result column="lq" jdbcType="VARCHAR" property="lq"/>
+    </resultMap>
+
     <!--
-      WARNING - @mbg.generated
+        @Select("SELECT * FROM `cj` WHERE id = ${id} ")
+        userGrande selectGrande(@Param("id") String id);
     -->
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="xh" jdbcType="VARCHAR" property="xh" />
-    <result column="zkzh" jdbcType="VARCHAR" property="zkzh" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="gender" jdbcType="VARCHAR" property="gender" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="bkmajor" jdbcType="VARCHAR" property="bkmajor" />
-    <result column="km1" jdbcType="VARCHAR" property="km1" />
-    <result column="km1f" jdbcType="REAL" property="km1f" />
-    <result column="km1b" jdbcType="VARCHAR" property="km1b" />
-    <result column="km2" jdbcType="VARCHAR" property="km2" />
-    <result column="km2f" jdbcType="REAL" property="km2f" />
-    <result column="km2b" jdbcType="VARCHAR" property="km2b" />
-    <result column="total" jdbcType="VARCHAR" property="total" />
-    <result column="lq" jdbcType="VARCHAR" property="lq" />
-  </resultMap>
+
+    <select id="selectGrande" resultType="cn.gobyte.apply.pojo.user.userGrande" parameterType="String">
+        SELECT * FROM `cj` WHERE id = ${id}
+    </select>
+
+
+    <select id="selectGrande2" resultType="cn.gobyte.apply.pojo.user.userGrande" parameterType="String">
+        SELECT * FROM `cj` WHERE cj.id = #{id} AND cj.name = #{name}
+    </select>
+
+
 </mapper>

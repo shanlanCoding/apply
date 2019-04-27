@@ -41,17 +41,12 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     private CourseService cs;
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
-/*
-    public UserServiceImpl(Mapper<User> mapper) {
-        super(mapper);
-    }
-*/
 
     //注册到数据库
     @Override
     public ResponseBo register(User user) {
         try {
-            System.err.println(user.toString() + "----" + this.getClass().getName());
+//            System.err.println(user.toString() + "----" + this.getClass().getName());
             // 查询报考科目
             Course course = cs.selectExamCourseByMajor(user.getBkmajor());
 
@@ -155,6 +150,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
      * @date 2019/4/25 20:36
      */
     @Override
+    @Transactional
     public void updateLoginTotal(String id, String number) {
         Example example = new Example(User.class);
         example.createCriteria().andCondition("id=", id);
@@ -227,25 +223,84 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         }
     }
 
+    // 通过身份证号查询问题
+    @Override
+    public ResponseBo seleteAnswer(String id) {
+        id = id.trim();
+        Example example = new Example(User.class);
+        example.createCriteria().andCondition("id=", id);
 
+        List<User> userList = this.selectByExample(example);
+        return userList.isEmpty() ? ResponseBo.error("该身份证号未注册") : ResponseBo.ok(userList.get(0).getTswt());
+    }
 
+    // 通过姓名、身份证号查询问题
+    @Override
+    public ResponseBo seleteAnswer(String name, String id) {
+        id = id.trim();
+        name = name.trim();
 
+        Example example = new Example(User.class);
+        example.createCriteria().andCondition("id=", id);
+        example.createCriteria().andCondition("name=", name);
 
+        List<User> userList = this.selectByExample(example);
+        return userList.isEmpty() ? ResponseBo.error("该身份证号未注册") : ResponseBo.ok(userList.get(0).getTswt());
+    }
 
+    // 通过姓名、身份证号、问题答案查询
+    @Override
+    public ResponseBo seleteAnswer(String name, String id, String answer) {
 
+        try {
+            id = id.trim();
+            name = name.trim();
+            answer = answer.trim();
 
+            Example example = new Example(User.class);
+            example.createCriteria().andCondition("id=", id);
+            example.createCriteria().andCondition("name=", name);
+            example.createCriteria().andCondition("mmda=", answer);
 
+            List<User> userList = this.selectByExample(example);
 
+            // 返回ok即可，切记不要返回用户对象，否则用户信息将会泄露
+            return userList.isEmpty() ? ResponseBo.error("该身份证号未注册") : ResponseBo.ok("请填写新密码");
+        } catch (Exception e) {
+            //System.err.println(e.getMessage());
+        }
 
+        return ResponseBo.error("通过姓名、身份证号、问题答案查询失败");
+    }
 
+    // 通过验证：姓名、身份证号、问题答案，来重置密码
+    @Override
+    public ResponseBo updatePassword(String name, String id, String answer, String password1, String password2) {
 
+        ResponseBo responseBo = this.seleteAnswer(name, id, answer);
+        if (responseBo != null) {
+            password1 = password1.trim();
+            password2 = password2.trim();
 
+            if (password1.length() < 6 || password2.length() < 6) {
+                return responseBo.error("新密码长度不足");
+            } else if (!password1.equals(password2)) {
+                return responseBo.error("两次输入的密码不相同");
+            }
 
+            // && responseBo.get("code")
+            if (responseBo.get("code").toString().equals("0")) {
+//                System.err.println("成功进入修改密码");
 
+                // 修改密码
+                return this.updatePassword(password1, id);
 
-
-
-
+            } else {
+                // System.err.println("失败");
+            }
+        }
+        return ResponseBo.error("重置密码失败");
+    }
 
 
     /*把编辑框空间拉大点，免得光标总是在屏幕下方*/

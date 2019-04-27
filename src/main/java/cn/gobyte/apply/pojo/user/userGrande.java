@@ -339,4 +339,25 @@ public class userGrande {
     public void setLq(String lq) {
         this.lq = lq == null ? null : lq.trim();
     }
+
+    @Override
+    public String toString() {
+        return "userGrande{" +
+                "id='" + id + '\'' +
+                ", xh='" + xh + '\'' +
+                ", zkzh='" + zkzh + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", password='" + password + '\'' +
+                ", bkmajor='" + bkmajor + '\'' +
+                ", km1='" + km1 + '\'' +
+                ", km1f=" + km1f +
+                ", km1b='" + km1b + '\'' +
+                ", km2='" + km2 + '\'' +
+                ", km2f=" + km2f +
+                ", km2b='" + km2b + '\'' +
+                ", total='" + total + '\'' +
+                ", lq='" + lq + '\'' +
+                '}';
+    }
 }

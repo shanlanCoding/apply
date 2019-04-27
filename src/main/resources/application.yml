@@ -17,9 +17,6 @@ spring:
     mode: HTML5
 
 
-logging:
-  level:
-    cn.gobyte.apply.service.user.impl: debug
 
 
   #热部署配置-开始
@@ -32,9 +29,11 @@ logging:
 #      #该目录下的内容修改不重启
 #      exclude: data/**
   #热部署配置-结束
+
   security:
     basic:
       enabled: true
+
 # 关闭 CONDITION EVALUATION DELTA
 #logging.level.org.springframework.boot.autoconfigure: ERROR
 

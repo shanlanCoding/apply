@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
  * @author shanLan misterchou@qq.com
  * @date 2019/4/24 1:42
  */
+
 @Service
 public interface CourseService extends IService<Course> {
 

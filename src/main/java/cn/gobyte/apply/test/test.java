@@ -20,7 +20,7 @@ public class test extends BaseService<User> {
      */
     @Test
     public void test01() {
-        System.err.println("身份证号验证：" + idNumberVerify.validateIdCard18("421127199909098888"));
+//        System.err.println("身份证号验证：" + idNumberVerify.validateIdCard18("421127199909098888"));
     }
 
     /**

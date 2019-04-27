@@ -4,6 +4,7 @@ import cn.gobyte.apply.domain.ResponseBo;
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.pojo.user.UserVo;
 import cn.gobyte.apply.service.IService;
+import org.springframework.stereotype.Service;
 
 /**
  * TODO: 用户方法类
@@ -12,6 +13,7 @@ import cn.gobyte.apply.service.IService;
  * @date 2019/4/24 2:03
  */
 
+@Service
 public interface UserService extends IService<User> {
 
     /**
@@ -100,11 +102,61 @@ public interface UserService extends IService<User> {
      * TODO: 修改用户密码
      *
      * @param password 新的密码
-     * @param id 用户名，一般是身份证号
+     * @param id       用户名，一般是身份证号
      * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/26 0:59
      */
-
     ResponseBo updatePassword(String password, String id);
+
+    /**
+     * TODO: 通过身份证号查询问题
+     *
+     * @param id
+     * @return cn.gobyte.apply.domain.ResponseBo:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/27 19:48
+     */
+    ResponseBo seleteAnswer(String id);
+
+    /**
+     * TODO: 通过姓名、身份证号查询问题
+     *
+     * @param name
+     * @param id
+     * @return cn.gobyte.apply.domain.ResponseBo:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/27 20:38
+     */
+    ResponseBo seleteAnswer(String name,String id);
+
+    /**
+     * TODO: 通过姓名、身份证号、问题答案查询
+     *
+     * @param name
+     * @param id
+     * @param answer
+     * @return cn.gobyte.apply.domain.ResponseBo: 
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/27 20:45
+     */
+    ResponseBo seleteAnswer(String name,String id,String answer);
+
+    /**
+     * TODO: 通过验证：姓名、身份证号、问题答案，来重置密码
+     *
+     * @param name
+     * @param id
+     * @param answer
+     * @param password1
+     * @param password2
+     * @return cn.gobyte.apply.domain.ResponseBo:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/27 20:49
+     */
+    ResponseBo updatePassword(String name,String id,String answer,String password1, String password2);
+
+
+
+
 }
