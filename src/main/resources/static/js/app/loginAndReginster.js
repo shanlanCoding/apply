@@ -1,5 +1,8 @@
 $(document).ready(function () {
-
+    console.log(
+        "Author：shan lan\r\n" +
+        "Mail: misterchou@qq.com\r\n" +
+        "Time：2019-03-16\r\n");
 });
 
 /*注册*/
@@ -7,7 +10,7 @@ $(document).ready(function () {
 function register() {
 
     // console.log("register-click");
-
+    var registerBtn = $(".registerButton");
 
     var username = $("#idNumber").val().trim();
     var password = $("#password").val().trim();
@@ -51,7 +54,7 @@ function register() {
     var gril = $("#optionsRadios4").is(":checked");
     if (!man && !gril) {
         $MB.n_warning("请选择性别！");
-        console.log("请选择性别！");
+        // console.log("请选择性别！");
         return;
     }
 
@@ -82,7 +85,9 @@ function register() {
     }
 
     // disabled button
-    $(".registerButton").attr("disabled", "disabled");
+    registerBtn.attr("disabled", true);
+    registerBtn.text("正在注册...");
+
 
     // $(".registration-form");
     // 发数据
@@ -107,6 +112,7 @@ function register() {
 
     // Enable Button
     $(".registerButton").removeAttr("disabled");
+    registerBtn.text("注册");
 }
 
 
@@ -116,7 +122,7 @@ function login() {
     var password = $("#loginPassword").val().trim();
     var $form = $(".one").find("form");
     // 登陆按钮
-    var $loginButton = $(".login");
+    var loginBtn = $(".login");
 
     if (username === "") {
         $MB.n_warning("请输入账号！");
@@ -128,6 +134,10 @@ function login() {
     }
     // 登陆按钮加载特效
     // $loginButton.html("").append("<div class='login-loder'><div class='line-scale'><div></div><div></div><div></div><div></div><div></div></div></div>");
+
+    loginBtn.attr("disabled", true);
+    loginBtn.text("正在登陆...");
+
     $.ajax(
         {
             type: "post",
@@ -136,19 +146,17 @@ function login() {
             dataType: "json",
             error: function (data, type, err) {
                 if (data.responseJSON != undefined) {
-                    console.log(data.responseJSON.error != undefined);
-                    console.log(JSON.stringify(data.responseJSON.error));
+                    // console.log(data.responseJSON.error != undefined);
+                    // console.log(JSON.stringify(data.responseJSON.error));
                     $MB.n_danger("error：" + JSON.stringify(data.responseJSON.error));
                 }
             },
             success: function (data) {
-
-                console.log(JSON.stringify(data));
+                // console.log(JSON.stringify(data));
                 // alert(JSON.stringify(data));
-
                 if (data.code == 0) {
                     // 如果有url，则跳转该url
-                    if (data.url != undefined) {
+                    if ( data.url !== undefined ) {
                         $form[0].reset();
                         window.location.href = data.url;
                     } else {
@@ -157,15 +165,16 @@ function login() {
                         window.location.href = '/index';
                         // $form.attr("action", '/index');
                     }
-
                 } else {
                     // if (r.msg !== '验证码不能为空！') reloadCode();
                     $MB.n_warning(data.message);
                 }
             },
-
         }
     );
+
+    loginBtn.attr("disabled", false);
+    loginBtn.text("确认登录");
     // return false;
 }
 
@@ -234,7 +243,7 @@ function selectGrande() {
 
 /* 找回密码 */
 function retrievePassword() {
-    console.log($(this).text());
+    // console.log($(this).text());
 
     var password = $("#id");
     var problem = $("#problem");
@@ -267,7 +276,7 @@ function retrievePassword() {
                     }
                 },
                 success: function (data) {
-                    console.log(JSON.stringify(data));
+                    // console.log(JSON.stringify(data));
                     // alert(JSON.stringify(data));
                     if (data.code == 0) {
 
@@ -283,7 +292,7 @@ function retrievePassword() {
             }
         );
     } else if (bttx == "提交答案") {
-        console.log('if (bttx == "提交答案")');
+        // console.log('if (bttx == "提交答案")');
         var pass = $(".password");
         pass.toggle();
 
@@ -299,7 +308,7 @@ function retrievePassword() {
                     }
                 },
                 success: function (data) {
-                    console.log(JSON.stringify(data));
+                    //  console.log(JSON.stringify(data));
                     // alert(JSON.stringify(data));
                     if (data.code == 0) {
                         problem.val(data.message)
@@ -313,7 +322,7 @@ function retrievePassword() {
             }
         );
     } else if (bttx == "修改密码") {
-        console.log('if (bttx == "修改密码")');
+        //  console.log('if (bttx == "修改密码")');
         var p1 = $("#pw1");
         var p2 = $("#pw2");
         if (p1.val().length < 6) {
@@ -342,7 +351,7 @@ function retrievePassword() {
                     }
                 },
                 success: function (data) {
-                    console.log(JSON.stringify(data));
+                    //  console.log(JSON.stringify(data));
                     // alert(JSON.stringify(data));
                     if (data.code == 0) {
                         problem.val(data.message)

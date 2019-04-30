@@ -51,6 +51,7 @@ public class MyUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         // 1. 根据表单提交的用户名，去数据库查询查user
         User user = userService.findByEmailOrIdNumber(s);
+
         if (user != null) {
             // 一定要把密码加密，否则登陆失败
             user.setPassword(this.passwordEncoder.encode(user.getPassword()));

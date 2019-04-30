@@ -1,3 +1,10 @@
+$(function () {
+    console.log(
+        "Author：shan lan\r\n" +
+        "Mail: misterchou@qq.com\r\n" +
+        "Time：2019-03-16\r\n");
+})
+
 function getUser() {
     var id = document.querySelector('body > div > div > div > div > div.col-md-8 > table > tbody > tr:nth-child(3) > td:nth-child(3)').textContent;
 

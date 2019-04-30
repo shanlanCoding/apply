@@ -241,11 +241,11 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         name = name.trim();
 
         Example example = new Example(User.class);
-        example.createCriteria().andCondition("id=", id);
-        example.createCriteria().andCondition("name=", name);
+        // 多条件查找；根据id和name
+        example.createCriteria().andCondition("id=", id).andCondition("name=", name);
 
         List<User> userList = this.selectByExample(example);
-        return userList.isEmpty() ? ResponseBo.error("该身份证号未注册") : ResponseBo.ok(userList.get(0).getTswt());
+        return userList.isEmpty() ? ResponseBo.error("该姓名或身份证号不正确") : ResponseBo.ok(userList.get(0).getTswt());
     }
 
     // 通过姓名、身份证号、问题答案查询

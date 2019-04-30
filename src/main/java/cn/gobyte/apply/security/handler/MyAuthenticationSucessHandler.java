@@ -1,7 +1,10 @@
 package cn.gobyte.apply.security.handler;
 
+import cn.gobyte.apply.dao.user.RoleMapper;
 import cn.gobyte.apply.domain.FebsConstant;
 import cn.gobyte.apply.domain.ResponseBo;
+import cn.gobyte.apply.pojo.user.Role;
+import cn.gobyte.apply.security.pojo.myUserDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 登陆成功处理类
@@ -28,6 +32,9 @@ import java.io.IOException;
 public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandler {
     @Autowired
     private ObjectMapper mapper;
+
+    @Autowired
+    private RoleMapper RoleMapper;
 
     // Spring Security提供的用于缓存请求的对象，通过调用它的getRequest方法可以获取到本次请求的HTTP信息。
     private RequestCache requestCache = new HttpSessionRequestCache();
@@ -60,16 +67,29 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
             // 跳转到之前引发跳转的url
             String url = savedRequest.getRedirectUrl();
             String messsage = "成功";
-//                System.err.println(mapper.writeValueAsString(ResponseBo.ok(messsage, url)));
-//
-
-//            Object jsons = ResponseBo.ok(messsage, url);
-
             response.getWriter().write(mapper.writeValueAsString(ResponseBo.ok(messsage, url)));
         } else {
+            /*
+                 查询用户的角色，若用户为管理员，则跳转到管理员的页面，否则跳转到普通用户的页面
+             */
 
-//            System.err.println(o.toString());
-            response.getWriter().write(mapper.writeValueAsString(ResponseBo.ok()));
+            // 1. 取得当前登录的用户
+            myUserDetails user = (myUserDetails) authentication.getPrincipal();
+
+            // 2. 从该对象中取到身份证号 user.id，并返回查询到的角色列表,默认返回第一个
+            List<Role> role = this.RoleMapper.findUserRole(user.getId().toString());
+
+            // 3. 判断角色名是否为“管理员”，否则默认为普通用户
+            if (!role.isEmpty() && role.get(0).getRoleName().equals("管理员")) {
+
+                String url = "/admin";
+                // 4. 跳转到管理员的页面
+                response.getWriter().write(mapper.writeValueAsString(ResponseBo.ok("欢迎，登陆成功", url)));
+            } else {
+                // 5. 否则跳转普通用户的页面
+                response.getWriter().write(mapper.writeValueAsString(ResponseBo.ok()));
+            }
+
         }
 
     }

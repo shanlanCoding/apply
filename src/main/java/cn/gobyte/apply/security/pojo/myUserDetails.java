@@ -198,4 +198,43 @@ public class myUserDetails extends User {
      */
     private Integer accountStatus;
 
+    public myUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities, Long systemid, String loginTime, String id, String password1, String tswt, String mmda, String email, String sid, String name, String birthd, String gender, String mz, String zzmm, String tel, String address, String school, String schoolc, String major, String gkbmh, String bkmajor, String mcode, String jl, String tc, String lxaddress, String yb, String state, String sj, String zkzh, String sf, Date creatTime, Date modifyTime, Date lastLoginTime, String theme, String avatar, String description, Integer accountStatus) {
+        super(username, password, authorities);
+        this.systemid = systemid;
+        this.loginTime = loginTime;
+        this.id = id;
+        this.password = password1;
+        this.tswt = tswt;
+        this.mmda = mmda;
+        this.email = email;
+        this.sid = sid;
+        this.name = name;
+        this.birthd = birthd;
+        this.gender = gender;
+        this.mz = mz;
+        this.zzmm = zzmm;
+        this.tel = tel;
+        this.address = address;
+        this.school = school;
+        this.schoolc = schoolc;
+        this.major = major;
+        this.gkbmh = gkbmh;
+        this.bkmajor = bkmajor;
+        this.mcode = mcode;
+        this.jl = jl;
+        this.tc = tc;
+        this.lxaddress = lxaddress;
+        this.yb = yb;
+        this.state = state;
+        this.sj = sj;
+        this.zkzh = zkzh;
+        this.sf = sf;
+        this.creatTime = creatTime;
+        this.modifyTime = modifyTime;
+        this.lastLoginTime = lastLoginTime;
+        this.theme = theme;
+        this.avatar = avatar;
+        this.description = description;
+        this.accountStatus = accountStatus;
+    }
 }

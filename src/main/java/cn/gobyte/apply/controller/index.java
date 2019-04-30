@@ -71,6 +71,15 @@ public class index extends BaseController {
         return "login";
     }
 
+    @GetMapping("/admin")
+    public String toAdmin(Authentication authentication, Model md) {
+//        md.addAttribute("user", super.getCurrentUser());
+        md.addAttribute("user", authentication.getPrincipal());
+
+        return "adminIndex";
+    }
+
+
     /**
      * TODO:登陆成功后页面
      *
@@ -221,7 +230,7 @@ public class index extends BaseController {
     @ResponseBody
     public ResponseBo getUser(String id) {
         try {
-            System.err.println("访问了" + "----" + this.getClass().getName());
+//            System.err.println("访问了" + "----" + this.getClass().getName());
             User user = this.us.findById(id);
 //            if (user != null) {
 //            }
@@ -339,18 +348,17 @@ public class index extends BaseController {
         try {
             //
             if (name != null && name != "" && id != null && id != "" && answer != null && answer != "" && password1 != null && password1 != "" && password2 != null && password2 != "") {
-                //System.err.println("3验证信息，然后修改密码");
+                // System.err.println("3验证信息，然后修改密码");
                 // 3验证信息，然后修改密码
-
                 return this.us.updatePassword(name, id, answer, password1, password2);
 
             } else if (name != null && name != "" && id != null && id != "" && answer != null && answer != "") {
-                //System.err.println("2验证答案");
+                // System.err.println("2验证答案");
                 // 2验证答案，为了安全依然需要判断姓名、身份证号，返回提示：填写新密码
                 return this.us.seleteAnswer(name, id, answer);
 
             } else if (name != null && name != "" && id != null && id != "") {
-                //System.err.println("1验证姓名和身份证号");
+                // System.err.println("1验证姓名和身份证号");
                 // 1验证姓名和身份证号，返回问题
                 return this.us.seleteAnswer(name, id);
             }
