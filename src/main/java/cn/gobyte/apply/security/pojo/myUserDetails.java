@@ -198,6 +198,11 @@ public class myUserDetails extends User {
      */
     private Integer accountStatus;
 
+    /**
+     * 客户登陆的ip
+     */
+    private String ip;
+
     public myUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities, Long systemid, String loginTime, String id, String password1, String tswt, String mmda, String email, String sid, String name, String birthd, String gender, String mz, String zzmm, String tel, String address, String school, String schoolc, String major, String gkbmh, String bkmajor, String mcode, String jl, String tc, String lxaddress, String yb, String state, String sj, String zkzh, String sf, Date creatTime, Date modifyTime, Date lastLoginTime, String theme, String avatar, String description, Integer accountStatus) {
         super(username, password, authorities);
         this.systemid = systemid;

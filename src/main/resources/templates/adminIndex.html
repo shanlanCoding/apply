@@ -1,9 +1,3 @@
-<!--
-作者：山岚
-邮箱：misterchou@qq.com
-时间：2019年3月25日22:33:40
-描述：登陆页面
--->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
@@ -11,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="edge"/>
-    <title>武昌工学院-专升本报名系统管理后台</title>
+    <title>武昌工学院-专升本管理系统</title>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <!-- Vendor styles -->
     <link rel="stylesheet" data-th-href="@{css/material-design-iconic-font/css/material-design-iconic-font.min.css}">
@@ -32,22 +26,40 @@
     <link rel="stylesheet" data-th-href="@{css/sweetalert2/sweetalert2.css}">
     <!-- datarangepicker -->
     <link rel="stylesheet" data-th-href="@{css/daterangepicker/daterangepicker.css}">
+
 </head>
 <body data-ma-theme="green">
+
 <div data-th-include="common/common"></div>
-<!--<main class="main">
-    <div data-th-include="common/header"></div>
+<main class="main">
+    <!--/*-->
+    头部固定条
+    <!--*/-->
+    <!--    <div data-th-include="common/header"></div>-->
+
+    <!--/*-->
+    左侧边栏-个人信息
+    <!--*/-->
     <div data-th-include="common/aside"></div>
+    <!--/*-->
+    右侧-内容
+    <!--*/-->
     <div data-th-include="common/main"></div>
-</main>-->
-<!--<div data-th-include="system/user/updatePassword"></div>-->
+</main>
+
 </body>
+<div data-th-include="system/user/updatePassword"></div>
 <script data-th-inline="javascript">
-    var ctx = [[@{/}]];
+    var ctx = [[@{
+        /}]];
+
+        /*
+        用户头像、主题
+         */
         var userName = [[${user.username}]];
         var theme = [[${user.theme}]];
+
         var avatar = ctx + "img/avatar/" + [[${user.avatar}]];
 </script>
-<script data-th-src="@{js/app/index.js}"></script>
-
+<script data-th-src="@{js/app/adminIndex.js}"></script>
 </html>

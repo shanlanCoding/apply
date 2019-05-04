@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RoleMapper extends MyMapper<Role> {
     /**
-     * TODO: 根据用户的身份证号或者邮箱号，找到用户的角色
+     * TODO: 根据用户的身份证号或者邮箱号，找到用户的角色。建议使用身份证号
      *
      * @param userName 用户的身份证号或者邮箱号，建议使用身份证号查询
      * @return java.util.List<cc.mrbird.system.domain.Role>:
@@ -15,7 +15,6 @@ public interface RoleMapper extends MyMapper<Role> {
      * @date 2019/4/29 1:01
      */
     List<Role> findUserRole(String userName);
-
 
     /**
      * TODO: 主键查询

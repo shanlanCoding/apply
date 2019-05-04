@@ -1,13 +1,17 @@
 package cn.gobyte.apply.controller;
 
+import cn.gobyte.apply.domain.QueryRequest;
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.security.pojo.myUserDetails;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * TODO: 这个是Controller的基础类
@@ -16,6 +20,22 @@ import java.util.Map;
  * @date 2019/4/26 0:47
  */
 public class BaseController {
+
+    /**
+     * TODO: 按页号大小选择
+     *
+     * @param request
+     * @param s
+     * @return java.util.Map<java.lang.String, java.lang.Object>:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/5/2 22:08
+     */
+    protected Map<String, Object> selectByPageNumSize(QueryRequest request, Supplier<?> s) {
+        PageHelper.startPage(request.getPageNum(), request.getPageSize());
+        PageInfo<?> pageInfo = new PageInfo<>((List<?>) s.get());
+        PageHelper.clearPage();
+        return getDataTable(pageInfo);
+    }
 
     private Map<String, Object> getDataTable(PageInfo<?> pageInfo) {
         Map<String, Object> rspData = new HashMap<>();

@@ -5,6 +5,7 @@ import cn.gobyte.apply.domain.ResponseBo;
 import cn.gobyte.apply.pojo.user.Course;
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.pojo.user.UserVo;
+import cn.gobyte.apply.security.pojo.MyUser;
 import cn.gobyte.apply.security.pojo.myUserDetails;
 import cn.gobyte.apply.service.BaseService;
 import cn.gobyte.apply.service.user.CourseService;
@@ -301,6 +302,27 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         }
         return ResponseBo.error("重置密码失败");
     }
+
+    @Override
+    public Object findUserWithDept(MyUser user) {
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /*把编辑框空间拉大点，免得光标总是在屏幕下方*/

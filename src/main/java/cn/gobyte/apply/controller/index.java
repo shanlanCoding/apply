@@ -2,6 +2,7 @@ package cn.gobyte.apply.controller;
 
 import cn.gobyte.apply.domain.ResponseBo;
 import cn.gobyte.apply.pojo.user.Course;
+import cn.gobyte.apply.pojo.user.Role;
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.pojo.user.userGrande;
 import cn.gobyte.apply.security.pojo.myUserDetails;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * 主页，用户的所有操作都是从这里开始
@@ -47,6 +50,10 @@ public class index extends BaseController {
     @Autowired
     private GrandeServiceImpl gs;
 
+    // 角色查询
+    @Autowired
+    private cn.gobyte.apply.dao.user.RoleMapper RoleMapper;
+
     /**
      * TODO:默认访问首页
      *
@@ -73,12 +80,22 @@ public class index extends BaseController {
 
     @GetMapping("/admin")
     public String toAdmin(Authentication authentication, Model md) {
+        // 1. 获取当前登陆的用户
+        myUserDetails myUserDetails = (myUserDetails) authentication.getPrincipal();
 //        md.addAttribute("user", super.getCurrentUser());
-        md.addAttribute("user", authentication.getPrincipal());
 
-        return "adminIndex";
+        // 2. 查询角色名
+        List<Role> role = this.RoleMapper.findUserRole(myUserDetails.getId());
+        md.addAttribute("user", myUserDetails);
+
+        // 3. 判断是否为管理员,是则跳转到admin
+        if (!role.isEmpty() && role.get(0).getRoleName().equals("管理员")) {
+            return "adminIndex";
+        }
+
+        // 4. 不是管理员用户，重定向到普通界面
+        return "redirect:index";
     }
-
 
     /**
      * TODO:登陆成功后页面
@@ -368,6 +385,9 @@ public class index extends BaseController {
         }
         return ResponseBo.error("操作失败，请检查信息是否正确.");
     }
+
+
+
 
 
 

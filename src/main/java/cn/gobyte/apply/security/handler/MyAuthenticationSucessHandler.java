@@ -42,7 +42,7 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     /**
-     * TODO: 自定义默认的处理登陆成功的逻辑
+     * TODO: 自定义默认的处理登陆成功的逻辑，该方法可以实现普通用户和管理员跳转到不同的页面
      *
      * @param request
      * @param response

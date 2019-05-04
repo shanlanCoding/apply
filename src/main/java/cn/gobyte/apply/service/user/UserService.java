@@ -3,6 +3,7 @@ package cn.gobyte.apply.service.user;
 import cn.gobyte.apply.domain.ResponseBo;
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.pojo.user.UserVo;
+import cn.gobyte.apply.security.pojo.MyUser;
 import cn.gobyte.apply.service.IService;
 import org.springframework.stereotype.Service;
 
@@ -156,7 +157,5 @@ public interface UserService extends IService<User> {
      */
     ResponseBo updatePassword(String name,String id,String answer,String password1, String password2);
 
-
-
-
+    Object findUserWithDept(MyUser user);
 }
