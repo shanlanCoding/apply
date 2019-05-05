@@ -58,7 +58,7 @@ public class UserController extends BaseController {
     @PreAuthorize("hasAuthority('user:list')")
     @ResponseBody
     public Map<String, Object> userList(QueryRequest request, User user) {
-//        System.err.println(request);
+        System.err.println("userList====" + user);
         // 调用父类方法，根据页面数字大小查询
         return super.selectByPageNumSize(request, () -> this.userService.findUserByUsernameOrIdNumber(user));
     }

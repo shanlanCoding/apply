@@ -35,8 +35,8 @@ var $MB = (function () {
             throw '初始化表格失败，请配置columns参数！';
         }
         $('#' + id).bootstrapTable(params);
-        $("body").on("click", "[data-table-action]", function (obj) {
-            obj.preventDefault();
+        $("body").on("click", "[data-table-action]", function (a) {
+            a.preventDefault();
             var b = $(this).data("table-action");
             if ("excel" === b && $(this).closest(".dataTables_wrapper").find(".buttons-excel").trigger("click"), "csv" === b && $(this).closest(".dataTables_wrapper").find(".buttons-csv").trigger("click"), "print" === b && $(this).closest(".dataTables_wrapper").find(".buttons-print").trigger("click"), "fullscreen" === b) {
                 var c = $(this).closest(".card");

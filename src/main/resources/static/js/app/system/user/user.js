@@ -5,13 +5,14 @@ $(function () {
     var settings = {
         url: ctx + "user/list",
         pageSize: 10,
+        // 获取筛选用户的参数
         queryParams: function (params) {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
-                username: $userTableForm.find("input[name='username']").val().trim(),
-                ssex: $userTableForm.find("select[name='ssex']").val(),
-                status: $userTableForm.find("select[name='status']").val()
+                id: $userTableForm.find("input[name='id']").val().trim(),
+                name: $userTableForm.find("input[name='name']").val(),
+                state: $userTableForm.find("select[name='state']").val()
             };
         },
         columns: [{
@@ -22,25 +23,7 @@ $(function () {
         }, {
             field: 'name',
             title: '姓名'
-        }
-/*        , {
-            field: 'theme',
-            title: '主题',
-            formatter: function (value, row, index) {
-                return '<span style="width: 2rem;display: block;height: 1rem;" class="bg-' + value + '"></span>';
-            }
         }, {
-            field: 'avatar',
-            title: '头像',
-            formatter: function (value, row, index) {
-                return '<img style="width: 2.6rem;border-radius: 50%;" src="' + ctx + 'img/avatar/' + value + '" >';
-            }
-        }
-        , {
-            field: 'deptName',
-            title: '部门'
-        }*/
-        , {
 
             field: 'id',
             title: '身份证'
