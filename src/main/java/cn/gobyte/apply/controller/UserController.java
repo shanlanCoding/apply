@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,14 +84,53 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResponseBo getUser(String id) {
         try {
-//            System.err.println("访问了" + "----" + this.getClass().getName());
             User user = this.userService.findById(id);
-//            if (user != null) {
-//            }
             return ResponseBo.ok(user);
         } catch (Exception e) {
             log.error("获取用户失败", e);
             return ResponseBo.error("获取用户失败，请联系网站管理员！");
         }
+    }
+
+    /**
+     * TODO: 导出表格，下载xlsx表格
+     *
+     * @param user
+     * @return cc.mrbird.common.domain.ResponseBo:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/5/5 16:44
+     */
+    @RequestMapping("user/excel")
+    @ResponseBody
+    public ResponseBo userExcel(User user) {
+        try {
+            List<User> list = this.userService.findUserByUsernameOrIdNumber(user);
+//            return FileUtils.createExcelByPOIKit("用户表", list, MyUser.class);
+        } catch (Exception e) {
+            log.error("导出用户信息Excel失败", e);
+            return ResponseBo.error("导出Excel失败，请联系网站管理员！");
+        }
+        return null;
+    }
+
+    /**
+     * TODO: 导出表格，下载csv表格
+     *
+     * @param user
+     * @return cc.mrbird.common.domain.ResponseBo:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/5/5 16:43
+     */
+    @RequestMapping("user/csv")
+    @ResponseBody
+    public ResponseBo userCsv(User user) {
+        try {
+            List<User> list = this.userService.findUserByUsernameOrIdNumber(user);
+//            return FileUtils.createCsv("用户表", list, MyUser.class);
+        } catch (Exception e) {
+            log.error("导出用户信息Csv失败", e);
+            return ResponseBo.error("导出Csv失败，请联系网站管理员！");
+        }
+        return null;
     }
 }

@@ -50,9 +50,15 @@ $(function () {
 });
 
 // 获取用户信息，填充到遮罩层里
-function getUser() {
+function getUser(obj) {
     var selected = $("#userTable").bootstrapTable('getSelections');
-    var id = selected[0].id;
+    var id = $(obj).parent().siblings().children('.idNumber').text();
+    if (!typeof id == 'undefined') {
+        id = selected[0].id;
+    } else if (!typeof obj == 'undefined') {
+        id = $(obj).parent().siblings().children('.idNumber').text();
+    }
+    // console.log("id=" + id);
 
     $.ajax(
         {
@@ -102,7 +108,7 @@ function getUser() {
                 }
             }
         }
-    )
+    );
 
 }
 

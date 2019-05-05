@@ -158,7 +158,6 @@ public interface UserService extends IService<User> {
      */
     ResponseBo updatePassword(String name,String id,String answer,String password1, String password2);
 
-
     /**
      * TODO: 查询用户列表
      *
