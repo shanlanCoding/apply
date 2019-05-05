@@ -1,8 +1,12 @@
 package cn.gobyte.apply.pojo.user;
 
+import cn.gobyte.apply.annotation.ExportConfig;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -189,6 +193,7 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
+    @ExportConfig(value = "创建时间", convert = "c:cc.mrbird.common.utils.poi.convert.TimeConvert")
     @Column(name = "creat_time")
     private Date creatTime;
 

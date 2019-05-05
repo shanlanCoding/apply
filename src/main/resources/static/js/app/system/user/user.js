@@ -1,4 +1,6 @@
 $(function () {
+    // 初始化表格
+
     var $userTableForm = $(".user-table-form");
     var settings = {
         url: ctx + "user/list",
@@ -18,9 +20,10 @@ $(function () {
             field: 'userId',
             visible: false
         }, {
-            field: 'username',
-            title: '用户名'
-        }, {
+            field: 'name',
+            title: '姓名'
+        }
+/*        , {
             field: 'theme',
             title: '主题',
             formatter: function (value, row, index) {
@@ -32,32 +35,40 @@ $(function () {
             formatter: function (value, row, index) {
                 return '<img style="width: 2.6rem;border-radius: 50%;" src="' + ctx + 'img/avatar/' + value + '" >';
             }
-        }, {
+        }
+        , {
             field: 'deptName',
             title: '部门'
+        }*/
+        , {
+
+            field: 'id',
+            title: '身份证'
         }, {
+
             field: 'email',
             title: '邮箱'
         }, {
-            field: 'mobile',
-            title: '手机'
+            field: 'bkmajor',
+            title: '报考科目'
         }, {
-            field: 'ssex',
+            field: 'gender',
             title: '性别',
             formatter: function (value, row, index) {
-                if (value === '0') return '男';
-                else if (value === '1') return '女';
+                if (value === '男') return '男';
+                else if (value === '女') return '女';
                 else return '保密';
             }
         }, {
-            field: 'crateTime',
+            field: 'creatTime',
             title: '创建时间'
         }, {
-            field: 'status',
+            field: 'state',
             title: '状态',
             formatter: function (value, row, index) {
-                if (value === '1') return '<span class="badge badge-success">有效</span>';
-                if (value === '0') return '<span class="badge badge-warning">锁定</span>';
+                if (value === '审核通过') return '<span class="badge badge-success">审核通过</span>';
+                if (value === '未审核') return '<span class="badge badge-warning">未审核</span>';
+                return '<span class="badge badge-danger">审核失败</span>';
             }
         }
 

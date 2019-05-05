@@ -56,17 +56,18 @@ $(document).ready(function () {
         a.requestFullscreen ? a.requestFullscreen() : a.mozRequestFullScreen ? a.mozRequestFullScreen() : a.webkitRequestFullscreen ? a.webkitRequestFullscreen() : a.msRequestFullscreen && a.msRequestFullscreen()
     }
 
-    $("body").on("click", "[data-ma-action]", function (b) {
-        b.preventDefault();
-        var c = $(this),
-            d = c.data("ma-action"),
-            e = "";
-        switch (d) {
+    // 给菜单添加点击事件
+    $("body").on("click", "[data-ma-action]", function (obj) {
+        obj.preventDefault();
+        var $this = $(this),
+            $data = c.data("ma-action"),
+            str = "";
+        switch ($data) {
             case "aside-open":
-                e = c.data("ma-target"), c.addClass("toggled"), $(e).addClass("toggled"), $(".content, .header").append('<div class="ma-backdrop" data-ma-action="aside-close" data-ma-target=' + e + " />");
+                str = c.data("ma-target"), c.addClass("toggled"), $(str).addClass("toggled"), $(".content, .header").append('<div class="ma-backdrop" data-ma-action="aside-close" data-ma-target=' + str + " />");
                 break;
             case "aside-close":
-                e = c.data("ma-target"), $('[data-ma-action="aside-open"], ' + e).removeClass("toggled"), $(".content, .header").find(".ma-backdrop").remove();
+                str = c.data("ma-target"), $('[data-ma-action="aside-open"], ' + str).removeClass("toggled"), $(".content, .header").find(".ma-backdrop").remove();
                 break;
         }
     });
@@ -199,6 +200,8 @@ function loadMain(obj) {
         }
         clearInterval(rediskeysSizeInterval);
         clearInterval(redisMemoryInfoInterval);
+
+        // console.log("js/app/adminIndex.js:202\r\n"+r);
         $main_content.html("").append(r);
     });
 }

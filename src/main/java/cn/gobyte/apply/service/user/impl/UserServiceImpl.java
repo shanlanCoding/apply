@@ -5,7 +5,6 @@ import cn.gobyte.apply.domain.ResponseBo;
 import cn.gobyte.apply.pojo.user.Course;
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.pojo.user.UserVo;
-import cn.gobyte.apply.security.pojo.MyUser;
 import cn.gobyte.apply.security.pojo.myUserDetails;
 import cn.gobyte.apply.service.BaseService;
 import cn.gobyte.apply.service.user.CourseService;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -303,10 +303,23 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         return ResponseBo.error("重置密码失败");
     }
 
+    // 查询用户列表
     @Override
-    public Object findUserWithDept(MyUser user) {
-        return null;
+    public List<User> findUserByUsernameOrIdNumber(User user) {
+        try {
+            List<User> userList = this.um.findUserByUsernameOrIdNumber(user);
+            return userList;
+        } catch (Exception e) {
+            log.error("error", e);
+            return new ArrayList<>();
+        }
     }
+
+
+
+
+
+
 
 
 

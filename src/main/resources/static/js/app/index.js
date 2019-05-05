@@ -5,6 +5,7 @@ $(function () {
         "Time：2019-03-16\r\n");
 })
 
+// 获取用户信息
 function getUser() {
     var id = document.querySelector('body > div > div > div > div > div.col-md-8 > table > tbody > tr:nth-child(3) > td:nth-child(3)').textContent;
 
@@ -133,7 +134,8 @@ function editUser() {
                 if (data.code === 0) {
                     $MB.n_success("同学恭喜你，资料修改成功!");
                     // $(".registration-form")[0].reset();
-                    alert("同学恭喜你，资料修改成功!");
+                    // alert("同学恭喜你，资料修改成功!");
+                    $("#register-form").find(".btn.btn-secondary").click();
                     // window.location.reload();
                 } else {
                     $MB.n_danger(data.message);

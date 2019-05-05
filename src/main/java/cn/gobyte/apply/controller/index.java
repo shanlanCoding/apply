@@ -235,28 +235,7 @@ public class index extends BaseController {
         return "zkz";
     }
 
-    /**
-     * TODO: 获取用户信息
-     *
-     * @param
-     * @return java.lang.String:
-     * @author shanLan misterchou@qq.com
-     * @date 2019/4/25 1:29
-     */
-    @RequestMapping("/user/getUser")
-    @ResponseBody
-    public ResponseBo getUser(String id) {
-        try {
-//            System.err.println("访问了" + "----" + this.getClass().getName());
-            User user = this.us.findById(id);
-//            if (user != null) {
-//            }
-            return ResponseBo.ok(user);
-        } catch (Exception e) {
-            log.error("获取用户失败", e);
-            return ResponseBo.error("获取用户失败，请联系网站管理员！");
-        }
-    }
+
 
     /**
      * TODO:修改用户信息

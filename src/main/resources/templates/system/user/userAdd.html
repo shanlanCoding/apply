@@ -1,125 +1,232 @@
-<div class="modal fade" id="user-add" data-keyboard="false" data-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+<!--/*--> 学生管理-修改用户 <!--*/-->
+<!--/*-->
+遮罩层 - 修改资料
+<!--*/-->
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+     id="modal-container-981481" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <!--修改客户信息-弹出框 /register-->
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title pull-left" id="user-add-modal-title">新增用户</h3>
-            </div>
-            <div class="modal-body">
-                <form id="user-add-form">
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-					               	 用户名：
-					            </span>
-                                <div class="form-group">
-                                    <input type="text" name="username" class="form-control">
-                                    <input type="text" hidden name="oldusername" class="form-control">
-                                    <input type="text" hidden name="userId" class="form-control">
-                                </div>
+            <form action="" class="registration-form" id="register-form" method="post"
+                  role="form">
+                <!--表单标题-->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">修改资料</h4>
+
+                    <button class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <!--主体-->
+
+                    <!--/*-->
+                    <div class="form-group">
+                        <input class="form-first-name form-control" id="idNumber"
+                               name="id"
+                               placeholder="身份证号（用户名）"
+                               type="text"
+                               value="">
+                    </div>
+                    <!--*/-->
+
+                    <!--邮箱-->
+                    <!--                                                    <span class="d-inline-block" data-toggle="tooltip" tabindex="0" title="资料未审核，无法打印申请表">-->
+
+                    <div class="form-group ">
+                        <input class="form-control" data-toggle="tooltip" id="email"
+                               name="email"
+                               placeholder="邮箱/Email"
+                               tabindex="1" title="电子邮箱/Email" type="email"
+                               value="">
+                    </div>
+
+                    <!--问题-->
+                    <div class="form-group">
+                        <input class="form-first-name form-control"
+                               data-toggle="tooltip" id="tswt" name="tswt"
+                               placeholder="提示问题" tabindex="1" title="提示问题（找回账号需要此资料）"
+                               type="text" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" data-toggle="tooltip" id="mmda"
+                               name="mmda" placeholder="问题答案" tabindex="1"
+                               title="问题的答案（找回账号需要此资料）"
+                               type="text" value="">
+                    </div>
+
+                    <!--姓名-->
+                    <div class="form-group">
+                        <input class="form-control" data-toggle="tooltip" id="name"
+                               name="name"
+                               placeholder="姓名（务必真实）" tabindex="1"
+                               title="姓名（务必真实，因为会用在准考证和录取通知书上）" type="text"
+                               value="">
+                    </div>
+
+                    <!--性别gender-->
+                    <div class="form-group">
+                        <label>性别：</label>
+                        <label class="radio-inline">
+                            <input id="optionsRadios3" name="gender"
+                                   type="radio"
+                                   value="男">
+                            男
+                        </label>
+                        <label class="radio-inline">
+                            <input id="optionsRadios4" name="gender"
+                                   type="radio"
+                                   value="女">
+                            女
+                        </label>
+                    </div>
+                    <!--报考专业 bkmajor-->
+                    <!--/*-->
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    id="dropdownMenuButton-bkzy" type="button">
+                                报考专业
+                            </button>
+                            <div aria-labelledby="dropdownMenuButton-bkzy"
+                                 class="dropdown-menu">
+                                <a class="dropdown-item"
+                                   href="javascript:void(0)">会计学</a>
+                                <a class="dropdown-item" href="javascript:void(0)">人力资源管理</a>
+                                <a class="dropdown-item"
+                                   href="javascript:void(0)">工商管理</a>
+                                <a class="dropdown-item"
+                                   href="javascript:void(0)">工程管理</a>
+                                <a class="dropdown-item" href="javascript:void(0)">计算机科学与技术</a>
+                                <a class="dropdown-item" href="javascript:void(0)">机械设计制造及其自动化</a>
+                                <a class="dropdown-item" href="javascript:void(0)">材料成型及控制工程</a>
+                                <a class="dropdown-item" href="javascript:void(0)">电子信息工程</a>
+                                <a class="dropdown-item"
+                                   href="javascript:void(0)">土木工程</a>
+                                <a class="dropdown-item" href="javascript:void(0)">食品质量与安全</a>
+                                <a class="dropdown-item"
+                                   href="javascript:void(0)">英语</a>
+                                <a class="dropdown-item"
+                                   href="javascript:void(0)">环境设计</a>
                             </div>
                         </div>
                     </div>
-                    <div class="row user_password">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-					               	 密码：
-					            </span>
-                                <div class="form-group">
-                                    <input type="text" name="password" value="123456" readonly class="form-control">
-                                </div>
-                            </div>
-                        </div>
+                    <!--*/-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你需要报考的专业">
+                        <select class="form-control" id="bkmajor" name="bkmajor"
+                                placeholder="报考专业">
+                            <option value="">报考专业</option>
+                            <option value="">会计学</option>
+                            <option value="">人力资源管理</option>
+                            <option value="">工商管理</option>
+                            <option value="">工程管理</option>
+                            <option value="">计算机科学与技术</option>
+                            <option value="">机械设计制造及其自动化</option>
+                            <option value="">材料成型及控制工程</option>
+                            <option value="">电子信息工程</option>
+                            <option value="">土木工程</option>
+                            <option value="">食品质量与安全</option>
+                            <option value="">英语</option>
+                            <option value="">环境设计</option>
+                        </select>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-					               	 邮箱：
-					            </span>
-                                <div class="form-group">
-                                    <input type="text" name="email" class="form-control">
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你目前的政治面貌">
+                        <select class="form-control" id="zzmm" name="zzmm"
+                                placeholder="政治面貌">
+                            <option value="">政治面貌</option>
+                            <option value="">党员</option>
+                            <option value="">预备党员</option>
+                            <option value="">团员</option>
+                            <option value="">群众</option>
+                            <option value="">其它</option>
+                        </select>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-					               	 角色：
-					             </span>
-                                <div class="form-group">
-                                    <select multiple="multiple" name="rolesSelect"></select>
-                                    <input name="roles" hidden/>
-                                </div>
-                            </div>
-                        </div>
+
+                    <!--民族-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你是哪个民族">
+                        <input class="form-control" id="mz" name="mz" placeholder="民族"
+                               type="text" value="">
                     </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group" style="margin-top:10px;">
-                                <span class="input-group-addon">
-					               	状态：
-					             </span>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" name="status" checked class="toggle-switch__checkbox">
-                                    <i class="toggle-switch__helper"></i>
-                                </div>
-                                <span class="input-group-addon" id="status" style="margin-left: 10px;">
-	                                 	可用
-						             </span>
-                            </div>
-                        </div>
+
+                    <!--电话-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你的手机号；请务必真实切畅通，避免影响你录取">
+                        <input class="form-control" id="tel" name="tel"
+                               placeholder="手机号；务必真实"
+                               type="text" value="">
                     </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group" style="margin-top:10px;">
-                                <span class="input-group-addon">
-					               	性别：
-					             </span>
-                                <div class="form-group">
-                                    <label class="custom-control custom-radio">
-                                        <input name="ssex" type="radio" value="0" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">男</span>
-                                    </label>
-                                    <label class="custom-control custom-radio">
-                                        <input name="ssex" type="radio" value="1" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">女</span>
-                                    </label>
-                                    <label class="custom-control custom-radio">
-                                        <input name="ssex" type="radio" value="2" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">保密</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                    <!--家庭住址-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="家庭住址；请务必真实切畅通，避免影响你录取">
+                        <input class="form-control" id="address" name="address"
+                               placeholder="家庭地址；务必真实"
+                               type="text" value="">
                     </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon" style="justify-content: flex-start;margin-top: .5rem;">
-					               	部门：
-					             </span>
-                                <div class="form-group">
-                                    <div id="deptTree"></div>
-                                </div>
-                                <input type="hidden" name="deptId">
-                            </div>
-                        </div>
+                    <!--毕业学校-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你就读的大专学校校名">
+                        <input class="form-control" id="school" name="school"
+                               placeholder="大专就读学校"
+                               type="text" value="">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-save" id="user-add-button" name="save">保存</button>
-                <button type="button" class="btn btn-secondary btn-close">关闭</button>
-                <button class="btn-hide"></button>
-            </div>
+                    <!--学校代码-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你就读的大专学校的代码，如果不清楚请上网查询">
+                        <input class="form-control" id="schoolc" name="schoolc"
+                               placeholder="大专院校代码"
+                               type="text" value="">
+                    </div>
+                    <!--大专就读专业-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你大专就读的专业名称">
+                        <input class="form-control" id="major" name="major"
+                               placeholder="大专就读专业"
+                               type="text" value="">
+                    </div>
+                    <!--高考报名号-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="高考报名号，如果不记得可以登陆学信网查看个人照片的底部">
+                        <input class="form-control" id="gkbmh" name="gkbmh"
+                               placeholder="高考报名号；可以前往学信网查看照片底部有记录"
+                               type="text" value="">
+                    </div>
+                    <!--联系地址-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你现在所在的地址；务必真实可用，避免后续无法联系你">
+                        <input class="form-control" id="contactAddress"
+                               name="contactAddress"
+                               placeholder="联系地址；务必真实"
+                               type="text" value="">
+                    </div>
+                    <!--邮编-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1"
+                         title="你家所在地的邮编">
+                        <input class="form-control" id="yb" name="yb" placeholder="邮编"
+                               type="text" value="邮编">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal"
+                            type="button">关闭
+                    </button>
+                    <button class="btn btn-primary editUserButton" type="button">修改
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<!--/*-->
+遮罩层-修改资料-end
+<!--*/-->
+
 <script data-th-src="@{js/app/system/user/userAdd.js}"></script>

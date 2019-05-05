@@ -31,12 +31,21 @@ public class BaseController {
      * @date 2019/5/2 22:08
      */
     protected Map<String, Object> selectByPageNumSize(QueryRequest request, Supplier<?> s) {
+//        System.err.println(s.toString() + "----" + this.getClass().getName());
         PageHelper.startPage(request.getPageNum(), request.getPageSize());
         PageInfo<?> pageInfo = new PageInfo<>((List<?>) s.get());
         PageHelper.clearPage();
         return getDataTable(pageInfo);
     }
 
+    /**
+     * TODO: 根据页面信息返回表格
+     *
+     * @param pageInfo
+     * @return java.util.Map<java.lang.String, java.lang.Object>:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/5/4 21:24
+     */
     private Map<String, Object> getDataTable(PageInfo<?> pageInfo) {
         Map<String, Object> rspData = new HashMap<>();
         rspData.put("rows", pageInfo.getList());

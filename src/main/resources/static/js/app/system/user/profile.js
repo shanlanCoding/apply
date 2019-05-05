@@ -97,13 +97,14 @@ $(function () {
     });
 
 });
-
+// 刷新用户配置文件
 function refreshUserProfile() {
     $.post(ctx + "user/profile", function (r) {
         $main_content.html("").append(r);
     });
 }
 
+// 编辑用户配置文件
 function editUserProfile() {
     $.post(ctx + "user/getUserProfile", {"userId": userId}, function (r) {
         if (r.code === 0) {

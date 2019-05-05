@@ -122,7 +122,7 @@ function login() {
     var password = $("#loginPassword").val().trim();
     var $form = $(".one").find("form");
     // 登陆按钮
-    var loginBtn = $(".login");
+    var loginBtn = $(".loginBtn");
 
     if (username === "") {
         $MB.n_warning("请输入账号！");

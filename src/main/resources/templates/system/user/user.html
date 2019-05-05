@@ -4,22 +4,35 @@
         <div class="table-responsive">
             <div id="data-table_wrapper" class="dataTables_wrapper">
                 <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" /> <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
+                    <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索"/> <span
+                        class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新"/>
                     <div class="dropdown actions__item">
                         <i data-toggle="dropdown" class="zmdi zmdi-download"> </i>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" onclick="exportUserExcel()">
-							Excel (.xlsx) </a>
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" onclick="exportUserCsv()"> CSV
-							(.csv) </a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel"
+                               onclick="exportUserExcel()">
+                                Excel (.xlsx) </a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv"
+                               onclick="exportUserCsv()"> CSV
+                                (.csv) </a>
                         </ul>
                     </div>
-                    <div class="dropdown actions__item" sec:authorize="hasAnyAuthority('user:add','user:delete','user:update')">
+                    <div class="dropdown actions__item"
+                         sec:authorize="hasAnyAuthority('user:add','user:delete','user:update')">
                         <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#user-add" sec:authorize="hasAuthority('user:add')">新增用户</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="updateUser()" sec:authorize="hasAuthority('user:update')">修改用户</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteUsers()" sec:authorize="hasAuthority('user:delete')">删除用户</a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal"
+                               data-target="#user-add" sec:authorize="hasAuthority('user:add')">新增用户</a>
+
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="getUser()"
+                               data-target="#modal-container-981481"
+                               data-toggle="modal" sec:authorize="hasAuthority('user:update')">修改用户</a>
+                            <!--/*--> <a class="nav-link editUser" data-target="#modal-container-981481"
+                                         data-toggle="modal"
+                                         href="javascript:void(0)">修改个人信息</a> <!--*/-->
+
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteUsers()"
+                               sec:authorize="hasAuthority('user:delete')">删除用户</a>
                         </div>
                     </div>
                 </div>
@@ -28,32 +41,38 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 用户名： </span>
+                                    <span class="input-group-addon"> 身份证： </span>
                                     <div class="form-group">
-                                        <input type="text" name="username" class="form-control"> <i class="form-group__bar"></i>
+                                        <input type="text" name="username" class="form-control">
+                                        <i class="form-group__bar"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 性别： </span>
+                                    <span class="input-group-addon"> 姓名： </span>
                                     <div class="form-group">
-                                        <select class="form-control" name="ssex">
-                                            <option value="" selected>所有</option>
-                                            <option value="0">男</option>
-                                            <option value="1">女</option>
-                                        </select>
+                                        <input type="text" name="username" class="form-control">
+                                        <i class="form-group__bar"></i>
                                     </div>
+                                    <!--    <div class="form-group">
+                                         <select class="form-control" name="ssex">
+                                             <option value="" selected>所有</option>
+                                             <option value="0">男</option>
+                                             <option value="1">女</option>
+                                         </select>
+                                     </div>-->
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 状态： </span>
+                                    <span class="input-group-addon"> 审核状态： </span>
                                     <div class="form-group">
                                         <select class="form-control" name="status">
                                             <option value="" selected>所有</option>
-                                            <option value="0">锁定</option>
-                                            <option value="1">有效</option>
+                                            <option value="0">审核通过</option>
+                                            <option value="1">未审核</option>
+                                            <option value="2">审核失败</option>
                                         </select>
                                     </div>
                                 </div>

@@ -5,6 +5,8 @@ import cn.gobyte.apply.pojo.user.User;
 import org.springframework.stereotype.Component;
 import tk.mybatis.spring.annotation.MapperScan;
 
+import java.util.List;
+
 @MapperScan
 @Component
 public interface userMapper extends MyMapper<User> {
@@ -29,5 +31,14 @@ public interface userMapper extends MyMapper<User> {
      */
     Integer queryId(String id);
 
+    /**
+     * TODO: 查询用户列表
+     *
+     * @param user
+     * @return java.util.List<cn.gobyte.apply.pojo.user.User>:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/5/4 21:25
+     */
+    List<User> findUserByUsernameOrIdNumber(User user);
 
 }

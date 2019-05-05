@@ -16,7 +16,10 @@ spring:
     content-type: text/html
     mode: HTML5
 
-
+  # 时间类型格式化，时区为 +8区
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
   #热部署配置-开始

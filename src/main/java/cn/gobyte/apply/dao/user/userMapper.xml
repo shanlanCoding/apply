@@ -57,5 +57,31 @@
     <!--public Integer queryId(String id);-->
     <select id="queryId" parameterType="String" resultType="Integer">
             SELECT * FROM `users` WHERE id = #{id}
-        </select>
+    </select>
+    <!--查询用户列表-->
+    <!--    List<User> findUserByUsernameOrIdNumber(User user);-->
+    <select id="findUserByUsernameOrIdNumber" resultType="cn.gobyte.apply.pojo.user.User" parameterType="cn.gobyte.apply.pojo.user.User">
+
+        SELECT u.`systemId` systemId, u.`id`, u.`name`, u.`email`, u.`bkmajor`,  u.`state`,u.`creat_time` creatTime,u.`gender`
+        FROM `users` u
+        LEFT JOIN `t_user_role` ur ON(u.`sid` = ur.`ROLE_ID`)
+        WHERE 1=1
+        ORDER BY u.`systemId`
+
+    </select>
+    <!--
+            <if test="username != null and username != ''">
+            AND u.username = #{username}
+        </if>
+        <if test="deptId != null and deptId != ''">
+            AND d.dept_id = #{deptId}
+        </if>
+        <if test="ssex != null and ssex != ''">
+            AND u.ssex = #{ssex}
+        </if>
+        <if test="status != null and status != ''">
+            AND u.status = #{status}
+        </if>
+    -->
+
 </mapper>

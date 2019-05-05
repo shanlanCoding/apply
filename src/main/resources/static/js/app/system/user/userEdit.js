@@ -1,6 +1,8 @@
+/*修改用户*/
 function updateUser() {
     var selected = $("#userTable").bootstrapTable('getSelections');
     var selected_length = selected.length;
+
     if (!selected_length) {
         $MB.n_warning('请勾选需要修改的用户！');
         return;
@@ -9,8 +11,8 @@ function updateUser() {
         $MB.n_warning('一次只能修改一个用户！');
         return;
     }
-    var userId = selected[0].userId;
-    $.post(ctx + "user/getUser", {"userId": userId}, function (r) {
+    var userId = selected[0].id;
+    $.post(ctx + "user/getUser", {"id": userId}, function (r) {
         if (r.code === 0) {
             var $form = $('#user-add');
             var $deptTree = $('#deptTree');
@@ -18,7 +20,7 @@ function updateUser() {
             var user = r.msg;
             $form.find(".user_password").hide();
             $("#user-add-modal-title").html('修改用户');
-            $form.find("input[name='username']").val(user.username).attr("readonly", true);
+            $form.find("input[name='username']").val(user.name).attr("readonly", true);
             $form.find("input[name='oldusername']").val(user.username);
             $form.find("input[name='userId']").val(user.userId);
             $form.find("input[name='email']").val(user.email);
