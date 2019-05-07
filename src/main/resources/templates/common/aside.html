@@ -44,7 +44,7 @@
 <aside class="sidebar">
     <div class="scrollbar-inner">
         <!--个人信息-->
-        <div class="user">
+        <div class="user" title="点击修改密码">
             <div class="user__info dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton">
                 <img class="user__img">
                 <div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<!--                <a class="dropdown-item" href="#" id="user__profile">个人信息</a>-->
+                <!--                <a class="dropdown-item" href="#" id="user__profile">个人信息</a>-->
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#update-password">修改密码</a>
             </div>
         </div>
@@ -62,7 +62,7 @@
         菜单列表
         <!--*/-->
         <div id="navigation" class="navigation">
-            <div><span name="user" onclick="loadMain(this)"><i class="zmdi zmdi-settings"></i>&nbsp;&nbsp;学生管理</span>
+            <div><span name="user" onclick="loadMain(this)"><i class="actions__item zmdi zmdi zmdi-account"></i>&nbsp;&nbsp;学生管理</span>
                 <!--/*-->
                 <ul>
                     <div><span name="user" onclick="loadMain(this);"><i class=""></i>&nbsp;&nbsp;用户管理</span>
@@ -81,35 +81,14 @@
                 <!--*/-->
             </div>
 
-<!--            网络资源-->
-            <div><span><i class="zmdi zmdi-globe-alt"></i>&nbsp;&nbsp;网络资源</span>
-                <ul>
-                    <div><span name="weather" onclick="loadMain(this);"><i class=""></i>&nbsp;&nbsp;天气查询</span>
-                        <ul></ul>
-                    </div>
-                    <div><span name="article" onclick="loadMain(this);"><i class=""></i>&nbsp;&nbsp;每日一文</span>
-                        <ul></ul>
-                    </div>
-                    <div><span><i class="null"></i>&nbsp;&nbsp;影视资讯</span>
-                        <ul>
-                            <div><span name="movie/hot" onclick="loadMain(this);"><i
-                                    class=""></i>&nbsp;&nbsp;正在热映</span>
-                                <ul></ul>
-                            </div>
-                            <div><span name="movie/coming" onclick="loadMain(this);"><i
-                                    class=""></i>&nbsp;&nbsp;即将上映</span>
-                                <ul></ul>
-                            </div>
-                        </ul>
-                    </div>
-                </ul>
+            <!--网络资源-->
+            <div><span><i class="actions__item zmdi zmdi zmdi-check" onclick="loadMain(this)"></i>&nbsp;&nbsp;成绩管理</span>
             </div>
 
-            <div><span><i class="zmdi zmdi-alarm"></i>&nbsp;&nbsp;<a href="/logout">退出登陆</a></span>
+            <div><span><i class="actions__item zmdi zmdi-power"></i>&nbsp;&nbsp;<a href="/logout">退出登陆</a></span>
 
             </div>
         </div>
-
     </div>
 </aside>
 

@@ -72,7 +72,7 @@ $(function () {
 
         ]
     };
-    console.log($id);
+    // console.log($id);
     $MB.initTable('userTable', settings);
 });
 
@@ -115,7 +115,7 @@ function deleteUsers() {
     }
     var ids = "";
     for (var i = 0; i < selected_length; i++) {
-        ids += selected[i].userId;
+        ids += selected[i].id;
         if (i !== (selected_length - 1)) ids += ",";
         if (userName === selected[i].username) contain = true;
     }
@@ -130,10 +130,10 @@ function deleteUsers() {
     }, function () {
         $.post(ctx + 'user/delete', {"ids": ids}, function (r) {
             if (r.code === 0) {
-                $MB.n_success(r.msg);
+                $MB.n_success(r.message);
                 refresh();
             } else {
-                $MB.n_danger(r.msg);
+                $MB.n_danger(r.message);
             }
         });
     });
@@ -142,9 +142,9 @@ function deleteUsers() {
 function exportUserExcel() {
     $.post(ctx + "user/excel", $(".user-table-form").serialize(), function (r) {
         if (r.code === 0) {
-            window.location.href = "file/download?fileName=" + r.msg + "&delete=" + true;
+            window.location.href = "file/download?fileName=" + r.message + "&delete=" + true;
         } else {
-            $MB.n_warning(r.msg);
+            $MB.n_warning(r.message);
         }
     });
 }
@@ -152,9 +152,9 @@ function exportUserExcel() {
 function exportUserCsv() {
     $.post(ctx + "user/csv", $(".user-table-form").serialize(), function (r) {
         if (r.code === 0) {
-            window.location.href = "file/download?fileName=" + r.msg + "&delete=" + true;
+            window.location.href = "file/download?fileName=" + r.message + "&delete=" + true;
         } else {
-            $MB.n_warning(r.msg);
+            $MB.n_warning(r.message);
         }
     });
 }

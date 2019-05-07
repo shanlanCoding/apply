@@ -68,7 +68,7 @@
         creatTime,u.`gender`
         FROM `users` u
         LEFT JOIN `t_user_role` ur ON(u.`sid` = ur.`ROLE_ID`)
-        WHERE 1=1
+        WHERE sid = 2 /*1为管理员，2为普通用户*/
         <if test="id != null and id != ''">
             AND u.id = #{id}
         </if>
@@ -95,5 +95,11 @@
             AND u.status = #{status}
         </if>
     -->
+    <!--    void deleteUserByUserId(String userIds); -->
+    <!--按用户Id删除用户-->
+    <update id="deleteUserByUserId" parameterType="String">
+        UPDATE users SET users.`isDelete` = '0' WHERE users.`id` = #{userIds}
+    </update>
+
 
 </mapper>

@@ -77,4 +77,14 @@ public interface RoleService extends IService<Role> {
      * @date 2019/4/29 1:42
      */
     void deleteRoles(String roleIds);
+
+    /**
+     * TODO: 根据用户Id删除用户角色
+     *
+     * @param userIds
+     * @return void:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/29 1:02
+     */
+    void deleteUserRolesByUserId(String userIds);
 }

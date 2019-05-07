@@ -169,6 +169,8 @@ $(document).ready(function () {
 function loadMain(obj) {
     // 设置面包屑
     var $this = $(obj);
+
+/*
     $(".navigation").find("span").removeClass("navigation__active");
     $this.addClass("navigation__active").parents("ul").prev().addClass("navigation__active");
 
@@ -184,6 +186,7 @@ function loadMain(obj) {
     }
     breadcrumnHtml += '<li class="breadcrumb-item">' + target_text + '</li>';
     $breadcrumb.html("").append(breadcrumnHtml);
+ */
 
     // 加载内容
     var $name = $this.attr("name");

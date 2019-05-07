@@ -18,12 +18,12 @@
                     </div>
 
                     <span href="javascript:void(0)" class="actions__item zmdi zmdi-account-add"
-                          data-target="#modal-container-981481"
-                          data-toggle="modal" sec:authorize="hasAuthority('user:add')" onclick="" title="新增用户"></span>
+                          data-target="#modal-container-9814815"
+                          data-toggle="modal" sec:authorize="hasAuthority('user:add')"
+                          title="新增用户" onclick=""></span>
 
                     <span href="javascript:void(0)" class="actions__item zmdi zmdi-delete"
-                          data-target="#modal-container-981481"
-                          data-toggle="modal" sec:authorize="hasAuthority('user:add')" onclick="" title="删除用户"></span>
+                          sec:authorize="hasAuthority('user:add')" onclick="deleteUsers()" title="删除用户"></span>
 
                     <!--/*-->
                     <!--菜单-->
@@ -32,8 +32,8 @@
                         <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
                         <div class="dropdown-menu dropdown-menu-right">
 
-                            <a href="javascript:void(0)" class="dropdown-item" data-target="#modal-container-981481"
-                               data-toggle="modal" sec:authorize="hasAuthority('user:add')" onclick="">新增用户</a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-target="#modal-container-9814815"
+                               data-toggle="modal" sec:authorize="hasAuthority('user:add')" onclick="register(this)">新增用户</a>
 
 
                             <a href="javascript:void(0)" class="dropdown-item" onclick="getUser()"
@@ -52,8 +52,9 @@
                     <!--*/-->
 
                 </div>
+                <!--/*--> 表格 <!--*/-->
                 <div id="data-table_filter" class="dataTables_filter">
-                    <form class="user-table-form">
+                    <form class="user-table-form form">
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="input-group">

@@ -41,4 +41,13 @@ public interface userMapper extends MyMapper<User> {
      */
     List<User> findUserByUsernameOrIdNumber(User user);
 
+    /**
+     * TODO: 按用户Id删除用户
+     *
+     * @param userIds
+     * @return void:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/7 12:29
+     */
+    void deleteUserByUserId(String userIds);
 }

@@ -5,6 +5,7 @@ import cn.gobyte.apply.domain.QueryRequest;
 import cn.gobyte.apply.domain.ResponseBo;
 import cn.gobyte.apply.pojo.user.User;
 import cn.gobyte.apply.service.user.UserService;
+import cn.gobyte.apply.utils.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,19 +60,11 @@ public class UserController extends BaseController {
     @PreAuthorize("hasAuthority('user:list')")
     @ResponseBody
     public Map<String, Object> userList(QueryRequest request, User user) {
-        System.err.println("userList====" + user);
+//        System.err.println("userList====" + user);
         // 调用父类方法，根据页面数字大小查询
         return super.selectByPageNumSize(request, () -> this.userService.findUserByUsernameOrIdNumber(user));
     }
 
-    /**
-     * TODO: 获取用户信息
-     *
-     * @param userId
-     * @return cn.gobyte.apply.domain.ResponseBo:
-     * @author shanLan misterchou@qq.com
-     * @date 2019/5/5 0:35
-     */
     /**
      * TODO: 获取用户信息
      *
@@ -92,6 +85,20 @@ public class UserController extends BaseController {
         }
     }
 
+    @Log("删除用户")
+    @PreAuthorize("hasAuthority('user:delete')")
+    @RequestMapping("/user/delete")
+    @ResponseBody
+    public ResponseBo deleteUsers(String ids) {
+        try {
+            this.userService.deleteUsers(ids);
+            return ResponseBo.ok("删除用户成功！");
+        } catch (Exception e) {
+            log.error("删除用户失败", e);
+            return ResponseBo.error("删除用户失败，请联系网站管理员！");
+        }
+    }
+
     /**
      * TODO: 导出表格，下载xlsx表格
      *
@@ -100,7 +107,7 @@ public class UserController extends BaseController {
      * @author shanLan misterchou@qq.com
      * @date 2019/5/5 16:44
      */
-    @RequestMapping("user/excel")
+    @RequestMapping("/user/excel")
     @ResponseBody
     public ResponseBo userExcel(User user) {
         try {
@@ -121,16 +128,16 @@ public class UserController extends BaseController {
      * @author shanLan misterchou@qq.com
      * @date 2019/5/5 16:43
      */
-    @RequestMapping("user/csv")
+    @RequestMapping("/user/csv")
     @ResponseBody
     public ResponseBo userCsv(User user) {
         try {
             List<User> list = this.userService.findUserByUsernameOrIdNumber(user);
-//            return FileUtils.createCsv("用户表", list, MyUser.class);
+            return FileUtils.createCsv("用户表", list,  User.class);
         } catch (Exception e) {
             log.error("导出用户信息Csv失败", e);
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");
         }
-        return null;
+//        return null;
     }
 }

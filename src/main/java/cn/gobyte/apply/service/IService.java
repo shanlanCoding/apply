@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 抄的，提供了很多功能
-*/
+ */
 @Service
 public interface IService<T> {
 
@@ -53,9 +53,9 @@ public interface IService<T> {
     /**
      * TODO: 批量删除
      *
-     * @param list
-     * @param property
-     * @param clazz
+     * @param list     存放id的list
+     * @param property 数据库列名
+     * @param clazz    例如：user.class
      * @return int:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/13 21:29

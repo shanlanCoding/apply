@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -47,12 +48,16 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Override
     public ResponseBo register(User user) {
         try {
+            if (um == null) {
+                return ResponseBo.error("注册服务启动失败，请联系管理员");
+            }
+
 //            System.err.println(user.toString() + "----" + this.getClass().getName());
-            // 查询报考科目
-            Course course = cs.selectExamCourseByMajor(user.getBkmajor());
+                // 查询报考科目
+                Course course = cs.selectExamCourseByMajor(user.getBkmajor());
 
             // 1.以身份证号为条件，判断是否为空注册;判断报考科目不为空，原因是考试报名系统，报考科目是不能缺少的
-            if (user.getId() != null && !user.getId().equals("") && um != null && course != null) {
+            if (user.getId() != null && !user.getId().equals("")  && course != null) {
 
                 // 设置默认信息，例如头像、主题、创建时间、默认激活账号等
                 /*user.setTheme(user.DEFAULT_THEME); //默认主题
@@ -65,6 +70,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
                 user.setKskm2(course.getKm2());// 设置考试科目2
                 user.setJl("0");// 登陆次数默认0次
                 user.setGkbmh("00000000000000");//设置默认的高考报名号
+                user.setSid("2");//设置类型为普通用户
 
                 // 2.判断通过，身份证号可以注册
                 //利用tk-mybatis进行注册
@@ -313,6 +319,14 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
             log.error("error", e);
             return new ArrayList<>();
         }
+    }
+
+    // 通过id物理删除用户
+    @Override
+    public void deleteUsers(String userIds) {
+        List<String> list = Arrays.asList(userIds.split(","));
+        int num = this.batchDelete(list, "id", User.class);
+        System.err.println("num====" + num);
     }
 
 

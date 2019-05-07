@@ -167,4 +167,14 @@ public interface UserService extends IService<User> {
      * @date 2019/5/4 22:41
      */
     List<User> findUserByUsernameOrIdNumber(User user);
+
+    /**
+     * TODO: 通过id物理删除用户
+     *
+     * @param userIds 用户id字符串，多个id用英文逗号,分割
+     * @return void: 
+     * @author shanLan misterchou@qq.com
+     * @date 2019/5/7 11:02
+     */
+    void deleteUsers(String userIds);
 }

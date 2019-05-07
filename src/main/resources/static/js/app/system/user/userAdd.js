@@ -5,8 +5,7 @@ var $roles = $userAddForm.find("input[name='roles']");
 
 $(function () {
     validateRule();
-    // initRole();
-    // createDeptTree();
+
 
     /*审核状态文本*/
     $("input[name='status']").change(function () {
@@ -196,6 +195,117 @@ function editUser() {
 
 }
 
+/* 新增用户 */
+function register(obj) {
+    // console.log(this);
+
+
+    // console.log("register-click");
+    // 监听保存按钮
+    var registerBtn = $(".registerButton");
+
+    var username = $("#addIdNumber").val().trim();
+    var password = $("#password").val().trim();
+    var cpassword = $("#password2").val().trim();
+    var email = $("#addEmail").val().trim();
+
+    // 身份号校验
+    if (username === "") {
+        $MB.n_warning("身份证号不能为空！");
+        return;
+    } else if (username.length > 18) {
+        $MB.n_warning("身份证号长度不能超过18个字符！");
+        return;
+    } else if (username.length < 18) {
+        $MB.n_warning("身份证号长度不能少于18个字符！");
+        return;
+    }
+
+    //密码校验
+    if (password === "") {
+        $MB.n_warning("密码不能为空！");
+        return;
+    }
+    if (cpassword === "") {
+        $MB.n_warning("请再次输入密码！");
+        return;
+    }
+    if (cpassword !== password) {
+        $MB.n_warning("两次密码输入不一致！");
+        return;
+    }
+
+    // 邮箱校验
+    if (email === "") {
+        $MB.n_warning("邮箱不能为空！");
+        return;
+    }
+
+    // 性别校验
+    var man = $("#addOptionsRadios3").is(":checked");
+    var gril = $("#addOptionsRadios4").is(":checked");
+    if (!man && !gril) {
+        $MB.n_warning("请选择性别！");
+        // console.log("请选择性别！");
+        return;
+    }
+
+    // 专业
+    var major = $("#addBkmajor option:selected").text();
+    if (major === "报考专业") {
+        $MB.n_warning("'报考专业'不能为空！");
+        return;
+    } else {
+        // setting value
+        $("#addBkmajor option:selected").val(major);
+    }
+
+    // 政治面貌
+    var zzmm = $("#addZzmm option:selected").text();
+    if (zzmm === "政治面貌") {
+        $MB.n_warning("'政治面貌'不能为空！");
+        return;
+    } else {
+        // setting value
+        $("#addZzmm option:selected").val(zzmm);
+    }
+    // 高考报名号
+    var gkbmh = $("#addGkbmh").val().trim();
+    if (gkbmh.length != 14) {
+        $MB.n_warning("高考报名号不对，应该为14位数！");
+        return;
+    }
+
+    // disabled button
+    registerBtn.attr("disabled", true);
+    registerBtn.text("正在注册...");
+
+
+    // $(".registration-form");
+    // 发数据
+    $.ajax(
+        {
+            type: "post",
+            url: "/register",
+            data: $("#register-form").serialize(),
+            dataType: "json",
+            success: function (data) {
+                if (data.code === 0) {
+                    $MB.n_success("账号添加成功!");
+                    $(".registration-form")[0].reset();
+                    alert("账号添加成功，确定后将会刷新页面");
+                    window.location.reload();
+                } else {
+                    $MB.n_warning(data.message);
+                }
+            }
+        }
+    );
+
+    // Enable Button
+    $(".registerButton").removeAttr("disabled");
+    registerBtn.text("注册");
+}
 
 function closeModal() {
     $("#user-add-button").attr("name", "save");
@@ -264,52 +374,15 @@ function validateRule() {
     });
 }
 
-function initRole() {
-    $.post(ctx + "role/list", {}, function (r) {
-        var data = r.rows;
-        var option = "";
-        for (var i = 0; i < data.length; i++) {
-            option += "<option value='" + data[i].roleId + "'>" + data[i].roleName + "</option>"
-        }
-        $rolesSelect.html("").append(option);
-        var options = {
-            selectAllText: '所有角色',
-            allSelected: '所有角色',
-            width: '100%',
-            onClose: function () {
-                $roles.val($rolesSelect.val());
-                validator.element("input[name='roles']");
-            }
-        };
-
-        $rolesSelect.multipleSelect(options);
-    });
-}
-
-function createDeptTree() {
-    $.post(ctx + "dept/tree", {}, function (r) {
-        if (r.code === 0) {
-            var data = r.msg;
-            $('#deptTree').jstree({
-                "core": {
-                    'data': data.children,
-                    'multiple': false // 取消多选
-                },
-                "state": {
-                    "disabled": true
-                },
-                "checkbox": {
-                    "three_state": false // 取消选择父节点后选中所有子节点
-                },
-                "plugins": ["wholerow", "checkbox"]
-            });
-        } else {
-            $MB.n_danger(r.msg);
-        }
-    })
-}
-
-function getDept() {
-    var ref = $('#deptTree').jstree(true);
-    $("[name='deptId']").val(ref.get_selected()[0]);
+/**
+ * 根据id清空表单
+ * @param id
+ */
+function clearForm(id) {
+    // 清空表单
+    $(':input', '#' + id)
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
 }
