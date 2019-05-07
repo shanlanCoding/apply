@@ -28,7 +28,7 @@ public class BaseController {
      * @param s
      * @return java.util.Map<java.lang.String, java.lang.Object>:
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/2 22:08
+     * @date 2019/4/2 22:08
      */
     protected Map<String, Object> selectByPageNumSize(QueryRequest request, Supplier<?> s) {
 //        System.err.println(s.toString() + "----" + this.getClass().getName());
@@ -44,7 +44,7 @@ public class BaseController {
      * @param pageInfo
      * @return java.util.Map<java.lang.String, java.lang.Object>:
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/4 21:24
+     * @date 2019/4/4 21:24
      */
     private Map<String, Object> getDataTable(PageInfo<?> pageInfo) {
         Map<String, Object> rspData = new HashMap<>();

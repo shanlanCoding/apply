@@ -32,14 +32,24 @@ public interface userMapper extends MyMapper<User> {
     Integer queryId(String id);
 
     /**
-     * TODO: 查询用户列表
+     * TODO: 查询普通用户列表
      *
      * @param user
      * @return java.util.List<cn.gobyte.apply.pojo.user.User>:
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/4 21:25
+     * @date 2019/4/4 21:25
      */
     List<User> findUserByUsernameOrIdNumber(User user);
+
+    /**
+     * TODO: 查询用户的所有信息返回POJO，主要为了导出excel
+     *
+     * @param user
+     * @return java.util.List<cn.gobyte.apply.pojo.user.User>:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/7 14:20
+     */
+    List<User> findAllUserByUsernameOrIdNumber(User user);
 
     /**
      * TODO: 按用户Id删除用户

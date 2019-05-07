@@ -164,7 +164,7 @@ public interface UserService extends IService<User> {
      * @param user
      * @return java.util.List<cn.gobyte.apply.pojo.user.User>: 
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/4 22:41
+     * @date 2019/4/4 22:41
      */
     List<User> findUserByUsernameOrIdNumber(User user);
 
@@ -174,7 +174,7 @@ public interface UserService extends IService<User> {
      * @param userIds 用户id字符串，多个id用英文逗号,分割
      * @return void: 
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/7 11:02
+     * @date 2019/4/7 11:02
      */
     void deleteUsers(String userIds);
 }

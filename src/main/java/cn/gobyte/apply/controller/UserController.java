@@ -22,7 +22,7 @@ import java.util.Map;
  * TODO: 管理员用户类，该类为管理员提供用户管理
  *
  * @author shanLan misterchou@qq.com
- * @date 2019/5/2 21:15
+ * @date 2019/4/2 21:15
  */
 @Controller
 public class UserController extends BaseController {
@@ -32,12 +32,12 @@ public class UserController extends BaseController {
     private UserService userService;
 
     /**
-     * TODO: 获取用户的信息
+     * TODO: 获取用户表格html
      *
      * @param model
      * @return java.lang.String:
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/2 21:16
+     * @date 2019/4/2 21:16
      */
 
     @RequestMapping("/user")
@@ -53,14 +53,14 @@ public class UserController extends BaseController {
      * @param user
      * @return java.util.Map<java.lang.String, java.lang.Object>:
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/2 22:03
+     * @date 2019/4/2 22:03
      */
     @Log("获取用户列表")
     @RequestMapping("user/list")
     @PreAuthorize("hasAuthority('user:list')")
     @ResponseBody
     public Map<String, Object> userList(QueryRequest request, User user) {
-//        System.err.println("userList====" + user);
+//        System.err.println("gradeList====" + user);
         // 调用父类方法，根据页面数字大小查询
         return super.selectByPageNumSize(request, () -> this.userService.findUserByUsernameOrIdNumber(user));
     }
@@ -103,41 +103,41 @@ public class UserController extends BaseController {
      * TODO: 导出表格，下载xlsx表格
      *
      * @param user
-     * @return cc.mrbird.common.domain.ResponseBo:
+     * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/5 16:44
+     * @date 2019/4/7 14:39
      */
     @RequestMapping("/user/excel")
     @ResponseBody
     public ResponseBo userExcel(User user) {
         try {
             List<User> list = this.userService.findUserByUsernameOrIdNumber(user);
-//            return FileUtils.createExcelByPOIKit("用户表", list, MyUser.class);
+            return FileUtils.createExcelByPOIKit("用户表", list, User.class);
         } catch (Exception e) {
             log.error("导出用户信息Excel失败", e);
             return ResponseBo.error("导出Excel失败，请联系网站管理员！");
         }
-        return null;
+//        return null;
     }
 
     /**
      * TODO: 导出表格，下载csv表格
      *
      * @param user
-     * @return cc.mrbird.common.domain.ResponseBo:
+     * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/5 16:43
+     * @date 2019/4/7 14:39
      */
     @RequestMapping("/user/csv")
     @ResponseBody
     public ResponseBo userCsv(User user) {
         try {
             List<User> list = this.userService.findUserByUsernameOrIdNumber(user);
-            return FileUtils.createCsv("用户表", list,  User.class);
+
+            return FileUtils.createCsv("用户表", list, User.class);
         } catch (Exception e) {
             log.error("导出用户信息Csv失败", e);
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");
         }
-//        return null;
     }
 }

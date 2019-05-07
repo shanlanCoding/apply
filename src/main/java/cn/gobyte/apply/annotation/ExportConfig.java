@@ -30,7 +30,7 @@ public @interface ExportConfig {
      * 1. 固定的数值转换为字符串值（如：1代表男，2代表女）<br/>
      * <b>表达式:</b> "s:1=男,2=女"<br/>
      * <p>
-     * 2. 数值对应的值需要查询数据库才能进行映射(实现cc.mrbird.util.poi.convert.ExportConvert接口)<br/>
+     * 2. 数值对应的值需要查询数据库才能进行映射(实现cn/gobyte/apply/utils/poi/convert/ExportConvert.java接口)<br/>
      *
      * @return 默认不启用
      */

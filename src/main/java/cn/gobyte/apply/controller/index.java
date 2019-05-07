@@ -4,11 +4,11 @@ import cn.gobyte.apply.domain.ResponseBo;
 import cn.gobyte.apply.pojo.user.Course;
 import cn.gobyte.apply.pojo.user.Role;
 import cn.gobyte.apply.pojo.user.User;
-import cn.gobyte.apply.pojo.user.userGrande;
+import cn.gobyte.apply.pojo.user.userGrade;
 import cn.gobyte.apply.security.pojo.myUserDetails;
 import cn.gobyte.apply.service.user.CourseService;
 import cn.gobyte.apply.service.user.UserService;
-import cn.gobyte.apply.service.user.impl.GrandeServiceImpl;
+import cn.gobyte.apply.service.user.impl.GradeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class index extends BaseController {
 
     // 查询成绩
     @Autowired
-    private GrandeServiceImpl gs;
+    private GradeServiceImpl gs;
 
     // 角色查询
     @Autowired
@@ -117,11 +117,11 @@ public class index extends BaseController {
         md.addAttribute("duser", user);
 
         // 传递成绩到页面,切记传递过去的对象不能为null和空字符串，否则页面会报错
-        userGrande grande = this.gs.selectGrande(user.getId());
-        if (grande != null) {
-            md.addAttribute("grande", grande);
+        userGrade grade = this.gs.selectGrade(user.getId());
+        if (grade != null) {
+            md.addAttribute("grade", grade);
         } else {
-            md.addAttribute("grande", new userGrande());
+            md.addAttribute("grade", new userGrade());
         }
 
         return "index";
@@ -235,8 +235,6 @@ public class index extends BaseController {
         return "zkz";
     }
 
-
-
     /**
      * TODO:修改用户信息
      *
@@ -307,14 +305,21 @@ public class index extends BaseController {
         }
     }
 
-    //    /user/selectGrande
-    @RequestMapping("/user/selectGrande")
+    /**
+     * TODO: 前端查询成绩
+     *
+     * @param name
+     * @param id
+     * @return cn.gobyte.apply.domain.ResponseBo:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/7 16:10
+     */
+    @RequestMapping("/user/selectGrade")
     @ResponseBody
-    public ResponseBo selectGrande(String name, String id) {
+    public ResponseBo selectGrade(String name, String id) {
         try {
-            ResponseBo responseBo = this.gs.selectGrande(name, id);
+            ResponseBo responseBo = this.gs.selectGrade(name, id);
             return responseBo;
-
         } catch (Exception e) {
             log.error("查询成绩失败", e);
             return ResponseBo.error("查询成绩失败，请联系网站管理员！");

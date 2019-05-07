@@ -299,23 +299,23 @@ public class ExcelUtils {
         }
     }
 
-    // convertCellValue: number to String
+    // convertCellValue:将数字转换为字符串
     private String convertCellValue(Object oldValue, String format) {
         try {
             String protocol = format.split(":")[0];
 
             // 键值对字符串解析：s:1=男,2=女
-            if ("s".equalsIgnoreCase(protocol)) {
-
-                String[] pattern = format.split(":")[1].split(",");
-                for (String p : pattern) {
-                    String[] cp = p.split("=");
-                    if (cp[0].equals(oldValue)) {
-                        return cp[1];
-                    }
-                }
-
-            }
+//            if ("s".equalsIgnoreCase(protocol)) {
+//
+//                String[] pattern = format.split(":")[1].split(",");
+//                for (String p : pattern) {
+//                    String[] cp = p.split("=");
+//                    if (cp[0].equals(oldValue)) {
+//                        return cp[1];
+//                    }
+//                }
+//
+//            }
             if ("c".equalsIgnoreCase(protocol)) {
 
                 String clazz = format.split(":")[1];

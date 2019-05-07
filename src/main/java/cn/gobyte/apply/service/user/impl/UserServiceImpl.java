@@ -53,11 +53,11 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
             }
 
 //            System.err.println(user.toString() + "----" + this.getClass().getName());
-                // 查询报考科目
-                Course course = cs.selectExamCourseByMajor(user.getBkmajor());
+            // 查询报考科目
+            Course course = cs.selectExamCourseByMajor(user.getBkmajor());
 
             // 1.以身份证号为条件，判断是否为空注册;判断报考科目不为空，原因是考试报名系统，报考科目是不能缺少的
-            if (user.getId() != null && !user.getId().equals("")  && course != null) {
+            if (user.getId() != null && !user.getId().equals("") && course != null) {
 
                 // 设置默认信息，例如头像、主题、创建时间、默认激活账号等
                 /*user.setTheme(user.DEFAULT_THEME); //默认主题
@@ -313,7 +313,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Override
     public List<User> findUserByUsernameOrIdNumber(User user) {
         try {
-            List<User> userList = this.um.findUserByUsernameOrIdNumber(user);
+            List<User> userList = this.um.findAllUserByUsernameOrIdNumber(user);
             return userList;
         } catch (Exception e) {
             log.error("error", e);

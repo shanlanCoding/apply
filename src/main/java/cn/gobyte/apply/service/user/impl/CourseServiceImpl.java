@@ -15,8 +15,7 @@ public class CourseServiceImpl extends BaseService<Course> implements CourseServ
     @Autowired
     private CourseMapper cm;
 
-
-    // 根据专业名称，查询考试科目，以及考试的时间
+    // 根据专业名称，查询考试科目，以及考试的时间，用于考试成绩查询
     @Override
     public Course selectExamCourseByMajor(String name) {
         Example example = new Example(Course.class);

@@ -13,6 +13,7 @@ import java.util.Date;
 /**
  * 用户表，里面包含了用户的所有信息
  */
+//@Excel("用户列表")
 @Table(name = "users")
 @Data
 public class User implements Serializable {
@@ -58,6 +59,7 @@ public class User implements Serializable {
      * 身份证号
      */
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ExportConfig(value = "身份证号")
     private String id;
 
     /**
@@ -68,86 +70,103 @@ public class User implements Serializable {
     /**
      * 提示问题
      */
+    @ExportConfig(value = "提示问题")
     private String tswt;
 
     /**
      * 问题答案
      */
+    @ExportConfig(value = "问题答案")
     private String mmda;
 
     /**
      * 邮箱
      */
+    @ExportConfig(value = "邮箱")
     private String email;
 
     /**
-     * 学号
+     * 角色：1管理员；2普通用户
      */
     private String sid;
 
     /**
      * 姓名
      */
+    @ExportConfig(value = "姓名")
     private String name;
 
     /**
      * 生日
      */
+    @ExportConfig(value = "生日")
     private String birthd;
 
     /**
      * 性别
      */
+    @ExportConfig(value = "性别")
     private String gender;
 
     /**
      * 民族
      */
+    @ExportConfig(value = "民族")
     private String mz;
 
     /**
      * 政治面貌
      */
+    @ExportConfig(value = "政治面貌")
     private String zzmm;
 
     /**
      * 电话号
      */
+    @ExportConfig(value = "电话")
     private String tel;
 
     /**
      * 地址
      */
+    @ExportConfig(value = "地址")
     private String address;
 
     /**
      * 学校
      */
+    @ExportConfig(value = "大专学校")
     private String school;
 
     /**
      * 学校代码
      */
+    @ExportConfig(value = "大专学校代码")
     private String schoolc;
 
     /**
      * 主修科目
      */
+    @ExportConfig(value = "大专专业")
+
     private String major;
 
     /**
      * 高考报名号
      */
+    @ExportConfig(value = "高考报名号")
     private String gkbmh;
 
     /**
      * 报考科目
      */
+    @ExportConfig(value = "报考科目")
     private String bkmajor;
 
     /**
      * 报考专业的代码
      */
+    @ExportConfig(value = "报考专业的代码")
     private String mcode;
 
     /**
@@ -163,26 +182,32 @@ public class User implements Serializable {
     /**
      * 联系地址
      */
+    @ExportConfig(value = "联系地址")
+
     private String lxaddress;
 
     /**
      * 邮编
      */
+    @ExportConfig(value = "邮编")
     private String yb;
 
     /**
      * 审核状态
      */
+    @ExportConfig(value = "审核状态")
     private String state;
 
     /**
      * 时间
      */
+
     private String sj;
 
     /**
      * 准考证号
      */
+    @ExportConfig(value = "准考证号")
     private String zkzh;
 
     /**
@@ -193,7 +218,7 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    @ExportConfig(value = "创建时间", convert = "c:cc.mrbird.common.utils.poi.convert.TimeConvert")
+    @ExportConfig(value = "创建时间", convert = "c:cn.gobyte.apply.utils.poi.convert.TimeConvert")
     @Column(name = "creat_time")
     private Date creatTime;
 
@@ -233,18 +258,22 @@ public class User implements Serializable {
     /**
      * 考试科目1
      */
+    @ExportConfig(value = "考试科目1")
     private String kskm1;
     /**
      * 考试科目2
      */
+    @ExportConfig(value = "考试科目2")
     private String kskm2;
     /**
      * 考试科目3
      */
+    @ExportConfig(value = "考试科目3")
     private String kskm3;
     /**
      * 考试科目4
      */
+    @ExportConfig(value = "考试科目4")
     private String kskm4;
 
     /**

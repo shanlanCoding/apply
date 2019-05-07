@@ -1,5 +1,5 @@
 <div class="card">
-    <div data-th-include="system/user/userAdd"></div>
+    <div data-th-include="system/grade/gradeAdd"></div>
     <div class="card-block">
         <div class="table-responsive">
             <div id="data-table_wrapper" class="dataTables_wrapper">
@@ -28,34 +28,8 @@
                     <span href="javascript:void(0)" class="actions__item zmdi zmdi-delete"
                           sec:authorize="hasAuthority('user:add')" onclick="deleteUsers()" title="删除用户"></span>
 
-                    <!--/*-->
-                    <!--菜单-->
-                    <div class="dropdown actions__item"
-                         sec:authorize="hasAnyAuthority('user:add','user:delete','user:update')" title="菜单">
-                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
-                        <div class="dropdown-menu dropdown-menu-right">
-
-                            <a href="javascript:void(0)" class="dropdown-item" data-target="#modal-container-9814815"
-                               data-toggle="modal" sec:authorize="hasAuthority('user:add')" onclick="register(this)">新增用户</a>
-
-
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="getUser()"
-                               data-target="#modal-container-981481"
-                               data-toggle="modal" sec:authorize="hasAuthority('user:update')">修改用户</a>
-
-                            <a class="nav-link editUser" data-target="#modal-container-981481"
-                               data-toggle="modal"
-                               href="javascript:void(0)">修改个人信息</a>
-
-
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteUsers()"
-                               sec:authorize="hasAuthority('user:delete')">删除用户</a>
-                        </div>
-                    </div>
-                    <!--*/-->
-
                 </div>
-                <!--/*--> 表格 <!--*/-->
+                <!--/*--> 表格搜索条件 <!--*/-->
                 <div id="data-table_filter" class="dataTables_filter">
                     <form class="user-table-form form">
                         <div class="row">
@@ -79,13 +53,13 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon"> 审核状态： </span>
+                                    <span class="input-group-addon"> 录取状态： </span>
                                     <div class="form-group">
                                         <select class="form-control" name="state">
                                             <option value="" selected>所有</option>
-                                            <option value="审核通过">审核通过</option>
-                                            <option value="未审核">未审核</option>
-                                            <option value="审核失败">审核失败</option>
+                                            <option value="审核通过">录取</option>
+                                            <option value="未审核">预录取</option>
+                                            <option value="审核失败">未录取</option>
                                         </select>
                                     </div>
                                 </div>
@@ -98,5 +72,5 @@
         </div>
     </div>
 </div>
-<script data-th-src="@{js/app/system/user/user.js}"></script>
-<script data-th-src="@{js/app/system/user/userEdit.js}"></script>
+<script data-th-src="@{js/app/system/grade/grade.js}"></script>
+<script data-th-src="@{js/app/system/grade/gradeEdit.js}"></script>

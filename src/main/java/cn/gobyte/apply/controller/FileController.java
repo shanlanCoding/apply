@@ -25,7 +25,7 @@ public class FileController {
      * @param response
      * @return void:
      * @author shanLan misterchou@qq.com
-     * @date 2019/5/5 16:17
+     * @date 2019/4/5 16:17
      */
     @RequestMapping("file/download")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response) throws IOException, FileDownloadException {
@@ -33,7 +33,7 @@ public class FileController {
          * fileName=8c28d2d5-5a93-4e39-890b-978e1e066b1d_%E7%94%A8%E6%88%B7%E8%A1%A8.xlsx&
          * delete=true
          * */
-        System.err.println("fileDownload====" + fileName + "----" + this.getClass().getName());
+//        System.err.println("fileDownload====" + fileName + "----" + this.getClass().getName());
         if (StringUtils.isNotBlank(fileName) && !fileName.endsWith(".xlsx") && !fileName.endsWith(".csv")) {
             throw new FileDownloadException("不支持该类型文件下载");
         }

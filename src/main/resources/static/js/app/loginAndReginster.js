@@ -179,9 +179,9 @@ function login() {
 }
 
 /*查询成绩*/
-function selectGrande() {
+function selectGrade() {
     // console.log($(this).text())
-    var id = $("#grandeNumber").val();
+    var id = $("#gradeNumber").val();
     if (id.length < 18) {
         $MB.n_warning("身份证号不足18位，再检查下？");
         return;
@@ -200,15 +200,15 @@ function selectGrande() {
     if ($(this).text() == "查询") {
         $.ajax({
             type: "post",
-            url: "/user/selectGrande",
-            data: $(".grande-form").serialize(),
+            url: "/user/selectGrade",
+            data: $(".grade-form").serialize(),
             dataType: "json",
             success: function (data) {
                 if (data.code === 0) {
                     $MB.n_success("查询成功！");
-                    $(".selectGrandeForm").toggle();
-                    $(".grandeTable").toggle();
-                    $(".selectGrandeButton").text("重新查询");
+                    $(".selectGradeForm").toggle();
+                    $(".gradeTable").toggle();
+                    $(".selectGradeButton").text("重新查询");
 
                     // 填充
                     km1.text(data.message.km1);
@@ -234,9 +234,9 @@ function selectGrande() {
             }
         });
     } else if ($(this).text() == "重新查询") {
-        $(".selectGrandeForm").toggle();
-        $(".grandeTable").toggle();
-        $(".selectGrandeButton").text("查询");
+        $(".selectGradeForm").toggle();
+        $(".gradeTable").toggle();
+        $(".selectGradeButton").text("查询");
     }
 
 }

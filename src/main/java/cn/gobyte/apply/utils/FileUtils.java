@@ -109,8 +109,7 @@ public class FileUtils {
             if (!fileDir.exists())
                 fileDir.mkdir();
             String path = "file/" + fileName;
-            operateSign = ExcelUtils.builder(clazz)
-                    .toCsv(list, path);
+            operateSign = ExcelUtils.builder(clazz).toCsv(list, path);
             if (operateSign) {
                 return ResponseBo.ok(fileName);
             } else {

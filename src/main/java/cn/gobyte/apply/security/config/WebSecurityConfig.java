@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests() // 授权配置
 //                .antMatchers("/", "/favicon.ico", "/index", "/css/**", "/js/**", "/img/**", "/static/**").permitAll() // 登录跳转 URL 无需认证
                 .antMatchers("/static/**", "/css/**", "/js/**", "/img/**", "/favicon.ico",
-                        "/", "/login", "/register","/user/selectGrande","/user/retrievePassword").permitAll() // 登录跳转 URL 无需认证
+                        "/", "/login", "/register","/user/selectGrade","/user/retrievePassword").permitAll() // 登录跳转 URL 无需认证
                 .anyRequest()  // 所有请求
                 .authenticated() // 都需要认证
                 .and().csrf().disable();//解决非thymeleaf的form表单提交被拦截问题

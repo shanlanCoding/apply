@@ -8,7 +8,7 @@ import java.io.Serializable;
  * TODO: 查询请求
  *
  * @author shanLan misterchou@qq.com
- * @date 2019/5/2 22:03
+ * @date 2019/4/2 22:03
  */
 public class QueryRequest implements Serializable {
 

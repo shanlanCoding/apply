@@ -1,12 +1,14 @@
 package cn.gobyte.apply.pojo.user;
 
+import cn.gobyte.apply.annotation.ExportConfig;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "cj")
-public class userGrande {
+public class userGrade {
     /**
      * 身份证号
      */
@@ -17,21 +19,25 @@ public class userGrande {
     /**
      * 学号
      */
+    @ExportConfig(value = "序号")
     private String xh;
 
     /**
      * 准考证号
      */
+    @ExportConfig(value = "准考证号")
     private String zkzh;
 
     /**
      * 名字
      */
+    @ExportConfig(value = "名字")
     private String name;
 
     /**
      * 性别
      */
+    @ExportConfig(value = "身份证号")
     private String gender;
 
     /**
@@ -42,40 +48,45 @@ public class userGrande {
     /**
      * 报考专业
      */
+    @ExportConfig(value = "报考专业")
     private String bkmajor;
 
     /**
      * 考试科目1
      */
+    @ExportConfig(value = "考试科目1")
     private String km1;
 
     /**
      * 科目1分数
      */
+    @ExportConfig(value = "科目1分数")
     private Float km1f;
-
     private String km1b;
 
     /**
      * 考试科目2
      */
+    @ExportConfig(value = "考试科目2")
     private String km2;
 
     /**
      * 考试科目2分数
      */
+    @ExportConfig(value = "考试科目2分数")
     private Float km2f;
-
     private String km2b;
 
     /**
      * 总分
      */
+    @ExportConfig(value = "总分")
     private String total;
 
     /**
      * 是否录取
      */
+    @ExportConfig(value = "是否录取")
     private String lq;
 
     /**
@@ -342,7 +353,7 @@ public class userGrande {
 
     @Override
     public String toString() {
-        return "userGrande{" +
+        return "userGrade{" +
                 "id='" + id + '\'' +
                 ", xh='" + xh + '\'' +
                 ", zkzh='" + zkzh + '\'' +

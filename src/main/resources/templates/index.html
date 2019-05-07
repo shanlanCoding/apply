@@ -420,11 +420,11 @@
                                                     <!--/*-->
                                                     不等于null才显示表格
                                                     <!--*/-->
-                                                    <div class="container-fluid" th:if="${grande.id} != null">
+                                                    <div class="container-fluid" th:if="${grade.id} != null">
                                                         <div class="row">
                                                             <!--/*-->
-                                                            <span th:if="${grande.id} == null "> == null</span>
-                                                            <span th:if="${grande.id} != null "> != null</span>
+                                                            <span th:if="${grade.id} == null "> == null</span>
+                                                            <span th:if="${grade.id} != null "> != null</span>
                                                             <!--*/-->
                                                             <div class="col-md-12">
 
@@ -441,18 +441,18 @@
                                                                     </thead>
                                                                     <tbody>
                                                                     <tr>
-                                                                        <td th:text="${grande.km1}">
+                                                                        <td th:text="${grade.km1}">
                                                                             C语言基础
                                                                         </td>
-                                                                        <td th:text="${grande.km1f}">
+                                                                        <td th:text="${grade.km1f}">
                                                                             105
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td th:text="${grande.km2}">
+                                                                        <td th:text="${grade.km2}">
                                                                             计算机基础
                                                                         </td>
-                                                                        <td th:text="${grande.km2f}">
+                                                                        <td th:text="${grade.km2f}">
                                                                             108
                                                                         </td>
                                                                     </tr>
@@ -461,7 +461,7 @@
                                                                             <strong>总分：</strong>
                                                                         </td>
                                                                         <td>
-                                                                            <strong th:text="${grande.total}">213</strong>
+                                                                            <strong th:text="${grade.total}">213</strong>
                                                                         </td>
                                                                     </tr>
                                                                     <!--/*-->
@@ -471,7 +471,7 @@
                                                                         <td>
                                                                             <strong>录取：</strong>
                                                                         </td>
-                                                                        <td th:switch="${grande.lq}">
+                                                                        <td th:switch="${grade.lq}">
                                                                             <strong th:case="'录取'">录取</strong>
                                                                             <strong th:case="'预录取'">预录取</strong>
                                                                             <strong th:case="'未录取'">未录取</strong>
@@ -483,7 +483,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span th:if="${grande.id} == null "><strong>成绩暂未公布</strong></span>
+                                                    <span th:if="${grade.id} == null "><strong>成绩暂未公布</strong></span>
                                                     <!--主体-end-->
                                                 </div>
 

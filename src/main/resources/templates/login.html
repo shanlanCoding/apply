@@ -63,7 +63,7 @@
             float: right;
         }
 
-        .problem, .answer, .password, .grandeTable {
+        .problem, .answer, .password, .gradeTable {
             display: none;
         }
 
@@ -365,12 +365,12 @@
 
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form role="form" action="" id="grande-form" name="grande-form" method="post" class="grande-form">
+                    <form role="form" action="" id="grade-form" name="grade-form" method="post" class="grade-form">
                         <!--/*-->
                         表单标题
                         <!--*/-->
                         <div class="modal-header">
-                            <h4 class="modal-title" id="grandeModalLabel">查询成绩</h4>
+                            <h4 class="modal-title" id="gradeModalLabel">查询成绩</h4>
                             <button type="button" class="close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -380,11 +380,11 @@
                             <!--/*-->
                             主体
                             <!--*/-->
-                            <div class="selectGrande">
+                            <div class="selectgrade">
                                 <!--/*-->
                                 输入信息查成绩
                                 <!--*/-->
-                                <div class="form-group selectGrandeForm">
+                                <div class="form-group selectgradeForm">
                                     <label for="grandName" style="width: 100%;">
                                         <strong>姓 名：</strong>
                                     </label>
@@ -394,12 +394,12 @@
                                     <!--/*-->
                                     分割线
                                     <!--*/-->
-                                    <label for="grandeNumber" style="width: 100%;">
+                                    <label for="gradeNumber" style="width: 100%;">
                                         <strong>身份证号：</strong>
                                     </label>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="身份证号"
-                                               autofocus="autofocus" name="id" id="grandeNumber"
+                                               autofocus="autofocus" name="id" id="gradeNumber"
                                                autocomplete="username"
                                                value="130730199405281821"/>
                                     </div>
@@ -407,7 +407,7 @@
                                 <!--/*-->
                                 成绩查询表单
                                 <!--*/-->
-                                <div class="grandeTable">
+                                <div class="gradeTable">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -485,7 +485,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary selectGrandeButton">查询</button>
+                            <button type="button" class="btn btn-primary selectGradeButton">查询</button>
                         </div>
                     </form>
                 </div>
@@ -614,8 +614,7 @@
 
         $(".loginBtn").on("click", login);
 
-        $(".selectGrandeButton").on("click", selectGrande);
-
+        $(".selectGradeButton").on("click", selectGrade);
         $(".retrievePasswordButton").on("click", retrievePassword);
 
     });

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.gobyte.apply.dao.user.userGrandeMapper">
+<mapper namespace="cn.gobyte.apply.dao.user.UserGradeMapper">
 
-    <resultMap id="BaseResultMap" type="cn.gobyte.apply.pojo.user.userGrande">
+    <resultMap id="BaseResultMap" type="cn.gobyte.apply.pojo.user.userGrade">
         <!--
           WARNING - @mbg.generated
         -->
@@ -25,17 +25,35 @@
 
     <!--
         @Select("SELECT * FROM `cj` WHERE id = ${id} ")
-        userGrande selectGrande(@Param("id") String id);
+        userGrade selectGrade(@Param("id") String id);
     -->
 
-    <select id="selectGrande" resultType="cn.gobyte.apply.pojo.user.userGrande" parameterType="String">
+    <!--    public ResponseBo selectGrade(String name, String id) {-->
+    <select id="selectGrade" resultType="cn.gobyte.apply.pojo.user.userGrade" parameterType="String">
         SELECT * FROM `cj` WHERE id = ${id}
     </select>
 
 
-    <select id="selectGrande2" resultType="cn.gobyte.apply.pojo.user.userGrande" parameterType="String">
+    <!--    userGrade selectGradeByIdAndName(String name, String id);-->
+    <select id="selectGradeByIdAndName" resultType="cn.gobyte.apply.pojo.user.userGrade" parameterType="String">
         SELECT * FROM `cj` WHERE cj.id = #{id} AND cj.name = #{name}
     </select>
 
+    <!--    List<userGrade> selectAllGrade(userGrade grade);-->
+    <!--根据条件查询所有的成绩-->
+    <select id="selectAllGrade" resultType="cn.gobyte.apply.pojo.user.userGrade"
+            parameterType="cn.gobyte.apply.pojo.user.userGrade">
+        SELECT * FROM `cj`
+        WHERE 1 = 1
+        <if test="name != null and name != ''">
+            AND cj.name = #{name}
+        </if>
+        <if test="id != null and id != ''">
+            AND cj.id = #{id}
+        </if>
+        ORDER BY cj.xh
+    </select>
 
+
+    <!--拉大编辑框-->
 </mapper>

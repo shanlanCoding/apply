@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public interface CourseService extends IService<Course> {
 
     /**
-     * TODO: 根据专业名称，查询考试科目，以及考试的时间
+     * TODO: 根据专业名称，查询考试科目，以及考试的时间；用于考试成绩查询
      *
      * @param name 报考的专业，如：计算技术与科学
      * @return cn.gobyte.apply.pojo.user.Course:
@@ -23,5 +23,6 @@ public interface CourseService extends IService<Course> {
      * @date 2019/4/24 3:01
      */
     Course selectExamCourseByMajor(String name);
+
 
 }

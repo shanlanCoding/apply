@@ -81,6 +81,26 @@
         ORDER BY u.`systemId`
 
     </select>
+    <!--查询所有信息给POJO，主要是为了导出excel-->
+    <!--List<User> findAllUserByUsernameOrIdNumber(User user);-->
+    <select id="findAllUserByUsernameOrIdNumber" resultType="cn.gobyte.apply.pojo.user.User"
+            parameterType="cn.gobyte.apply.pojo.user.User">
+        SELECT *
+        FROM `users` u
+        LEFT JOIN `t_user_role` ur ON(u.`sid` = ur.`ROLE_ID`)
+        WHERE sid = 2 /*1为管理员，2为普通用户*/
+        <if test="id != null and id != ''">
+            AND u.id = #{id}
+        </if>
+        <if test="name != null and name != ''">
+            AND u.name = #{name}
+        </if>
+        <if test="state != null and state != ''">
+            AND u.state = #{state}
+        </if>
+        ORDER BY u.`systemId`
+    </select>
+
     <!--
             <if test="username != null and username != ''">
             AND u.username = #{username}
