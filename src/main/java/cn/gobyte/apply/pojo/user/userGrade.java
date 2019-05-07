@@ -14,6 +14,7 @@ public class userGrade {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ExportConfig(value = "身份证号")
     private String id;
 
     /**
@@ -37,7 +38,6 @@ public class userGrade {
     /**
      * 性别
      */
-    @ExportConfig(value = "身份证号")
     private String gender;
 
     /**
