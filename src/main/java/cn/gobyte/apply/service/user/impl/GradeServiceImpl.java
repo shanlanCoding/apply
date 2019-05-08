@@ -50,4 +50,25 @@ public class GradeServiceImpl extends BaseService<userGrade> implements GradeSer
         userGrade userGrade = this.ugm.selectGradeByIdAndName(name, id);
         return userGrade == null ? ResponseBo.error("查询的用户信息不存在") : ResponseBo.ok(userGrade);
     }
+
+    // 修改单个用户成绩
+    @Override
+    public ResponseBo editGrade(userGrade userGrade) {
+        try {
+            int i = this.updateNotNull(userGrade);
+            if (i > 0) {
+                return ResponseBo.ok("修改成功");
+            } else {
+                return ResponseBo.error("修改失败");
+            }
+        } catch (Exception e) {
+            log.error("修改成绩信息失败", e);
+            return ResponseBo.error("修改失败，请联系管理员处理");
+        }
+
+    }
+
+
+
+    /*扩大输入框*/
 }

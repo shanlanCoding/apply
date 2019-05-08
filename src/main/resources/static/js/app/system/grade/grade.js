@@ -77,7 +77,11 @@ $(function () {
             }
         }
 
-        ]
+        ],
+        onClickRow: function (row, $element, field) {
+            var i = $element.data('index');//可通过此参数获取当前行号
+            console.log(i + "行；名字：" + row.name + "，" + field);
+        }
     };
     // console.log($id);
     $MB.initTable('userTable', settings);
@@ -167,4 +171,52 @@ function exportUserCsv() {
             $MB.n_warning(r.message);
         }
     });
+}
+
+/**
+ * 上传文件
+ * @param obj
+ */
+function uploadFile(obj) {
+    //获取文件列表
+    // 相当于： $input[0].files, $input.get(0).files
+    var files = $('#uploadFile').prop('files');
+    if (files.length <= 0) {
+        $MB.n_warning("文件列表为空.")
+        return;
+    }
+    // print file name
+    console.log(files);
+
+    var data = new FormData();
+    data.append('file', files[0]);
+
+    $.ajax({
+        url: '/grade/uploadFile',
+        type: 'POST',
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (r) {
+            $MB.n_success(r.message);
+        }
+    });
+
+
+    /*    $("#uploadFile").upload({
+            url: '/grade/uploadFile',
+            // 其他表单数据
+            params: {name: 'pxblog'},
+            // 上传完成后, 返回json, text
+            dataType: 'json',
+            onSend: function (obj, str) {
+                return true;
+            },
+            // 上传之后回调
+            onComplate: function (data) {
+                alert(data.file);
+            }
+        });
+        $("#uploadFile").upload("ajaxSubmit")*/
 }

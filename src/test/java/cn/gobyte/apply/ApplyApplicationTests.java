@@ -1,43 +1,47 @@
 package cn.gobyte.apply;
 
+import cn.gobyte.apply.dao.user.UserGradeMapper;
+import cn.gobyte.apply.pojo.user.userGrade;
+import cn.gobyte.apply.utils.EasyPoiUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplyApplicationTests {
+    @Autowired
+    private UserGradeMapper ugm;
 
     @Test
     public void contextLoads() {
 
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void fun01() {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        // 1. 传统
-        for (Object n : list) {
-            System.out.println(n);
+
+//        String filePath = "D:\\QQPCmgr\\Desktop\\easyExcel.csv";
+        String filePath = "D:\\QQPCmgr\\Desktop\\easyExcel.xlsxsss";
+
+//        List<userGrade> list = this.ugm.selectAllGrade(user);
+
+        List<userGrade> userGrades = EasyPoiUtils.importExcel(filePath, 0, 1, userGrade.class);
+
+        for (userGrade u : userGrades) {
+            System.err.println(u.toString());
         }
-        System.err.println("----第一个");
 
-        // 2. 拉姆达
-        list.forEach(n -> System.out.println(n));
+//        com.example.easypoi.util.EasyPoiUtils.exportExcel(userGradeList, "我是标题", "0", userGrade.class, filePath,);
+//        FileUtils.createExcelByPOIKit(filePath, list, userGrade.class);
 
-        System.err.println("----第二个");
+//        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("计算机一班学生", "学生"), userGrade.class, userGradeList);
 
-        // 3. 终极
-        list.forEach(System.out::println);
-
-        System.err.println("----最后一个");
-
+//        FileUtils.createExcelByPOIKit("excelTest", userGradeList, userGrade.class);
     }
 
 }

@@ -52,6 +52,8 @@ $(function () {
 function getGrade(obj) {
     var selected = $("#userTable").bootstrapTable('getSelections');
     var id = $(obj).parent().siblings().children('.idNumber').text();
+
+    
     if (!typeof id == 'undefined') {
         id = selected[0].id;
     } else if (!typeof obj == 'undefined') {
@@ -80,7 +82,7 @@ function getGrade(obj) {
                     // console.log(r.message)
                     // alert(JSON.stringify(data.message));
                     $("#name").val(r.message.name);
-                    $("#id").val(r.message.id);
+                    $("#idNumber").val(r.message.id);
                     $("#zkzh").val(r.message.zkzh);
                     /*报考专业*/
                     $("#bkmajor option:selected").text(r.message.bkmajor)
@@ -92,6 +94,12 @@ function getGrade(obj) {
                     $("#km2f").val(r.message.km2f);
 
                     $("#total").val(r.message.total);
+                    // 录取结果
+                    if (r.message.lq == "" || r.message.lq == null ) {
+                        $("#lq option:selected").text("暂无结果");
+                    } else {
+                        $("#lq option:selected").text(r.message.lq);
+                    }
                 } else {
                     $MB.n_danger(r.message);
                 }
@@ -110,20 +118,11 @@ function editUser() {
 
 
     // console.log("register-click");
-    var email = $("#email").val().trim();
+    var name = $("#name").val().trim();
 
-    // 邮箱校验
-    if (email === "") {
-        $MB.n_warning("邮箱不能为空！");
-        return;
-    }
-
-    // 性别校验
-    var man = $("#optionsRadios3").is(":checked");
-    var gril = $("#optionsRadios4").is(":checked");
-    if (!man && !gril) {
-        $MB.n_warning("请选择性别！");
-        console.log("请选择性别！");
+    // 姓名校验
+    if (name === "") {
+        $MB.n_warning("姓名不能为空！");
         return;
     }
 
@@ -137,21 +136,45 @@ function editUser() {
         $("#bkmajor option:selected").val(bkmajor);
     }
 
-    // 政治面貌
-    var zzmm = $("#zzmm option:selected").text();
-    if (zzmm === "政治面貌") {
-        $MB.n_warning("'政治面貌'不能为空！");
+    // 考试科目1
+    var km1 = $("#km1").val().trim();
+    if (km1 === "") {
+        $MB.n_warning("'考试科目1'不能为空！");
+        return;
+    }
+    // 科目1分数
+    var km1f = $("#km1f").val().trim();
+    if (km1f.length === '') {
+        $MB.n_warning("科目1分数，不能为空！");
+        return;
+    }
+    // 考试科目2
+    var km2 = $("#km2").val().trim();
+    if (km2 === "") {
+        $MB.n_warning("'考试科目2'不能为空！");
+        return;
+    }
+    // 科目2分数
+    var km1f = $("#km2f").val().trim();
+    if (km1f.length === '') {
+        $MB.n_warning("科目2分数，不能为空！");
+        return;
+    }
+    // 总分
+    var total = $("#total").val().trim();
+    if (total.length === '') {
+        $MB.n_warning("总分，不能为空！");
+        return;
+    }
+
+    // 录取状态
+    var lq = $("#lq option:selected").text();
+    if (lq === "录取结果") {
+        $MB.n_warning("'录取结果'不能为空！");
         return;
     } else {
         // setting value
-        $("#zzmm option:selected").val(zzmm);
-    }
-
-    // 高考报名号
-    var gkbmh = $("#gkbmh").val().trim();
-    if (gkbmh.length !== 14) {
-        $MB.n_warning("高考报名号不对，应该为14位数！");
-        return;
+        $("#lq option:selected").val(lq);
     }
 
     $(".registration-form");
@@ -159,8 +182,8 @@ function editUser() {
     $.ajax(
         {
             type: "post",
-            url: "/user/edit",
-            data: $("#register-form").serialize(),
+            url: "/grade/edit",
+            data: $("#edtiGrande-form").serialize(),
             dataType: "json",
             error: function (data, type, err) {
                 // alert(JSON.stringify(data));
@@ -174,8 +197,10 @@ function editUser() {
                 if (data.code === 0) {
                     $MB.n_success("同学恭喜你，资料修改成功!");
                     // $(".registration-form")[0].reset();
-                    alert("同学恭喜你，资料修改成功!");
+                    // alert("同学恭喜你，资料修改成功!");
                     // window.location.reload();
+                    $("#edtiGrande-form").find(".btn.btn-secondary").click();
+                    refresh();
                 } else {
                     $MB.n_danger(data.message);
                 }

@@ -108,8 +108,11 @@ public class FileUtils {
             File fileDir = new File("file");
             if (!fileDir.exists())
                 fileDir.mkdir();
+
             String path = "file/" + fileName;
             operateSign = ExcelUtils.builder(clazz).toCsv(list, path);
+
+            // 给客户端发送文件路径
             if (operateSign) {
                 return ResponseBo.ok(fileName);
             } else {

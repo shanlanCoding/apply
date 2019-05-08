@@ -182,10 +182,11 @@ function editUser() {
             },
             success: function (data) {
                 if (data.code === 0) {
-                    $MB.n_success("同学恭喜你，资料修改成功!");
+                    $MB.n_success("资料修改成功!");
                     // $(".registration-form")[0].reset();
-                    alert("同学恭喜你，资料修改成功!");
+                    // alert("资料修改成功!");
                     // window.location.reload();
+                    $(".editUser-form").find(".btn.btn-secondary").click();
                 } else {
                     $MB.n_danger(data.message);
                 }

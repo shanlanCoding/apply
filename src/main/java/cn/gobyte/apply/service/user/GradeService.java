@@ -39,4 +39,14 @@ public interface GradeService extends IService<userGrade> {
      */
     ResponseBo selectGrade(String name, String id);
 
+    /**
+     * TODO: 修改单个用户成绩
+     *
+     * @param userGrade
+     * @return cn.gobyte.apply.domain.ResponseBo:
+     * @author shanLan misterchou@qq.com
+     * @date 2019/4/8 13:46
+     */
+    ResponseBo editGrade(userGrade userGrade);
+
 }

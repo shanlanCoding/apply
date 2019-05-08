@@ -12,6 +12,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * TODO: 文件控制器
+ *
+ * @author shanLan misterchou@qq.com
+ * @date 2019/4/8 13:47
+ */
 @Controller
 public class FileController {
 
@@ -40,11 +46,14 @@ public class FileController {
         String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf('_') + 1);
         String filePath = "file/" + fileName;
         File file = new File(filePath);
-        if (!file.exists())
+        if (!file.exists()) {
             throw new FileDownloadException("文件未找到");
+        }
+
         response.setHeader("Content-Disposition", "attachment;fileName=" + java.net.URLEncoder.encode(realFileName, "utf-8"));
         response.setContentType("multipart/form-data");
         response.setCharacterEncoding("utf-8");
+
         try (InputStream inputStream = new FileInputStream(file); OutputStream os = response.getOutputStream()) {
             byte[] b = new byte[2048];
             int length;

@@ -220,16 +220,56 @@
             <artifactId>jedis</artifactId>
         </dependency>
         <!--EXCEL导出、导入-->
+        <!-- https://mvnrepository.com/artifact/cn.afterturn/easypoi-base -->
+<!--        <dependency>-->
+<!--            <groupId>cn.afterturn</groupId>-->
+<!--            <artifactId>easypoi-base</artifactId>-->
+<!--            <version>4.0.0</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/cn.afterturn/easypoi-annotation &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>cn.afterturn</groupId>-->
+<!--            <artifactId>easypoi-annotation</artifactId>-->
+<!--            <version>4.0.0</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/cn.afterturn/easypoi-web &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>cn.afterturn</groupId>-->
+<!--            <artifactId>easypoi-web</artifactId>-->
+<!--            <version>4.0.0</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>com.wuwenze</groupId>
-            <artifactId>ExcelKit</artifactId>
-            <version>2.0.71</version>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+
+
+        <!--打包war-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
 
 
     </dependencies>
 
     <build>
+        <!--打包war-->
+        <!-- 应与application.properties(或application.yml)中context-path保持一致 -->
+        <!--        <finalName>war包名称</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -244,37 +284,37 @@
             <!--代码生成后，最好将pom.xml中刚刚开启的插件重新注释掉。
             因为在项目打包的时候会自动运行该插件，这样如果生成的代码后续有修改的话，将会被覆盖掉。
             所以通常的做法是只有在需要生成代码的时候才将该插件开启。-->
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.7</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.46</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>tk.mybatis</groupId>
-                        <artifactId>mapper</artifactId>
-                        <version>3.4.0</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>Generate MyBatis Artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <verbose>true</verbose>
-                    <overwrite>true</overwrite>
-                    <configurationFile>src/main/resources/config/mybatis-generator.xml</configurationFile>
-                </configuration>
-            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.mybatis.generator</groupId>-->
+            <!--                <artifactId>mybatis-generator-maven-plugin</artifactId>-->
+            <!--                <version>1.3.7</version>-->
+            <!--                <dependencies>-->
+            <!--                    <dependency>-->
+            <!--                        <groupId>mysql</groupId>-->
+            <!--                        <artifactId>mysql-connector-java</artifactId>-->
+            <!--                        <version>5.1.46</version>-->
+            <!--                    </dependency>-->
+            <!--                    <dependency>-->
+            <!--                        <groupId>tk.mybatis</groupId>-->
+            <!--                        <artifactId>mapper</artifactId>-->
+            <!--                        <version>3.4.0</version>-->
+            <!--                    </dependency>-->
+            <!--                </dependencies>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>Generate MyBatis Artifacts</id>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>generate</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--                <configuration>-->
+            <!--                    <verbose>true</verbose>-->
+            <!--                    <overwrite>true</overwrite>-->
+            <!--                    <configurationFile>src/main/resources/config/mybatis-generator.xml</configurationFile>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
 
 
         </plugins>
@@ -289,7 +329,8 @@
             </resource>
         </resources>
 
+
     </build>
 
-
+    <!--    <packaging>war</packaging>-->
 </project>

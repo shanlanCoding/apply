@@ -1,38 +1,44 @@
 package cn.gobyte.apply.pojo.user;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.gobyte.apply.annotation.ExportConfig;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "cj")
-public class userGrade {
+public class userGrade implements Serializable {
+    /**
+     * 学号
+     */
+    @ExportConfig(value = "序号")
+    @Excel(name = "序号")
+    private String xh;
+
     /**
      * 身份证号
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ExportConfig(value = "身份证号")
+    @Excel(name = "身份证号", type = 1)
     private String id;
-
-    /**
-     * 学号
-     */
-    @ExportConfig(value = "序号")
-    private String xh;
 
     /**
      * 准考证号
      */
     @ExportConfig(value = "准考证号")
+    @Excel(name = "准考证号", type = 1)
     private String zkzh;
 
     /**
      * 名字
      */
     @ExportConfig(value = "名字")
+    @Excel(name = "名字", type = 1)
     private String name;
 
     /**
@@ -49,18 +55,21 @@ public class userGrade {
      * 报考专业
      */
     @ExportConfig(value = "报考专业")
+    @Excel(name = "报考专业", type = 1)
     private String bkmajor;
 
     /**
      * 考试科目1
      */
     @ExportConfig(value = "考试科目1")
+    @Excel(name = "考试科目1", type = 1)
     private String km1;
 
     /**
      * 科目1分数
      */
     @ExportConfig(value = "科目1分数")
+    @Excel(name = "科目1分数", type = 1)
     private Float km1f;
     private String km1b;
 
@@ -68,12 +77,14 @@ public class userGrade {
      * 考试科目2
      */
     @ExportConfig(value = "考试科目2")
+    @Excel(name = "考试科目2", type = 1)
     private String km2;
 
     /**
      * 考试科目2分数
      */
     @ExportConfig(value = "考试科目2分数")
+    @Excel(name = "考试科目2分数", type = 1)
     private Float km2f;
     private String km2b;
 
@@ -81,12 +92,14 @@ public class userGrade {
      * 总分
      */
     @ExportConfig(value = "总分")
+    @Excel(name = "总分", type = 1)
     private String total;
 
     /**
      * 是否录取
      */
     @ExportConfig(value = "是否录取")
+    @Excel(name = "是否录取", type = 1)
     private String lq;
 
     /**

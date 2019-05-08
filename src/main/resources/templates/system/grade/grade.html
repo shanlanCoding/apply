@@ -4,29 +4,18 @@
         <div class="table-responsive">
             <div id="data-table_wrapper" class="dataTables_wrapper">
                 <div class="dataTables_buttons hidden-sm-down actions">
+
                     <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索"/>
                     <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新"/>
-
-                    <span class="actions__item zmdi zmdi-download" title="导出数据到.csv表格" onclick="exportUserCsv()"></span>
-                    <!--/*-->
-                    <div class="dropdown actions__item" title="导出数据到.csv表格" onclick="exportUserCsv()">
-                        <i data-toggle="dropdown" class="zmdi zmdi-download"> </i>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel"
-                               onclick="exportUserExcel()" title=".xlsx包含很多格式信息，更美观"> Excel (.xlsx) </a>
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv"
-                               onclick="exportUserCsv()" title=".csv纯文本文件，不美观"> CSV(.csv) </a>
-                        </ul>
-                    </div>
-                    <!--*/-->
-
-                    <span href="javascript:void(0)" class="actions__item zmdi zmdi-account-add"
-                          data-target="#modal-container-9814815"
-                          data-toggle="modal" sec:authorize="hasAuthority('user:add')"
-                          title="新增用户" onclick=""></span>
-
+                    <!--/*--> 删除用户 <!--*/-->
                     <span href="javascript:void(0)" class="actions__item zmdi zmdi-delete"
                           sec:authorize="hasAuthority('user:add')" onclick="deleteUsers()" title="删除用户"></span>
+
+                    <!--/*--> 导出 <!--*/-->
+                    <span class="actions__item zmdi zmdi-download" title="导出数据到.csv表格" onclick="exportUserCsv()"> </span>
+                    <!--/*--> 导入  style="height: 28px;width: 15px;"<!--*/-->
+                    <span class="actions__item zmdi zmdi-upload" id="uploadFile"
+                          data-target="#modal-container-1571832312" data-toggle="modal" title="导入到数据库"></span>
 
                 </div>
                 <!--/*--> 表格搜索条件 <!--*/-->
@@ -72,5 +61,7 @@
         </div>
     </div>
 </div>
+
+
 <script data-th-src="@{js/app/system/grade/grade.js}"></script>
 <script data-th-src="@{js/app/system/grade/gradeEdit.js}"></script>

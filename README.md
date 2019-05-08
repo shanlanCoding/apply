@@ -20,3 +20,6 @@
 - MySQL 数据库
 - Maven 依赖管理
 - Git 版本控制
+---------
+
+### 注意：clone本项目后，请先建立wcgxy数据库，然后将“DataBase.sql”文件恢复到数据库中。

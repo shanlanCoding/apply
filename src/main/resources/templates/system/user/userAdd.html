@@ -7,7 +7,7 @@
     <div class="modal-dialog" role="document">
         <!--修改客户信息-弹出框 /register-->
         <div class="modal-content">
-            <form action="" class="registration-form" id="edit-form" method="post"
+            <form action="" class="editUser-form" id="edit-form" method="post"
                   role="form">
                 <!--表单标题-->
                 <div class="modal-header">
@@ -218,7 +218,7 @@
                     <button class="btn btn-secondary" data-dismiss="modal"
                             type="button">关闭
                     </button>
-                    <button class="btn btn-primary editUserButton" type="button">修改
+                    <button class="btn btn-primary editUserButton" type="button" onclick="editUser()">修改
                     </button>
                 </div>
             </form>
@@ -417,7 +417,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary registerButton" onclick="register(this)">注册</button>
+                    <button type="button" class="btn btn-primary registerButton" onclick="register(this)">添加用户</button>
                 </div>
             </form>
         </div>
