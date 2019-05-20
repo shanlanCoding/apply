@@ -78,7 +78,8 @@ function getUser(obj) {
             success: function (r) {
                 if (r.code === 0) {
                     // console.log(r.message)
-                    // alert(JSON.stringify(data.message));
+                    // alert(JSON.stringify(data.message));idNumber
+                    $("#idNumber").val(r.message.id);
                     $("#email").val(r.message.email);
                     $("#tswt").val(r.message.tswt);
                     $("#mmda").val(r.message.mmda);
@@ -90,8 +91,10 @@ function getUser(obj) {
                     }
                     /*报考专业*/
                     $("#bkmajor option:selected").text(r.message.bkmajor)
+
                     /*政治面貌*/
                     $("#zzmm option:selected").text(r.message.zzmm);
+
                     $("#mz").val(r.message.mz);
                     $("#tel").val(r.message.tel);
                     $("#address").val(r.message.address);
@@ -101,8 +104,14 @@ function getUser(obj) {
                     $("#gkbmh").val(r.message.gkbmh);
                     $("#contactAddress").val(r.message.lxaddress);
                     $("#yb").val(r.message.yb);
-                } else {
 
+                    /*审核状态*/
+                    if (r.message.state == "" || r.message.state == null) {
+                        $("#state option:selected").text("未审核");
+                    } else {
+                        $("#state option:selected").text(r.message.state);
+                    }
+                } else {
                     $MB.n_danger(r.message);
                 }
             }
@@ -164,13 +173,22 @@ function editUser() {
         return;
     }
 
-    $(".registration-form");
+    // 审核状态
+    var state = $("#state option:selected").text();
+    if (state === "") {
+        $MB.n_warning("'审核状态'不能为空！");
+        return;
+    } else {
+        // setting value
+        $("#state option:selected").val(state);
+    }
+
     // 发数据
     $.ajax(
         {
             type: "post",
             url: "/user/edit",
-            data: $("#register-form").serialize(),
+            data: $("#editUser-form").serialize(),
             dataType: "json",
             error: function (data, type, err) {
                 // alert(JSON.stringify(data));
@@ -178,6 +196,8 @@ function editUser() {
                     console.log(data.responseJSON.error != undefined);
                     console.log(JSON.stringify(data.responseJSON.error));
                     $MB.n_danger("error：" + JSON.stringify(data.responseJSON.error));
+                    // 重新点击“学生管理”刷新页面
+                    loadMain({"name": "user"});
                 }
             },
             success: function (data) {
@@ -187,6 +207,7 @@ function editUser() {
                     // alert("资料修改成功!");
                     // window.location.reload();
                     $(".editUser-form").find(".btn.btn-secondary").click();
+                    refresh();
                 } else {
                     $MB.n_danger(data.message);
                 }

@@ -17,13 +17,12 @@ function getUser() {
                 id: id
             },
             dataType: "json",
-            error: function (data, type, err) {
+            error: function (data) {
                 alert(JSON.stringify(data));
-                if (data.responseJSON != undefined) {
-                    console.log(data.responseJSON.error != undefined);
-                    console.log(JSON.stringify(data.responseJSON.error));
-                    $MB.n_danger("error：" + JSON.stringify(data.responseJSON.error));
-                }
+
+                console.log(data != undefined);
+                $MB.n_danger("error：" + data);
+
             },
             success: function (r) {
                 if (r.code === 0) {
@@ -52,7 +51,6 @@ function getUser() {
                     $("#contactAddress").val(r.message.lxaddress);
                     $("#yb").val(r.message.yb);
                 } else {
-
                     $MB.n_danger(r.message);
                 }
             }
@@ -83,7 +81,7 @@ function editUser() {
     var gril = $("#optionsRadios4").is(":checked");
     if (!man && !gril) {
         $MB.n_warning("请选择性别！");
-        console.log("请选择性别！");
+        // console.log("请选择性别！");
         return;
     }
 
@@ -122,13 +120,12 @@ function editUser() {
             url: "/user/edit",
             data: $("#register-form").serialize(),
             dataType: "json",
-            error: function (data, type, err) {
+            error: function (data) {
                 // alert(JSON.stringify(data));
-                if (data.responseJSON != undefined) {
-                    console.log(data.responseJSON.error != undefined);
-                    console.log(JSON.stringify(data.responseJSON.error));
-                    $MB.n_danger("error：" + JSON.stringify(data.responseJSON.error));
-                }
+                // console.log(data.responseJSON.error != undefined);
+                // console.log(JSON.stringify(data.responseJSON.error));
+                $MB.n_danger("error：" + data);
+
             },
             success: function (data) {
                 if (data.code === 0) {
@@ -172,10 +169,9 @@ function updatePassword() {
             data: $("#updatePassword-form").serialize(),
             dataType: "json",
             error: function (r) {
-
                 // Enable Button
                 $(".updatePasswordButton").removeAttr("disabled");
-
+                $MB.n_danger(r);
             },
             success: function (data) {
                 // Enable Button

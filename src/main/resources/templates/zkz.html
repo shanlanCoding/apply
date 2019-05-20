@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <html lang="ZH" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       xmlns:th="http://www.thymeleaf.org">
 <head></head>
@@ -53,8 +54,8 @@
     <tbody>
     <tr>
         <td align="center" bordercolor="#000000" class="STYLE2" height="30" width="15%">准考证号</td>
-        <!--/*--> 
-            准考证号应该是教师在后端点击“已审核”才能生成
+        <!--/*-->
+        准考证号应该是教师在后端点击“已审核”才能生成
         <!--*/-->
         <td align="center" bordercolor="#000000" width="22%"><span th:text="${user.zkzh}"></span></td>
         <td align="center" bordercolor="#000000" class="STYLE2" width="22%">姓 名</td>
@@ -77,8 +78,8 @@
     <!--*/-->
     <tr>
         <td align="center" class="STYLE2" height="30">考试科目</td>
-        <td align="center"><span th:text="${user.kskm1}"></span></td>
-        <td align="center"><span th:text="${user.kskm2}"></span></td>
+        <td align="center"><span th:text="${user?.kskm1}"></span></td>
+        <td align="center"><span th:text="${user?.kskm2}"></span></td>
         <td align="center" colspan="2"></td>
     </tr>
     <tr>

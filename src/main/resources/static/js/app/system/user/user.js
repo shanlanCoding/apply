@@ -1,80 +1,81 @@
-$(function () {
-    // 初始化表格
+$(
+    function () {
+        // 初始化表格
 
-    var $userTableForm = $(".user-table-form");
-    var $id = "1";
-    var settings = {
-        url: ctx + "user/list",
-        pageSize: 10,
-        // 获取筛选用户的参数
-        queryParams: function (params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                id: $userTableForm.find("input[name='id']").val().trim(),
-                name: $userTableForm.find("input[name='name']").val(),
-                state: $userTableForm.find("select[name='state']").val()
-            };
-        },
-        columns: [{
-            checkbox: true
-        }, {
-            field: 'userId',
-            visible: false
-        }, {
-            field: 'name',
-            title: '姓名'
-        }, {
-            field: 'id',
-            title: '身份证',
-            formatter: function (value, row, index) {
-                $id = value;
-                return '<span class="idNumber">' + value + '</span>';
-            }
-        }, {
-            field: 'email',
-            title: '邮箱'
-        }, {
-            field: 'bkmajor',
-            title: '报考科目'
-        }, {
-            field: 'gender',
-            title: '性别',
-            formatter: function (value, row, index) {
-                if (value === '男') return '男';
-                else if (value === '女') return '女';
-                else return '保密';
-            }
-        }, {
-            field: 'creatTime',
-            title: '创建时间'
-        }, {
-            field: 'state',
-            title: '状态',
-            formatter: function (value, row, index) {
-                // var id = $("#userTable").bootstrapTable('getSelections')[0].id;
-                if (value === '审核通过') {
-                    return '<span style="cursor:pointer;" title="点击审核" class="badge badge-success" ' +
-                        'onclick="">审核通过</span>';
+        var $userTableForm = $(".user-table-form");
+        var $id = "1";
+        var settings = {
+            url: ctx + "user/list",
+            pageSize: 10,
+            // 获取筛选用户的参数
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    id: $userTableForm.find("input[name='id']").val().trim(),
+                    name: $userTableForm.find("input[name='name']").val(),
+                    state: $userTableForm.find("select[name='state']").val()
+                };
+            },
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'userId',
+                visible: false
+            }, {
+                field: 'name',
+                title: '姓名'
+            }, {
+                field: 'id',
+                title: '身份证',
+                formatter: function (value, row, index) {
+                    $id = value;
+                    return '<span class="idNumber">' + value + '</span>';
                 }
-                if (value === '未审核') {
-                    return '<span style="cursor:pointer;" class="badge badge-warning" onclick="console.log(this)">未审核</span>';
+            }, {
+                field: 'email',
+                title: '邮箱'
+            }, {
+                field: 'bkmajor',
+                title: '报考科目'
+            }, {
+                field: 'gender',
+                title: '性别',
+                formatter: function (value, row, index) {
+                    if (value === '男') return '男';
+                    else if (value === '女') return '女';
+                    else return '保密';
                 }
-                return '<span style="cursor:pointer;" class="badge badge-danger" onclick="console.log(this)">审核失败</span>';
+            }, {
+                field: 'modifyTime',
+                title: '修改时间'
+            }, {
+                field: 'state',
+                title: '状态',
+                formatter: function (value, row, index) {
+                    // var id = $("#userTable").bootstrapTable('getSelections')[0].id;
+                    if (value === '审核通过') {
+                        return '<span style="cursor:pointer;" title="点击审核" class="badge badge-success" ' +
+                            'onclick="">审核通过</span>';
+                    }
+                    if (value === '未审核') {
+                        return '<span style="cursor:pointer;" class="badge badge-warning" onclick="console.log(this)">未审核</span>';
+                    }
+                    return '<span style="cursor:pointer;" class="badge badge-danger" onclick="console.log(this)">审核失败</span>';
+                }
+            }, {
+                field: 'editRows',
+                title: '编辑',
+                formatter: function (val, row, index) {
+                    return '<button type="button" class="btn btn-success" onclick="getUser(this)" data-target="#modal-container-981481" data-toggle="modal" >修改</button>'
+                }
             }
-        }, {
-            field: 'editRows',
-            title: '编辑',
-            formatter: function (val, row, index) {
-                return '<button type="button" class="btn btn-success" onclick="getUser(this)" data-target="#modal-container-981481" data-toggle="modal" >修改</button>'
-            }
-        }
 
-        ]
-    };
-    // console.log($id);
-    $MB.initTable('userTable', settings);
-});
+            ]
+        };
+        // console.log($id);
+        $MB.initTable('userTable', settings);
+    });
 
 /**
  * 查找该行的身份证号，并进行审核

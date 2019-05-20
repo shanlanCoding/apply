@@ -1,4 +1,7 @@
+<!--suppress ALL -->
+
 <!--/*--> 学生管理-修改用户 <!--*/-->
+
 <!--/*-->
 遮罩层 - 修改资料
 <!--*/-->
@@ -7,11 +10,11 @@
     <div class="modal-dialog" role="document">
         <!--修改客户信息-弹出框 /register-->
         <div class="modal-content">
-            <form action="" class="editUser-form" id="edit-form" method="post"
+            <form action="" class="editUser-form" id="editUser-form" method="post"
                   role="form">
                 <!--表单标题-->
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">修改资料</h4>
+                    <h4 class="modal-title" id="myModalLabel">修改用户资料</h4>
 
                     <button class="close" data-dismiss="modal" type="button">
                         <span aria-hidden="true">&times;</span>
@@ -21,19 +24,17 @@
                 <div class="modal-body">
                     <!--主体-->
 
-                    <!--/*-->
-                    <div class="form-group">
+                    <!--/*-->                    <!--*/-->
+
+                    <div class="form-group" hidden>
                         <input class="form-first-name form-control" id="idNumber"
                                name="id"
                                placeholder="身份证号（用户名）"
                                type="text"
                                value="">
                     </div>
-                    <!--*/-->
 
                     <!--邮箱-->
-                    <!--                                                    <span class="d-inline-block" data-toggle="tooltip" tabindex="0" title="资料未审核，无法打印申请表">-->
-
                     <div class="form-group ">
                         <input class="form-control" data-toggle="tooltip" id="email"
                                name="email"
@@ -210,6 +211,18 @@
                          title="你家所在地的邮编">
                         <input class="form-control" id="yb" name="yb" placeholder="邮编"
                                type="text" value="邮编">
+                    </div>
+
+
+                    <!--/*-->
+                    审核状态
+                    <!--*/-->
+                    <div class="form-group" data-toggle="tooltip" tabindex="1" title="政治面貌，请如实填写">
+                        <select class="form-control" id="state" placeholder="审核状态" name="state">
+                            <option value="">未审核</option>
+                            <option value="">审核通过</option>
+                            <option value="">审核失败</option>
+                        </select>
                     </div>
 
                 </div>
@@ -412,6 +425,7 @@
                         <input type="text" name="yb" placeholder="邮编"
                                class="form-control" value="邮编">
                     </div>
+
 
                 </div>
 

@@ -54,7 +54,7 @@ public class myUserDetails extends User {
     private String email;
 
     /**
-     * 学号
+     * 用户角色
      */
     private String sid;
 

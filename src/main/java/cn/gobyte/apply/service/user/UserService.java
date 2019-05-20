@@ -31,8 +31,7 @@ public interface UserService extends IService<User> {
     /**
      * TODO:登陆
      *
-     * @param user
-     * @return void
+     * @param user 用户
      * @author shanLan misterchou@qq.com
      * @date 2019/4/5 21:34
      */
@@ -49,21 +48,9 @@ public interface UserService extends IService<User> {
     User findByEmailOrIdNumber(String username);
 
     /**
-     * TODO: 查找身份证号和邮箱是否存在。
-     *
-     * @param id    身份证号
-     * @param email 邮箱号
-     * @return void:
-     * @author shanLan misterchou@qq.com
-     * @date 2019/4/21 21:45
-     */
-    void findByNameAndIdNumber(String id, String email);
-
-    /**
      * TODO: 更新用户登陆时间
      *
      * @param userName 需要更新的用户名
-     * @return void:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/23 0:01
      */
@@ -72,9 +59,8 @@ public interface UserService extends IService<User> {
     /**
      * TODO: 根据id，更新user登陆次数
      *
-     * @param id
-     * @param number
-     * @return void:
+     * @param id     身份号
+     * @param number 次数
      * @author shanLan misterchou@qq.com
      * @date 2019/4/24 20:09
      */
@@ -83,8 +69,7 @@ public interface UserService extends IService<User> {
     /**
      * TODO: 根据id获取用户信息
      *
-     * @param id
-     * @return void:
+     * @param id 身份证号
      * @author shanLan misterchou@qq.com
      * @date 2019/4/25 1:32
      */
@@ -93,7 +78,7 @@ public interface UserService extends IService<User> {
     /**
      * TODO: 修改用户资料
      *
-     * @param user
+     * @param user 用户
      * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/25 20:12
@@ -112,57 +97,47 @@ public interface UserService extends IService<User> {
     ResponseBo updatePassword(String password, String id);
 
     /**
-     * TODO: 通过身份证号查询问题
-     *
-     * @param id
-     * @return cn.gobyte.apply.domain.ResponseBo:
-     * @author shanLan misterchou@qq.com
-     * @date 2019/4/27 19:48
-     */
-    ResponseBo seleteAnswer(String id);
-
-    /**
      * TODO: 通过姓名、身份证号查询问题
      *
-     * @param name
-     * @param id
+     * @param name 姓名
+     * @param id   身份证号
      * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/27 20:38
      */
-    ResponseBo seleteAnswer(String name,String id);
+    ResponseBo seleteAnswer(String name, String id);
 
     /**
      * TODO: 通过姓名、身份证号、问题答案查询
      *
-     * @param name
-     * @param id
-     * @param answer
-     * @return cn.gobyte.apply.domain.ResponseBo: 
+     * @param name   姓名
+     * @param id     身份证号
+     * @param answer 答案
+     * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/27 20:45
      */
-    ResponseBo seleteAnswer(String name,String id,String answer);
+    ResponseBo seleteAnswer(String name, String id, String answer);
 
     /**
      * TODO: 通过验证：姓名、身份证号、问题答案，来重置密码
      *
-     * @param name
-     * @param id
-     * @param answer
-     * @param password1
-     * @param password2
+     * @param name      姓名
+     * @param id        身份证号
+     * @param answer    答案
+     * @param password1 密码1
+     * @param password2 密码2
      * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/27 20:49
      */
-    ResponseBo updatePassword(String name,String id,String answer,String password1, String password2);
+    ResponseBo updatePassword(String name, String id, String answer, String password1, String password2);
 
     /**
      * TODO: 查询用户列表
      *
-     * @param user
-     * @return java.util.List<cn.gobyte.apply.pojo.user.User>: 
+     * @param user 用户
+     * @return java.util.List<cn.gobyte.apply.pojo.user.User>:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/4 22:41
      */
@@ -172,7 +147,6 @@ public interface UserService extends IService<User> {
      * TODO: 通过id物理删除用户
      *
      * @param userIds 用户id字符串，多个id用英文逗号,分割
-     * @return void: 
      * @author shanLan misterchou@qq.com
      * @date 2019/4/7 11:02
      */

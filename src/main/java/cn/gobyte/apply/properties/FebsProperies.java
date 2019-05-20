@@ -1,10 +1,7 @@
 package cn.gobyte.apply.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-@ConfigurationProperties(prefix = "febs")
+/*@Configuration
+@ConfigurationProperties(prefix = "febs")*/
 public class FebsProperies {
 
     private boolean openAopLog = true;

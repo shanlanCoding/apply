@@ -38,11 +38,11 @@
         </dependency>
 
         <!-- poi -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>${poi.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- commons-lang3 -->
         <dependency>
@@ -189,10 +189,10 @@
             <version>2.0</version>
         </dependency>
         <!-- commons-lang3 -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- commons-collections4 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -221,23 +221,23 @@
         </dependency>
         <!--EXCEL导出、导入-->
         <!-- https://mvnrepository.com/artifact/cn.afterturn/easypoi-base -->
-<!--        <dependency>-->
-<!--            <groupId>cn.afterturn</groupId>-->
-<!--            <artifactId>easypoi-base</artifactId>-->
-<!--            <version>4.0.0</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/cn.afterturn/easypoi-annotation &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>cn.afterturn</groupId>-->
-<!--            <artifactId>easypoi-annotation</artifactId>-->
-<!--            <version>4.0.0</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/cn.afterturn/easypoi-web &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>cn.afterturn</groupId>-->
-<!--            <artifactId>easypoi-web</artifactId>-->
-<!--            <version>4.0.0</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>cn.afterturn</groupId>-->
+        <!--            <artifactId>easypoi-base</artifactId>-->
+        <!--            <version>4.0.0</version>-->
+        <!--        </dependency>-->
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/cn.afterturn/easypoi-annotation &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>cn.afterturn</groupId>-->
+        <!--            <artifactId>easypoi-annotation</artifactId>-->
+        <!--            <version>4.0.0</version>-->
+        <!--        </dependency>-->
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/cn.afterturn/easypoi-web &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>cn.afterturn</groupId>-->
+        <!--            <artifactId>easypoi-web</artifactId>-->
+        <!--            <version>4.0.0</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>cn.afterturn</groupId>

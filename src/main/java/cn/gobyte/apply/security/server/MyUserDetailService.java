@@ -78,6 +78,8 @@ public class MyUserDetailService implements UserDetailsService {
             userDetails.setId(user.getId());
             userDetails.setEmail(user.getEmail());
             userDetails.setPassword(user.getPassword());
+            // 用户角色
+            userDetails.setSid(user.getSid());
             // 审核状态
             userDetails.setState(user.getState());
             // 注册时间

@@ -13,7 +13,6 @@ import cn.gobyte.apply.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -36,13 +35,16 @@ import java.util.List;
 // 继承了基础的BaseService类，然后再去实现需要完善的UserService类
 public class UserServiceImpl extends BaseService<User> implements UserService {
 
-    @Autowired
-    private userMapper um;
+    private final userMapper um;
 
-    @Autowired
-    private CourseService cs;
+    private final CourseService cs;
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
+
+    public UserServiceImpl(userMapper um, CourseService cs) {
+        this.um = um;
+        this.cs = cs;
+    }
 
     //注册到数据库
     @Override
@@ -75,7 +77,11 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
                 // 2.判断通过，身份证号可以注册
                 //利用tk-mybatis进行注册
                 int temp = this.save(user);
-                return ResponseBo.ok();
+                if (temp > 0) {
+                    return ResponseBo.ok();
+                } else {
+                    return ResponseBo.error("注册失败，请重试.");
+                }
             } else {
                 return ResponseBo.error("注册失败!身份证号/报考科目不能为空");
             }
@@ -111,14 +117,21 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         return userList.isEmpty() ? null : userList.get(0);
     }
 
-    @Override
-    public void findByNameAndIdNumber(String id, String email) {
+//查找身份证号和邮箱是否存在。
+/*    @Override
+    public boolean findByNameAndIdNumber(String id, String email) {
         // 1. 先验证身份证号和邮箱格式的合法性
         // 2. 拿着身份证号和邮箱进行数据库查询
         // 3. 返回查询的结果
         email = email.trim();
         id = id.trim();
+
         boolean isEmail = Utils.checkEmail(email, 99);
+        boolean isId;
+        if (id.length() >= 18) {
+            isId = true;
+            return isId;
+        }
         // 实例化
         Example example = new Example(User.class);
         if (isEmail) {
@@ -126,13 +139,13 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
             example.createCriteria().andCondition("email=", email);
 
         }
-    }
+        return isEmail;
+    }*/
 
     /**
      * TODO: 根据身份证号更新用户登陆时间；初步设想是在登陆成功以后先获取一下登录时间，然后再使用该方法进行更新
      *
      * @param userName 身份证号
-     * @return void:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/22 23:54
      */
@@ -150,9 +163,8 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     /**
      * TODO: 根据id，更新user登陆次数
      *
-     * @param id
-     * @param number
-     * @return void:
+     * @param id     身份证号
+     * @param number 登陆的次数
      * @author shanLan misterchou@qq.com
      * @date 2019/4/25 20:36
      */
@@ -181,20 +193,37 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     public ResponseBo updateUser(User user) {
         try {
             // 修改用户资料的时候，不能修改用户名也就是身份证号和密码所以要设置null。如果身份证号不对，可以重新注册一个账号，但是不允许修改
-            user.setId(null);
+//            user.setId(null);
             user.setPassword(null);
             // 设置修改时间modify_time
             user.setModifyTime(new Date());
 
             //获取登录信息中的系统id
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            // 判断是否是匿名； 匿名类AnonymousAuthenticationToken
-            if (!(authentication instanceof AnnotatedBeanDefinition)) {
-                // 获得登陆用户对象
-                myUserDetails myUserDetails = (myUserDetails) authentication.getPrincipal();
-                // 设置主键
-                user.setSystemId(myUserDetails.getSystemid());
 
+            // 判断是否是匿名； 匿名类AnonymousAuthenticationToken
+            if (authentication != null && !(authentication instanceof AnnotatedBeanDefinition)) {
+
+                // 获得当前登陆用户对象
+                myUserDetails myUserDetails = (myUserDetails) authentication.getPrincipal();
+
+                // 是否为管理员，然后再设置主键.不等于管理员的时候才使用当前登陆账户的系统id（1管理员，2普通用户）
+                if (myUserDetails.getSid().equals("2")) {
+                    // 不是管理员，则使用当前登陆的用户的系统id
+                    user.setSystemId(myUserDetails.getSystemid());
+                } else {
+                    // 管理员用户，则需要通过身份证号查询系统id来修改信息
+                    // 通过身份证号查询:系统id(主键)
+                    User byDataUser = this.findByEmailOrIdNumber(user.getId());
+                    // 把查询到的主键赋值给需要修改的user
+                    user.setSystemId(byDataUser.getSystemId());
+                }
+
+//                user.setSystemId(byDataUser.getSystemId());
+
+                System.err.println(user.toString() + "----" + this.getClass().getName());
+
+                // 通过主键，更新非null的信息到数据库
                 int updateNumber = this.updateNotNull(user);
                 if (updateNumber > 0) {
                     return ResponseBo.ok("修改成功！");
@@ -230,7 +259,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         }
     }
 
-    // 通过身份证号查询问题
+/*    // 通过身份证号查询问题
     @Override
     public ResponseBo seleteAnswer(String id) {
         id = id.trim();
@@ -239,7 +268,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
         List<User> userList = this.selectByExample(example);
         return userList.isEmpty() ? ResponseBo.error("该身份证号未注册") : ResponseBo.ok(userList.get(0).getTswt());
-    }
+    }*/
 
     // 通过姓名、身份证号查询问题
     @Override
@@ -290,9 +319,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
             password2 = password2.trim();
 
             if (password1.length() < 6 || password2.length() < 6) {
-                return responseBo.error("新密码长度不足");
+                return ResponseBo.error("新密码长度不足");
             } else if (!password1.equals(password2)) {
-                return responseBo.error("两次输入的密码不相同");
+                return ResponseBo.error("两次输入的密码不相同");
             }
 
             // && responseBo.get("code")
@@ -302,9 +331,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
                 // 修改密码
                 return this.updatePassword(password1, id);
 
-            } else {
+            } /*else {
                 // System.err.println("失败");
-            }
+            }*/
         }
         return ResponseBo.error("重置密码失败");
     }
@@ -313,8 +342,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Override
     public List<User> findUserByUsernameOrIdNumber(User user) {
         try {
-            List<User> userList = this.um.findAllUserByUsernameOrIdNumber(user);
-            return userList;
+            return this.um.findAllUserByUsernameOrIdNumber(user);
         } catch (Exception e) {
             log.error("error", e);
             return new ArrayList<>();

@@ -8,10 +8,8 @@ import cn.gobyte.apply.service.user.UserService;
 import cn.gobyte.apply.utils.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,35 +26,36 @@ import java.util.Map;
 public class UserController extends BaseController {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * TODO: 获取用户表格html
      *
-     * @param model
      * @return java.lang.String:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/2 21:16
      */
-
     @RequestMapping("/user")
     @PreAuthorize("hasAuthority('user:list')")
-    public String index(Model model) {
+    public String index() {
         return "system/user/user";
     }
 
     /**
      * TODO: 获取用户列表
      *
-     * @param request
-     * @param user
+     * @param request 请求头
+     * @param user    用户
      * @return java.util.Map<java.lang.String, java.lang.Object>:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/2 22:03
      */
     @Log("获取用户列表")
-    @RequestMapping("user/list")
+    @RequestMapping("/user/list")
     @PreAuthorize("hasAuthority('user:list')")
     @ResponseBody
     public Map<String, Object> userList(QueryRequest request, User user) {
@@ -68,11 +67,12 @@ public class UserController extends BaseController {
     /**
      * TODO: 获取用户信息
      *
-     * @param
-     * @return java.lang.String:
+     * @param id 用户的id
+     * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
-     * @date 2019/4/25 1:29
+     * @date 2019/5/20 23:14
      */
+
     @RequestMapping("/user/getUser")
     @ResponseBody
     public ResponseBo getUser(String id) {
@@ -102,7 +102,7 @@ public class UserController extends BaseController {
     /**
      * TODO: 导出表格，下载xlsx表格
      *
-     * @param user
+     * @param user 用户对象
      * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/7 14:39
@@ -123,7 +123,7 @@ public class UserController extends BaseController {
     /**
      * TODO: 导出表格，下载csv表格
      *
-     * @param user
+     * @param user 用户对象
      * @return cn.gobyte.apply.domain.ResponseBo:
      * @author shanLan misterchou@qq.com
      * @date 2019/4/7 14:39
